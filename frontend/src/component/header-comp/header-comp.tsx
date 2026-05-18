@@ -32,6 +32,14 @@ export default function HeaderComp() {
             </Box>
 
             <Box className={styles.rightContainer}>
+                <Button
+                    variant="outlined"
+                    onClick={() => {
+                        router.push("/")
+                    }}
+                >
+                    Home
+                </Button>
                 {user ? (
                     <>
                         <Button

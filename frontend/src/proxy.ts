@@ -1,5 +1,5 @@
 import { NextRequest, NextResponse } from "next/server";
-const publicRoutes = ['/public', '/login', '/signup'];
+const publicRoutes = ['/public', '/login', '/signup', '/'];
 const authBlockRoutes = ['/login', '/signup'];
 
 export default function proxy(req: NextRequest) {

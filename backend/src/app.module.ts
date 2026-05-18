@@ -14,6 +14,7 @@ import * as AuthCronModule from './module/user-server/infrastructure/cron/cron.m
 import * as AuthModule from './module/user-server/feature/user/user.module';
 import { ScheduleModule } from '@nestjs/schedule';
 import { productDataSource } from './module/product-server/infrastructure/database/data-source';
+import { ProductModule } from './module/product-server/feature/product/product.module';
 
 @Module({
   imports: [
@@ -47,6 +48,7 @@ import { productDataSource } from './module/product-server/infrastructure/databa
       retryAttempts: 10,
       retryDelay: 5000
     }),
+    ProductModule
   ],
   controllers: [AppController],
   providers: [AppService, BcryptService, UserRepository, JwtHelperService],
@@ -59,6 +61,7 @@ export class AppModule implements NestModule {
       .exclude(
         { path: '/user/login', method: RequestMethod.ALL },
         { path: '/user/register', method: RequestMethod.ALL },
+        { path: '/product', method: RequestMethod.ALL },
       )
       .forRoutes('*');
   }

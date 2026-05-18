@@ -17,10 +17,12 @@ async function create() {
         const products: Partial<ProductEntity>[] = [];
 
         for (let i = 0; i < 50; i++) {
+            const category = faker.commerce.product();
             products.push({
                 name: faker.commerce.productName(),
                 description: faker.commerce.productDescription(),
-                image_url: faker.image.urlPicsumPhotos({
+                image_url: faker.image.urlLoremFlickr({
+                    category,
                     width: 640,
                     height: 480,
                 }),
