@@ -14,6 +14,7 @@ export default function Home() {
   const { products, totalDocuments, loading, } = useAppSelector((state: RootState) => state.productReducer);
   const [offset, setOffset] = useState(Number(process.env.page_offset) || 0);
   const limit = Number(process.env.page_limit) || 12;
+  const [hasMore, setHasMore] = useState(true);
 
   useEffect(() => {
     fetchInitialProducts();
@@ -38,7 +39,16 @@ export default function Home() {
       const newOffset = offset + limit;
       setOffset(newOffset);
 
-      await dispatch(getProducts({ limit, offset: newOffset, })).unwrap();
+      const response = await dispatch(getProducts({ limit, offset: newOffset, })).unwrap();
+
+      if (!response.data.length) {
+        setHasMore(false);
+        return;
+      }
+
+      if (products.length + response.data.length >= totalDocuments) {
+        setHasMore(false);
+      }
     } catch (err: any) {
       console.log(err);
       enqueueSnackbar(err, { variant: "warning", });
@@ -61,7 +71,7 @@ export default function Home() {
         <InfiniteScroll
           dataLength={products.length}
           next={fetchMoreProducts}
-          hasMore={products.length <= totalDocuments}
+          hasMore={hasMore}
           loader={<Box className={styles.loader}><CircularProgress size={30} /></Box>}
           endMessage={<Typography className={styles.endMessage}>Yay! You have seen it all</Typography>}
           scrollableTarget="scrollableDiv"
