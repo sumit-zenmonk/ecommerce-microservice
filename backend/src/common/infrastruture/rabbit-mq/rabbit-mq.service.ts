@@ -64,7 +64,7 @@ export class RabbitMQService implements OnModuleInit, OnModuleDestroy {
             QueueEnum.USER_REGISTERED_QUEUE,
             ExchangeNameEnum.USER_EXCHANGE,
             RoutingKeyEnum.USER_REGISTERED,
-            ExchangeTypeEnum.FANOUT,
+            ExchangeTypeEnum.DIRECT,
         );
     }
 

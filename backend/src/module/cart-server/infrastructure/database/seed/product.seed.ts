@@ -1,5 +1,5 @@
 import { faker } from '@faker-js/faker';
-import { productDataSource, options } from '../data-source';
+import { cartDataSource, options } from '../data-source';
 import { ProductEntity } from '../../../domain/product/product.entity';
 
 // hardcoded products for all microservices
@@ -566,13 +566,13 @@ const products: Partial<ProductEntity>[] = [
 ];
 
 async function create() {
-    productDataSource.setOptions({
+    cartDataSource.setOptions({
         ...options,
     });
 
-    await productDataSource.initialize();
+    await cartDataSource.initialize();
 
-    const queryRunner = productDataSource.createQueryRunner();
+    const queryRunner = cartDataSource.createQueryRunner();
     await queryRunner.connect();
     await queryRunner.startTransaction();
 
@@ -621,7 +621,7 @@ async function create() {
         console.error('❌ Something went wrong:', error);
     } finally {
         await queryRunner.release();
-        await productDataSource.destroy();
+        await cartDataSource.destroy();
     }
 }
 

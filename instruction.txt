@@ -4,4 +4,6 @@ steps to run this repo code (open 2 terminal)
 2. -> docker compose exec backend sh (2nd terminal command)
 
 For Creation
-3. -> npm run build && npm run migration:user:run && npm run seed:user:user && npm run migration:product:run && npm run seed:product:user && npm run seed:product:product
+3. -> npm run build && npm run migration:user:run && npm run seed:user:user 
+4. -> npm run build && npm run migration:product:run && npm run seed:product:user && npm run seed:product:product
+5. -> npm run build && npm run migration:cart:run && npm run seed:cart:user && npm run seed:cart:product

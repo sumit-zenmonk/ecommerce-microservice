@@ -7,7 +7,7 @@ const API_URL = process.env.NEXT_PUBLIC_BACKEND_URL
 export const getProducts = createAsyncThunk(
     "product/list",
     async (
-        { limit = Number(process.env.page_limit) || 12, offset = Number(process.env.page_offset) || 0 }: { limit?: number; offset?: number },
+        { limit = Number(process.env.page_limit) || 10, offset = Number(process.env.page_offset) || 0 }: { limit?: number; offset?: number },
         { rejectWithValue }
     ) => {
         try {

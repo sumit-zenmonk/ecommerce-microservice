@@ -15,6 +15,7 @@ import * as AuthModule from './module/user-server/feature/user/user.module';
 import { ScheduleModule } from '@nestjs/schedule';
 import { productDataSource } from './module/product-server/infrastructure/database/data-source';
 import { ProductModule } from './module/product-server/feature/product/product.module';
+import { cartDataSource } from './module/cart-server/infrastructure/database/data-source';
 
 @Module({
   imports: [
@@ -48,7 +49,15 @@ import { ProductModule } from './module/product-server/feature/product/product.m
       retryAttempts: 10,
       retryDelay: 5000
     }),
-    ProductModule
+    ProductModule,
+
+    // Cart Modules
+    TypeOrmModule.forRoot({
+      name: process.env.DB_POSTGRES_CART_SCHEMA || 'cart_schema',
+      ...cartDataSource.options,
+      retryAttempts: 10,
+      retryDelay: 5000
+    }),
   ],
   controllers: [AppController],
   providers: [AppService, BcryptService, UserRepository, JwtHelperService],

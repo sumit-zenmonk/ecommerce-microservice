@@ -13,7 +13,7 @@ export default function Home() {
   const dispatch = useAppDispatch();
   const { products, totalDocuments, loading, } = useAppSelector((state: RootState) => state.productReducer);
   const [offset, setOffset] = useState(Number(process.env.page_offset) || 0);
-  const limit = Number(process.env.page_limit) || 12;
+  const limit = Number(process.env.page_limit) || 10;
   const [hasMore, setHasMore] = useState(true);
 
   useEffect(() => {

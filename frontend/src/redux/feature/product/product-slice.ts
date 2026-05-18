@@ -9,7 +9,7 @@ const initialState: ProductState = {
     loading: false,
     error: null,
     status: "pending",
-    limit: Number(process.env.page_limit) || 12,
+    limit: Number(process.env.page_limit) || 10,
     offset: 0,
     totalDocuments: 0,
 };
