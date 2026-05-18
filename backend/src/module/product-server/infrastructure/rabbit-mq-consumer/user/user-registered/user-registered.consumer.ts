@@ -16,7 +16,7 @@ export class UserRegisteredConsumer implements OnModuleInit {
 
     async onModuleInit() {
         await this.rabbitMQService.consumeMessages(
-            QueueEnum.USER_QUEUE,
+            QueueEnum.USER_REGISTERED_QUEUE,
             async (data) => {
                 const { outbox_uuid, payload } = data;
 

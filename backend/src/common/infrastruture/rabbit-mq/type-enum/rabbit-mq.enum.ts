@@ -19,7 +19,7 @@ export enum RoutingKeyEnum {
 }
 
 export enum QueueEnum {
-    USER_QUEUE = 'user.queue',
+    USER_REGISTERED_QUEUE = 'user.registered.queue',
 }
 
 export enum RetryMechanismHeaderEnum {
