@@ -60,7 +60,11 @@ export default function CartPage() {
         <Container maxWidth="xl" className={styles.container}>
             <Box className={styles.header}>
                 <Typography variant="h4" className={styles.heading}>
-                    My Cart
+                    Cart
+                </Typography>
+
+                <Typography className={styles.subHeading}>
+                    Infinite Scroll Products
                 </Typography>
             </Box>
             {/* 

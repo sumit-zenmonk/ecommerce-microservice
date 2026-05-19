@@ -14,16 +14,19 @@
 }
 
 .header {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    margin-bottom: 3%;
+    width: 100%;
+    padding-bottom: .5%;
+    border-bottom: 1px solid black;
+    margin-bottom: 1%;
 }
 
 .heading {
-    font-weight: 700;
-    font-size: 2.5rem;
+    font-weight: 900;
     color: #111827;
+}
+
+.subHeading {
+    color: #6b7280;
 }
 
 .emptyWrapper {
@@ -126,8 +129,9 @@
     justify-content: space-between;
     align-items: center;
     padding: 2%;
-    background: #646464;
-    color: white;
+    border-bottom: 1px solid black;
+    box-shadow: 0 0 0 3px rgba(0, 0, 0, 0.05);
+    background-color: #ffffff;
     border-radius: 12px;
     position: absolute;
     top: 10;
