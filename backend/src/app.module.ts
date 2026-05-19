@@ -16,6 +16,7 @@ import { ScheduleModule } from '@nestjs/schedule';
 import { productDataSource } from './module/product-server/infrastructure/database/data-source';
 import { ProductModule } from './module/product-server/feature/product/product.module';
 import { cartDataSource } from './module/cart-server/infrastructure/database/data-source';
+import { CartModule } from './module/cart-server/feature/cart/cart.module';
 
 @Module({
   imports: [
@@ -58,6 +59,7 @@ import { cartDataSource } from './module/cart-server/infrastructure/database/dat
       retryAttempts: 10,
       retryDelay: 5000
     }),
+    CartModule,
   ],
   controllers: [AppController],
   providers: [AppService, BcryptService, UserRepository, JwtHelperService],
