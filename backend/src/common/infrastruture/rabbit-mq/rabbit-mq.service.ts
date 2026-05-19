@@ -59,9 +59,17 @@ export class RabbitMQService implements OnModuleInit, OnModuleDestroy {
         const channel = this.channel;
         if (!channel) return;
 
-        // user registered queue
+        // product user registered queue
         await this.setupExchangeQueueAndBind(
-            QueueEnum.USER_REGISTERED_QUEUE,
+            QueueEnum.PRODUCT_USER_REGISTERED_QUEUE,
+            ExchangeNameEnum.USER_EXCHANGE,
+            RoutingKeyEnum.USER_REGISTERED,
+            ExchangeTypeEnum.DIRECT,
+        );
+
+        // cart user registered queue
+        await this.setupExchangeQueueAndBind(
+            QueueEnum.CART_USER_REGISTERED_QUEUE,
             ExchangeNameEnum.USER_EXCHANGE,
             RoutingKeyEnum.USER_REGISTERED,
             ExchangeTypeEnum.DIRECT,

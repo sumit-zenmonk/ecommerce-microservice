@@ -19,7 +19,8 @@ export enum RoutingKeyEnum {
 }
 
 export enum QueueEnum {
-    USER_REGISTERED_QUEUE = 'user.registered.queue',
+    PRODUCT_USER_REGISTERED_QUEUE = 'product.user.registered.queue',
+    CART_USER_REGISTERED_QUEUE = 'cart.user.registered.queue',
 }
 
 export enum RetryMechanismHeaderEnum {
