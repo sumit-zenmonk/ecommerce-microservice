@@ -20,6 +20,11 @@ import * as OrderServerUserRepo from 'src/module/order-server/infrastructure/rep
 import * as OrderServerInboxRepo from 'src/module/order-server/infrastructure/repository/inbox.repo';
 import * as OrderUserConsumer from 'src/module/order-server/infrastructure/rabbit-mq-consumer/user/user-registered/user-registered.consumer';
 
+// finance Service
+import * as FinanceServerUserRepo from 'src/module/finance-server/infrastructure/repository/user.repo';
+import * as FinanceServerInboxRepo from 'src/module/finance-server/infrastructure/repository/inbox.repo';
+import * as FinanceUserConsumer from 'src/module/finance-server/infrastructure/rabbit-mq-consumer/user/user-registered/user-registered.consumer';
+
 @Global()
 @Module({
     imports: [],
@@ -44,6 +49,11 @@ import * as OrderUserConsumer from 'src/module/order-server/infrastructure/rabbi
         OrderServerUserRepo.UserRepository,
         OrderServerInboxRepo.InboxRepository,
         OrderUserConsumer.UserRegisteredConsumer,
+
+        // finance Service
+        FinanceServerUserRepo.UserRepository,
+        FinanceServerInboxRepo.InboxRepository,
+        FinanceUserConsumer.UserRegisteredConsumer,
     ],
     exports: [RabbitMQService],
 })

@@ -83,9 +83,18 @@ export class RabbitMQService implements OnModuleInit, OnModuleDestroy {
             ExchangeTypeEnum.DIRECT,
         );
 
+        // order user registered queue
+        await this.setupExchangeQueueAndBind(
+            QueueEnum.FINANCE_USER_REGISTERED_QUEUE,
+            ExchangeNameEnum.USER_EXCHANGE,
+            RoutingKeyEnum.USER_REGISTERED,
+            ExchangeTypeEnum.DIRECT,
+        );
+
         await this.setupRetryQueue(QueueEnum.PRODUCT_USER_REGISTERED_QUEUE);
         await this.setupRetryQueue(QueueEnum.CART_USER_REGISTERED_QUEUE);
         await this.setupRetryQueue(QueueEnum.ORDER_USER_REGISTERED_QUEUE);
+        await this.setupRetryQueue(QueueEnum.FINANCE_USER_REGISTERED_QUEUE);
     }
 
     private async setupRetryQueue(originalQueue: string, retryDelay = 15000) {

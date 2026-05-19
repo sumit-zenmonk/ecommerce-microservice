@@ -18,6 +18,7 @@ import { ProductModule } from './module/product-server/feature/product/product.m
 import { cartDataSource } from './module/cart-server/infrastructure/database/data-source';
 import { CartModule } from './module/cart-server/feature/cart/cart.module';
 import { orderDataSource } from './module/order-server/infrastructure/database/data-source';
+import { financeDataSource } from './module/finance-server/infrastructure/database/data-source';
 
 @Module({
   imports: [
@@ -62,10 +63,18 @@ import { orderDataSource } from './module/order-server/infrastructure/database/d
     }),
     CartModule,
 
-     // Order Modules
+    // Order Modules
     TypeOrmModule.forRoot({
       name: process.env.DB_POSTGRES_ORDER_SCHEMA || 'order_schema',
       ...orderDataSource.options,
+      retryAttempts: 10,
+      retryDelay: 5000
+    }),
+
+    // finance Modules
+    TypeOrmModule.forRoot({
+      name: process.env.DB_POSTGRES_FINANCE_SCHEMA || 'finance_schema',
+      ...financeDataSource.options,
       retryAttempts: 10,
       retryDelay: 5000
     }),
