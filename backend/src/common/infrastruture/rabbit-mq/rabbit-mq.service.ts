@@ -82,6 +82,24 @@ export class RabbitMQService implements OnModuleInit, OnModuleDestroy {
             RoutingKeyEnum.USER_REGISTERED,
             ExchangeTypeEnum.DIRECT,
         );
+
+        await this.setupRetryQueue(QueueEnum.PRODUCT_USER_REGISTERED_QUEUE);
+        await this.setupRetryQueue(QueueEnum.CART_USER_REGISTERED_QUEUE);
+        await this.setupRetryQueue(QueueEnum.ORDER_USER_REGISTERED_QUEUE);
+    }
+
+    private async setupRetryQueue(originalQueue: string, retryDelay = 15000) {
+        const channel = this.channel;
+        if (!channel) return;
+
+        const retryQueue = `${originalQueue}.retry`;
+
+        await channel.assertQueue(retryQueue, {
+            durable: true,
+            messageTtl: retryDelay, // delay before retry
+            deadLetterExchange: "", // back to default exchange
+            deadLetterRoutingKey: originalQueue, // send back to original queue after TTL
+        });
     }
 
     // insert exchange + insert queue -> bind both
@@ -164,9 +182,10 @@ export class RabbitMQService implements OnModuleInit, OnModuleDestroy {
                         // Chance 2: if working inside a requeue try chance
                         if (requeueTry + 1 < maxRequeues) {
                             this.logger.warn(`Requeue cycle ${requeueTry + 1}/${maxRequeues}`,);
+                            const retryQueue = `${queue}.retry`;
 
                             channel.sendToQueue(
-                                queue,
+                                retryQueue, //queue,
                                 msg.content,
                                 {
                                     persistent: true,
@@ -179,6 +198,7 @@ export class RabbitMQService implements OnModuleInit, OnModuleDestroy {
 
                             channel.ack(msg);
                             // channel.nack(msg, false, true); // requeue automatically
+                            this.logger.warn(`Message sent to retry queue ${retryQueue}, attempt ${requeueTry + 1}/${maxRequeues}`);
                             return;
                         }
 
