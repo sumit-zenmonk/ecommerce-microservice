@@ -17,6 +17,7 @@ import { productDataSource } from './module/product-server/infrastructure/databa
 import { ProductModule } from './module/product-server/feature/product/product.module';
 import { cartDataSource } from './module/cart-server/infrastructure/database/data-source';
 import { CartModule } from './module/cart-server/feature/cart/cart.module';
+import { orderDataSource } from './module/order-server/infrastructure/database/data-source';
 
 @Module({
   imports: [
@@ -60,6 +61,14 @@ import { CartModule } from './module/cart-server/feature/cart/cart.module';
       retryDelay: 5000
     }),
     CartModule,
+
+     // Order Modules
+    TypeOrmModule.forRoot({
+      name: process.env.DB_POSTGRES_ORDER_SCHEMA || 'order_schema',
+      ...orderDataSource.options,
+      retryAttempts: 10,
+      retryDelay: 5000
+    }),
   ],
   controllers: [AppController],
   providers: [AppService, BcryptService, UserRepository, JwtHelperService],

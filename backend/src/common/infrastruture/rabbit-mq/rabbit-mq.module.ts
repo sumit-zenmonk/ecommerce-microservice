@@ -15,6 +15,11 @@ import * as CartServerUserRepo from 'src/module/cart-server/infrastructure/repos
 import * as CartServerInboxRepo from 'src/module/cart-server/infrastructure/repository/inbox.repo';
 import * as CartUserConsumer from 'src/module/cart-server/infrastructure/rabbit-mq-consumer/user/user-registered/user-registered.consumer';
 
+// Order Service
+import * as OrderServerUserRepo from 'src/module/order-server/infrastructure/repository/user.repo';
+import * as OrderServerInboxRepo from 'src/module/order-server/infrastructure/repository/inbox.repo';
+import * as OrderUserConsumer from 'src/module/order-server/infrastructure/rabbit-mq-consumer/user/user-registered/user-registered.consumer';
+
 @Global()
 @Module({
     imports: [],
@@ -34,6 +39,11 @@ import * as CartUserConsumer from 'src/module/cart-server/infrastructure/rabbit-
         CartServerUserRepo.UserRepository,
         CartServerInboxRepo.InboxRepository,
         CartUserConsumer.UserRegisteredConsumer,
+
+        // order Service
+        OrderServerUserRepo.UserRepository,
+        OrderServerInboxRepo.InboxRepository,
+        OrderUserConsumer.UserRegisteredConsumer,
     ],
     exports: [RabbitMQService],
 })

@@ -74,6 +74,14 @@ export class RabbitMQService implements OnModuleInit, OnModuleDestroy {
             RoutingKeyEnum.USER_REGISTERED,
             ExchangeTypeEnum.DIRECT,
         );
+
+        // order user registered queue
+        await this.setupExchangeQueueAndBind(
+            QueueEnum.ORDER_USER_REGISTERED_QUEUE,
+            ExchangeNameEnum.USER_EXCHANGE,
+            RoutingKeyEnum.USER_REGISTERED,
+            ExchangeTypeEnum.DIRECT,
+        );
     }
 
     // insert exchange + insert queue -> bind both
