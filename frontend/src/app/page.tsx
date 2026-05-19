@@ -21,7 +21,9 @@ export default function Home() {
   const [hasMore, setHasMore] = useState(true);
 
   useEffect(() => {
-    fetchInitialProducts();
+    if (!products.length) {
+      fetchInitialProducts();
+    }
   }, []);
 
   const fetchInitialProducts = async () => {

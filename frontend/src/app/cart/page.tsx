@@ -63,7 +63,7 @@ export default function CartPage() {
                     My Cart
                 </Typography>
             </Box>
-{/* 
+            {/* 
             {loading && (
                 <Box className={styles.loader}>
                     <CircularProgress size={30} />
