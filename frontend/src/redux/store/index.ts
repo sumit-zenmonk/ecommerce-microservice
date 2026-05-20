@@ -10,6 +10,7 @@ import productReducer from "../feature/product/product-slice";
 import cartReducer from "../feature/cart/cart-slice";
 import paymentReducer from "../feature/payment/payment.slice";
 import userAddressReducer from "../feature/address/address.slice";
+import orderReducer from "../feature/order/order-slice";
 
 const persistConfig = {
     key: "root",
@@ -22,6 +23,7 @@ const appReducer = combineReducers({
     cartReducer: cartReducer,
     paymentReducer: paymentReducer,
     userAddressReducer: userAddressReducer,
+    orderReducer: orderReducer,
 });
 
 const rootReducer = (state: any, action: any) => {
