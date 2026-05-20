@@ -22,6 +22,7 @@ import { financeDataSource } from './module/finance-server/infrastructure/databa
 import { PaymentModule } from './module/finance-server/feature/payment/payment.module';
 import { PaymentCardModule } from './module/finance-server/feature/payment-card/payment-card.module';
 import { shipmentDataSource } from './module/shipment-server/infrastructure/database/data-source';
+import { UserAddressModule } from './module/shipment-server/feature/user-address/user-address.module';
 
 @Module({
   imports: [
@@ -91,6 +92,7 @@ import { shipmentDataSource } from './module/shipment-server/infrastructure/data
       retryAttempts: 10,
       retryDelay: 5000
     }),
+    UserAddressModule
   ],
   controllers: [AppController],
   providers: [AppService, BcryptService, UserRepository, JwtHelperService],

@@ -1,4 +1,5 @@
-import { Column, CreateDateColumn, DeleteDateColumn, Entity, Generated, PrimaryColumn, PrimaryGeneratedColumn, UpdateDateColumn } from "typeorm";
+import { Column, CreateDateColumn, DeleteDateColumn, Entity, Generated, OneToMany, PrimaryColumn, PrimaryGeneratedColumn, UpdateDateColumn } from "typeorm";
+import { UserAddressEntity } from "../user_address/user.address.entity";
 
 @Entity('user')
 export class UserEntity {
@@ -21,6 +22,9 @@ export class UserEntity {
 
     @Column({ type: "varchar", nullable: false })
     password: string;
+
+    @OneToMany(() => UserAddressEntity, (address) => address.user, { cascade: true })
+    addresses: UserAddressEntity[];
 
     @CreateDateColumn()
     created_at: Date;
