@@ -173,13 +173,13 @@
 
 .quantityWrapper button {
     width: 100%;
-    max-width: 120px;
+    max-width: 60px;
     padding: 0.5rem 1rem;
     font-size: 1rem;
     font-weight: 800;
     color: rgb(0, 65, 170);
-    background: rgb(211, 211, 211);
-    border: none;
+    /* background: rgb(211, 211, 211); */
+    border: 1px solid black;
     border-radius: 16px;
     cursor: pointer;
     transition: background 0.2s, transform 0.1s;
@@ -192,7 +192,7 @@
 }
 
 .quantityWrapper button:disabled {
-    background-color: #aaa;
+    background-color: #e2e2e2;
     cursor: not-allowed;
 }
 
