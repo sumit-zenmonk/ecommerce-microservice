@@ -10,11 +10,13 @@ import { enqueueSnackbar } from "notistack";
 import { useAppDispatch, useAppSelector } from "@/redux/hooks.ts";
 import { CartItem } from "@/redux/feature/cart/cart.type";
 import PayModal from "@/component/pay-modal/pay-modal";
+import UserAddressModal from "@/component/user-address-modal/user-address-modal";
 
 export default function CartPage() {
     const dispatch = useAppDispatch();
     const { cart, loading } = useAppSelector((state: RootState) => state.cartReducer);
     const [openPayModal, setOpenPayModal] = useState(false);
+    const [openUserAddressModal, setOpenUserAddressModal] = useState(false);
 
     useEffect(() => {
         fetchCart();
@@ -181,6 +183,10 @@ export default function CartPage() {
                     <Button variant="contained" color="primary" onClick={() => setOpenPayModal(true)}>
                         Pay
                     </Button>
+
+                    <Button variant="outlined" onClick={() => setOpenUserAddressModal(true)}>
+                        Add address
+                    </Button>
                 </Box>
             )}
 
@@ -191,6 +197,7 @@ export default function CartPage() {
                     amount={Number(cart.total_price)}
                 />
             )}
+            <UserAddressModal isOpen={openUserAddressModal} onClose={() => setOpenUserAddressModal(false)} />
         </Container>
     );
 }

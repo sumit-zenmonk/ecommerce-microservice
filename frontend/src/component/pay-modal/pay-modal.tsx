@@ -10,7 +10,6 @@ import AddCardModal from "../add-card-modal/AddCardModal";
 import AddAmountModal from "../add-amount-modal/AddAmountModal";
 import { PaymentCard } from "@/redux/feature/payment/payment.type";
 import styles from "./pay-modal.module.css";
-import UserAddressModal from "../user-address-modal/user-address-modal";
 
 interface PayModalProps {
     open: boolean;
@@ -24,7 +23,6 @@ export default function PayModal({ open, onClose, amount }: PayModalProps) {
     const [selectedCard, setSelectedCard] = useState<string>("");
     const [openCardModal, setOpenCardModal] = useState(false);
     const [openAmountModal, setOpenAmountModal] = useState(false);
-    const [openUserAddressModal, setOpenUserAddressModal] = useState(false);
 
     useEffect(() => {
         if (open) {
@@ -108,10 +106,6 @@ export default function PayModal({ open, onClose, amount }: PayModalProps) {
                     <Button variant="outlined" onClick={() => setOpenAmountModal(true)}>
                         Add Amount
                     </Button>
-
-                    <Button variant="outlined" onClick={() => setOpenUserAddressModal(true)}>
-                        Add address
-                    </Button>
                 </Box>
 
                 <Box className={styles.bottomButtons}>
@@ -124,7 +118,6 @@ export default function PayModal({ open, onClose, amount }: PayModalProps) {
 
             <AddCardModal open={openCardModal} onClose={() => setOpenCardModal(false)} />
             <AddAmountModal open={openAmountModal} onClose={() => setOpenAmountModal(false)} />
-            <UserAddressModal isOpen={openUserAddressModal} onClose={() => setOpenUserAddressModal(false)} />
         </Box>
     );
 }

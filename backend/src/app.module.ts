@@ -5,11 +5,11 @@ import { JwtModule } from '@nestjs/jwt';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { ConfigModule } from '@nestjs/config';
 import { userDataSource } from './module/user-server/infrastructure/database/data-source';
-import { BcryptService } from './common/services/bcrypt.service';
+import { BcryptService } from './module/common/services/bcrypt.service';
 import { UserRepository } from './module/user-server/infrastructure/repository/user.repo';
 import { JwtHelperService } from './module/user-server/infrastructure/services/jwt.service';
-import { RabbitMQModule } from './common/infrastruture/rabbit-mq/rabbit-mq.module';
-import { AuthenticateMiddleware } from './common/infrastruture/middleware/authenticate.middleware';
+import { RabbitMQModule } from './module/common/infrastruture/rabbit-mq/rabbit-mq.module';
+import { AuthenticateMiddleware } from './module/common/infrastruture/middleware/authenticate.middleware';
 import * as AuthCronModule from './module/user-server/infrastructure/cron/cron.module';
 import * as AuthModule from './module/user-server/feature/user/user.module';
 import { ScheduleModule } from '@nestjs/schedule';
@@ -23,6 +23,7 @@ import { PaymentModule } from './module/finance-server/feature/payment/payment.m
 import { PaymentCardModule } from './module/finance-server/feature/payment-card/payment-card.module';
 import { shipmentDataSource } from './module/shipment-server/infrastructure/database/data-source';
 import { UserAddressModule } from './module/shipment-server/feature/user-address/user-address.module';
+import { OrderModule } from './module/order-server/feature/order/order.module';
 
 @Module({
   imports: [
@@ -74,6 +75,7 @@ import { UserAddressModule } from './module/shipment-server/feature/user-address
       retryAttempts: 10,
       retryDelay: 5000
     }),
+    OrderModule,
 
     // finance Modules
     TypeOrmModule.forRoot({
