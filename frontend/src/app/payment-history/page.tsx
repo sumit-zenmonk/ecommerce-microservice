@@ -19,7 +19,7 @@ export default function PaymentHistoryPage() {
     return (
         <Container maxWidth="xl" className={styles.container}>
             <Typography variant="h4" component="h1" className={styles.header}>
-                Payment History
+                Payment Account
             </Typography>
 
             {loading && (
@@ -47,11 +47,15 @@ export default function PaymentHistoryPage() {
                 <Typography>No payment history yet.</Typography>
             )}
 
+            <Typography variant="h4" component="h1" className={styles.header}>
+                Payment History
+            </Typography>
             <Box className={styles.historyList}>
-                {histories.map((item) => (
+                {histories.map((item, idx) => (
                     <Card key={item.uuid} className={styles.historyCard}>
                         <CardContent>
-                            <Typography variant="subtitle1">{item.type?.toUpperCase()}</Typography>
+                            <Typography variant="subtitle1">{idx}</Typography>
+                            <Typography variant="subtitle2">Type: {item.type?.toUpperCase()}</Typography>
                             <Typography>Amount: ₹ {Number(item.amount).toFixed(2)}</Typography>
                             <Typography>{item.description || "No description"}</Typography>
                             <Typography color="textSecondary">
