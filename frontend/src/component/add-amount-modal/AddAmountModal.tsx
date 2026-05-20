@@ -30,7 +30,7 @@ export default function AddAmountModal({ open, onClose }: Props) {
             enqueueSnackbar("Amount Added", { variant: "success" });
             reset();
             onClose();
-           await dispatch(getAccount()).unwrap();
+            await dispatch(getAccount()).unwrap();
         } catch (error: any) {
             enqueueSnackbar(String(error), { variant: "error" });
         }
@@ -50,7 +50,7 @@ export default function AddAmountModal({ open, onClose }: Props) {
                         error={!!errors.amount}
                         helperText={errors.amount?.message}
                     />
-                    <Button type="submit" fullWidth variant="contained" sx={{ mt: 2 }}>Add Amount</Button>
+                    <Button type="submit" fullWidth sx={{ mt: 2 }}>Add Amount</Button>
                 </form>
             </Box>
         </Modal>

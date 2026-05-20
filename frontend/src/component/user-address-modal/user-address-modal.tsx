@@ -131,7 +131,6 @@ export default function UserAddressModal({ isOpen, onClose }: AddressModalProps)
 
                     <Button
                         type="submit"
-                        variant="contained"
                         color="primary"
                         fullWidth
                         disabled={loading}

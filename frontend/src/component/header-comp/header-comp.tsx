@@ -37,7 +37,7 @@ export default function HeaderComp() {
                     <Box className={styles.logoIcon}>
                         <svg
                             width="40"
-                            height="40" 
+                            height="40"
                             viewBox="0 0 24 24"
                             fill="none"
                             stroke="currentColor"
@@ -57,7 +57,6 @@ export default function HeaderComp() {
 
             <Box className={styles.rightContainer}>
                 <Button
-                    variant="outlined"
                     onClick={() => {
                         router.push("/")
                     }}
@@ -67,7 +66,6 @@ export default function HeaderComp() {
                 {user ? (
                     <>
                         <Button
-                            variant="outlined"
                             onClick={() => {
                                 router.push("/cart")
                             }}
@@ -76,7 +74,6 @@ export default function HeaderComp() {
                         </Button>
 
                         <Button
-                            variant="outlined"
                             onClick={() => {
                                 router.push("/order")
                             }}
@@ -85,7 +82,6 @@ export default function HeaderComp() {
                         </Button>
 
                         <Button
-                            variant="outlined"
                             onClick={() => {
                                 router.push("/payment-history")
                             }}
@@ -94,8 +90,7 @@ export default function HeaderComp() {
                         </Button>
 
                         <Button
-                            variant="outlined"
-                            sx={{ color: "#DB2D43", borderColor: "#DB2D43" }}
+                            className={styles.logoutbtn}
                             onClick={async () => { await handleLogOut() }}
                         >
                             Log Out
@@ -103,7 +98,6 @@ export default function HeaderComp() {
                     </>
                 ) : (
                     <Button
-                        variant="outlined"
                         onClick={() => {
                             router.push("/login")
                         }}

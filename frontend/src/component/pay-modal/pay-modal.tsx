@@ -87,7 +87,6 @@ export default function PayModal({ open, onClose, amount }: PayModalProps) {
                                     <FormControlLabel value={card.uuid} control={<Radio />} label="" />
                                 </CardContent>
                                 <Button
-                                    variant="outlined"
                                     className={styles.outlinedButton}
                                     onClick={() => handleDeleteCard(card.uuid)}
                                 >
@@ -99,18 +98,18 @@ export default function PayModal({ open, onClose, amount }: PayModalProps) {
                 </RadioGroup>
 
                 <Box className={styles.buttonsContainer}>
-                    <Button variant="outlined" onClick={() => setOpenCardModal(true)}>
+                    <Button onClick={() => setOpenCardModal(true)}>
                         Add Card
                     </Button>
 
-                    <Button variant="outlined" onClick={() => setOpenAmountModal(true)}>
+                    <Button onClick={() => setOpenAmountModal(true)}>
                         Add Amount
                     </Button>
                 </Box>
 
                 <Box className={styles.bottomButtons}>
                     <Button onClick={onClose}>Cancel</Button>
-                    <Button variant="contained" onClick={handlePay} disabled={!selectedCard}>
+                    <Button onClick={handlePay} disabled={!selectedCard}>
                         Pay
                     </Button>
                 </Box>

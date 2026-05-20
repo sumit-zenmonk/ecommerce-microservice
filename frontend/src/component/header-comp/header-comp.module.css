@@ -29,6 +29,14 @@
     gap: 1%;
 }
 
+.logoutbtn {
+    color: rgb(231, 0, 0);
+}
+
+.logoutbtn:hover {
+    background-color: rgb(194, 0, 0);
+}
+
 .logoContainer {
     display: flex;
     align-items: center;

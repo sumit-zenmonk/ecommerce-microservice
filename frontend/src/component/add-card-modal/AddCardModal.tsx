@@ -78,7 +78,7 @@ export default function AddCardModal({ open, onClose }: Props) {
                         error={!!errors.expiry_year}
                         helperText={errors.expiry_year?.message}
                     />
-                    <Button type="submit" fullWidth variant="contained" sx={{ mt: 2 }}>Add Card</Button>
+                    <Button type="submit" fullWidth sx={{ mt: 2 }}>Add Card</Button>
                 </form>
             </Box>
         </Modal>

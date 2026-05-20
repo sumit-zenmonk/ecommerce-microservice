@@ -89,8 +89,7 @@ export default function CartPage() {
             {/* {!!cart?.items?.length && (
                 <Button
                     color="error"
-                    variant="contained"
-                // onClick={handleDeleteCart}
+                                    // onClick={handleDeleteCart}
                 >
                     Delete Cart
                 </Button>
@@ -130,7 +129,6 @@ export default function CartPage() {
 
                                 <IconButton
                                     className={styles.removeBtn}
-                                    color="error"
                                     onClick={() =>
                                         handleRemoveItem(item.uuid, item.cart_uuid)
                                     }
@@ -180,11 +178,11 @@ export default function CartPage() {
 
             {cart && cart?.items?.length > 0 && (
                 <Box className={styles.paybox}>
-                    <Button variant="contained" color="primary" onClick={() => setOpenPayModal(true)}>
+                    <Button color="primary" onClick={() => setOpenPayModal(true)}>
                         Pay
                     </Button>
 
-                    <Button variant="outlined" onClick={() => setOpenUserAddressModal(true)}>
+                    <Button onClick={() => setOpenUserAddressModal(true)}>
                         Add address
                     </Button>
                 </Box>
