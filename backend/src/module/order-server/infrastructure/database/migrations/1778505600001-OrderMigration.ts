@@ -11,6 +11,7 @@ export class orderMigration1778505600002 implements MigrationInterface {
             columns: [
                 { name: "uuid", type: "uuid", isPrimary: true, generationStrategy: "uuid", default: "uuid_generate_v4()" },
                 { name: "id", type: "bigint", isGenerated: true, generationStrategy: "increment", isUnique: true, isNullable: false },
+                { name: "cart_uuid", type: "uuid", isNullable: false },
                 { name: "user_uuid", type: "uuid", isNullable: false },
                 { name: "total_price", type: "decimal", precision: 12, scale: 2, default: 0, isNullable: false },
                 { name: "payment_status", type: `"order_schema"."payment_status_type_enum"`, default: `'pending'` },

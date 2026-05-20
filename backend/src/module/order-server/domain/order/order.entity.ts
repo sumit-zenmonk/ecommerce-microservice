@@ -19,6 +19,9 @@ export class OrderEntity {
     @Column({ type: "uuid", nullable: false })
     user_uuid: string;
 
+    @Column({ type: "uuid", nullable: false })
+    cart_uuid: string;
+
     @Column({ type: "decimal", precision: 12, scale: 2, nullable: false, default: 0, })
     total_price: number;
 
