@@ -14,6 +14,7 @@ export class PaymentCardEntity {
         select: false,
     })
     id: number;
+
     @Column({ type: "uuid", nullable: false })
     user_uuid: string;
 
