@@ -10,6 +10,7 @@ import AddCardModal from "../add-card-modal/AddCardModal";
 import AddAmountModal from "../add-amount-modal/AddAmountModal";
 import { PaymentCard } from "@/redux/feature/payment/payment.type";
 import styles from "./pay-modal.module.css";
+import UserAddressModal from "../user-address-modal/user-address-modal";
 
 interface PayModalProps {
     open: boolean;
@@ -23,6 +24,7 @@ export default function PayModal({ open, onClose, amount }: PayModalProps) {
     const [selectedCard, setSelectedCard] = useState<string>("");
     const [openCardModal, setOpenCardModal] = useState(false);
     const [openAmountModal, setOpenAmountModal] = useState(false);
+    const [openUserAddressModal, setOpenUserAddressModal] = useState(false);
 
     useEffect(() => {
         if (open) {
@@ -60,8 +62,8 @@ export default function PayModal({ open, onClose, amount }: PayModalProps) {
     if (!open) return null;
 
     return (
-        <div className={styles.overlay}>
-            <div className={styles.modal}>
+        <Box className={styles.overlay}>
+            <Box className={styles.modal}>
                 <Typography className={styles.accountBalance}>
                     Account balance {account?.balance}
                 </Typography>
@@ -77,7 +79,7 @@ export default function PayModal({ open, onClose, amount }: PayModalProps) {
                 )}
 
                 <RadioGroup value={selectedCard} onChange={(e) => setSelectedCard(e.target.value)}>
-                    <div className={styles.cardList}>
+                    <Box className={styles.cardList}>
                         {cards.map((card: PaymentCard) => (
                             <Card key={card.uuid} className={styles.cardItem}>
                                 <CardContent className={styles.cardContent}>
@@ -95,10 +97,10 @@ export default function PayModal({ open, onClose, amount }: PayModalProps) {
                                 </Button>
                             </Card>
                         ))}
-                    </div>
+                    </Box>
                 </RadioGroup>
 
-                <div className={styles.buttonsContainer}>
+                <Box className={styles.buttonsContainer}>
                     <Button variant="outlined" onClick={() => setOpenCardModal(true)}>
                         Add Card
                     </Button>
@@ -106,18 +108,23 @@ export default function PayModal({ open, onClose, amount }: PayModalProps) {
                     <Button variant="outlined" onClick={() => setOpenAmountModal(true)}>
                         Add Amount
                     </Button>
-                </div>
 
-                <div className={styles.bottomButtons}>
+                    <Button variant="outlined" onClick={() => setOpenUserAddressModal(true)}>
+                        Add address
+                    </Button>
+                </Box>
+
+                <Box className={styles.bottomButtons}>
                     <Button onClick={onClose}>Cancel</Button>
                     <Button variant="contained" onClick={handlePay} disabled={!selectedCard}>
                         Pay
                     </Button>
-                </div>
-            </div>
+                </Box>
+            </Box>
 
             <AddCardModal open={openCardModal} onClose={() => setOpenCardModal(false)} />
             <AddAmountModal open={openAmountModal} onClose={() => setOpenAmountModal(false)} />
-        </div>
+            <UserAddressModal isOpen={openUserAddressModal} onClose={() => setOpenUserAddressModal(false)} />
+        </Box>
     );
 }
