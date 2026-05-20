@@ -54,6 +54,15 @@ export default function HeaderComp() {
                         <Button
                             variant="outlined"
                             onClick={() => {
+                                router.push("/order")
+                            }}
+                        >
+                            Order
+                        </Button>
+
+                        <Button
+                            variant="outlined"
+                            onClick={() => {
                                 router.push("/payment-history")
                             }}
                         >
