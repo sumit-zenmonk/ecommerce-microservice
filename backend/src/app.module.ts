@@ -19,6 +19,8 @@ import { cartDataSource } from './module/cart-server/infrastructure/database/dat
 import { CartModule } from './module/cart-server/feature/cart/cart.module';
 import { orderDataSource } from './module/order-server/infrastructure/database/data-source';
 import { financeDataSource } from './module/finance-server/infrastructure/database/data-source';
+import { PaymentModule } from './module/finance-server/feature/payment/payment.module';
+import { PaymentCardModule } from './module/finance-server/feature/payment-card/payment-card.module';
 
 @Module({
   imports: [
@@ -78,6 +80,8 @@ import { financeDataSource } from './module/finance-server/infrastructure/databa
       retryAttempts: 10,
       retryDelay: 5000
     }),
+    PaymentModule,
+    PaymentCardModule,
   ],
   controllers: [AppController],
   providers: [AppService, BcryptService, UserRepository, JwtHelperService],

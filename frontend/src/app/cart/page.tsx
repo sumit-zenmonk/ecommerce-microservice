@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { Box, Card, CardContent, CardMedia, Container, IconButton, Typography, CircularProgress, Button } from "@mui/material";
 import DeleteIcon from "@mui/icons-material/Delete";
 import styles from "./cart.module.css";
@@ -9,10 +9,12 @@ import { getCart, removeCartItem, updateCartItem } from "@/redux/feature/cart/ca
 import { enqueueSnackbar } from "notistack";
 import { useAppDispatch, useAppSelector } from "@/redux/hooks.ts";
 import { CartItem } from "@/redux/feature/cart/cart.type";
+import PayModal from "@/component/pay-modal/pay-modal";
 
 export default function CartPage() {
     const dispatch = useAppDispatch();
     const { cart, loading } = useAppSelector((state: RootState) => state.cartReducer);
+    const [openPayModal, setOpenPayModal] = useState(false);
 
     useEffect(() => {
         fetchCart();
@@ -172,6 +174,22 @@ export default function CartPage() {
                         Total: ₹ {cart.total_price}
                     </Typography>
                 </Box>
+            )}
+
+            {cart && cart.items.length > 0 && (
+                <Box className={styles.paybox}>
+                    <Button variant="contained" color="primary" onClick={() => setOpenPayModal(true)}>
+                        Pay
+                    </Button>
+                </Box>
+            )}
+
+            {cart && (
+                <PayModal
+                    open={openPayModal}
+                    onClose={() => setOpenPayModal(false)}
+                    amount={Number(cart.total_price)}
+                />
             )}
         </Container>
     );

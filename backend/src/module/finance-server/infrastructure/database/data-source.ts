@@ -5,6 +5,9 @@ import 'dotenv/config';
 //Entities
 import { InboxEntity } from "../../domain/inbox/inbox.entity";
 import { UserEntity } from "../../domain/user/user.entity";
+import { PaymentAccountEntity } from "../../domain/payment-account/payment-account.entity";
+import { PaymentCardEntity } from "../../domain/payment-card/payment-card.entity";
+import { PaymentHistoryEntity } from "../../domain/payment-history/payment-history.entity";
 
 const options: DataSourceOptions = {
     type: process.env.DB_POSTGRES_TYPE as any,
@@ -15,10 +18,11 @@ const options: DataSourceOptions = {
     database: process.env.DB_POSTGRES_DATABASE,
     entities: [
         UserEntity, InboxEntity,
+        PaymentAccountEntity, PaymentCardEntity, PaymentHistoryEntity,
     ],
     schema: process.env.DB_POSTGRES_FINANCE_SCHEMA || 'finance_schema',
     synchronize: false,
-    migrations: ['dist/module/order-server/infrastructure/database/migrations/*{.ts,.js}'],
+    migrations: ['dist/module/finance-server/infrastructure/database/migrations/*{.ts,.js}'],
 };
 
 const financeDataSource = new DataSource(options);
