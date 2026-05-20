@@ -21,6 +21,7 @@ import { orderDataSource } from './module/order-server/infrastructure/database/d
 import { financeDataSource } from './module/finance-server/infrastructure/database/data-source';
 import { PaymentModule } from './module/finance-server/feature/payment/payment.module';
 import { PaymentCardModule } from './module/finance-server/feature/payment-card/payment-card.module';
+import { shipmentDataSource } from './module/shipment-server/infrastructure/database/data-source';
 
 @Module({
   imports: [
@@ -82,6 +83,14 @@ import { PaymentCardModule } from './module/finance-server/feature/payment-card/
     }),
     PaymentModule,
     PaymentCardModule,
+
+    // shipment Modules
+    TypeOrmModule.forRoot({
+      name: process.env.DB_POSTGRES_SHIPMENT_SCHEMA || 'shipment_schema',
+      ...shipmentDataSource.options,
+      retryAttempts: 10,
+      retryDelay: 5000
+    }),
   ],
   controllers: [AppController],
   providers: [AppService, BcryptService, UserRepository, JwtHelperService],

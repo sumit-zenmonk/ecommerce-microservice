@@ -17,6 +17,7 @@ export async function createSchemas() {
         await client.query(`CREATE SCHEMA IF NOT EXISTS ${process.env.DB_POSTGRES_CART_SCHEMA || 'cart_schema'};`);
         await client.query(`CREATE SCHEMA IF NOT EXISTS ${process.env.DB_POSTGRES_ORDER_SCHEMA || 'order_schema'};`);
         await client.query(`CREATE SCHEMA IF NOT EXISTS ${process.env.DB_POSTGRES_FINANCE_SCHEMA || 'finance_schema'};`);
+        await client.query(`CREATE SCHEMA IF NOT EXISTS ${process.env.DB_POSTGRES_SHIPMENT_SCHEMA || 'shipment_schema'};`);
 
         console.log('DB Schema Created SuccessFully');
         await client.end();

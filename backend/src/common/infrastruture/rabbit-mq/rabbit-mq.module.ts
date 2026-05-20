@@ -25,6 +25,11 @@ import * as FinanceServerUserRepo from 'src/module/finance-server/infrastructure
 import * as FinanceServerInboxRepo from 'src/module/finance-server/infrastructure/repository/inbox.repo';
 import * as FinanceUserConsumer from 'src/module/finance-server/infrastructure/rabbit-mq-consumer/user/user-registered/user-registered.consumer';
 
+// shipment Service
+import * as ShipmentServerUserRepo from 'src/module/shipment-server/infrastructure/repository/user.repo';
+import * as ShipmentServerInboxRepo from 'src/module/shipment-server/infrastructure/repository/inbox.repo';
+import * as ShipmentUserConsumer from 'src/module/shipment-server/infrastructure/rabbit-mq-consumer/user/user-registered/user-registered.consumer';
+
 @Global()
 @Module({
     imports: [],
@@ -54,6 +59,12 @@ import * as FinanceUserConsumer from 'src/module/finance-server/infrastructure/r
         FinanceServerUserRepo.UserRepository,
         FinanceServerInboxRepo.InboxRepository,
         FinanceUserConsumer.UserRegisteredConsumer,
+
+
+        // shipment Service
+        ShipmentServerUserRepo.UserRepository,
+        ShipmentServerInboxRepo.InboxRepository,
+        ShipmentUserConsumer.UserRegisteredConsumer,
     ],
     exports: [RabbitMQService],
 })

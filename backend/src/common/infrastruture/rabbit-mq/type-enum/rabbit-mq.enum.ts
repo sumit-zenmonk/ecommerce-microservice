@@ -23,6 +23,7 @@ export enum QueueEnum {
     CART_USER_REGISTERED_QUEUE = 'cart.user.registered.queue',
     ORDER_USER_REGISTERED_QUEUE = 'order.user.registered.queue',
     FINANCE_USER_REGISTERED_QUEUE = 'finance.user.registered.queue',
+    SHIPMENT_USER_REGISTERED_QUEUE = 'shipment.user.registered.queue',
 }
 
 export enum RetryMechanismHeaderEnum {
