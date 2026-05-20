@@ -3,3 +3,8 @@ export enum OrderPaymentStatusEnum {
     PAID = 'paid',
     CANCELLED = 'cancelled'
 }
+
+export enum OrderStatusEnum {
+    PENDING = 'pending',
+    COMPLETED = 'completed'
+}

@@ -1,4 +1,4 @@
-import { IsUUID, IsNumber, IsArray, ValidateNested, IsString, IsOptional, IsPositive, Min, ArrayNotEmpty } from 'class-validator';
+import { IsUUID, IsNumber, IsArray, ValidateNested, IsString, IsOptional, IsPositive, Min, ArrayNotEmpty, MaxLength } from 'class-validator';
 import { Type } from 'class-transformer';
 
 export class OrderItemDto {
@@ -26,6 +26,10 @@ export class CreateOrderDto {
 
     @IsNumber({ maxDecimalPlaces: 2 })
     total_price: number;
+
+    @IsString()
+    @MaxLength(255)
+    order_address: string;
 
     @IsArray()
     @ArrayNotEmpty({ message: 'Order must have at least one item' })

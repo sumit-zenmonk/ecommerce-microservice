@@ -169,7 +169,7 @@ export default function CartPage() {
             {cart && (
                 <Box className={styles.summary}>
                     <Typography className={styles.summaryText}>
-                        Total Items: {cart.items.length}
+                        Total Items: {cart?.items?.length}
                     </Typography>
 
                     <Typography className={styles.summaryPrice}>
@@ -178,7 +178,7 @@ export default function CartPage() {
                 </Box>
             )}
 
-            {cart && cart.items.length > 0 && (
+            {cart && cart?.items?.length > 0 && (
                 <Box className={styles.paybox}>
                     <Button variant="contained" color="primary" onClick={() => setOpenPayModal(true)}>
                         Pay
