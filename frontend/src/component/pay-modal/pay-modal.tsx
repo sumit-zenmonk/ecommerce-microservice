@@ -10,6 +10,7 @@ import AddCardModal from "../add-card-modal/AddCardModal";
 import AddAmountModal from "../add-amount-modal/AddAmountModal";
 import { PaymentCard } from "@/redux/feature/payment/payment.type";
 import styles from "./pay-modal.module.css";
+import DeleteIcon from '@mui/icons-material/Delete';
 
 interface PayModalProps {
     open: boolean;
@@ -86,13 +87,13 @@ export default function PayModal({ open, onClose, amount, order_uuid }: PayModal
                                         **** **** {Number(card.card_number) % 10000} | {card.name_on_card}
                                     </Typography>
                                     <FormControlLabel value={card.uuid} control={<Radio />} label="" />
+                                    <Button
+                                        className={styles.outlinedButton}
+                                        onClick={() => handleDeleteCard(card.uuid)}
+                                    >
+                                        <DeleteIcon />
+                                    </Button>
                                 </CardContent>
-                                <Button
-                                    className={styles.outlinedButton}
-                                    onClick={() => handleDeleteCard(card.uuid)}
-                                >
-                                    Delete Card
-                                </Button>
                             </Card>
                         ))}
                     </Box>
