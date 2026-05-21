@@ -107,6 +107,14 @@ export class RabbitMQService implements OnModuleInit, OnModuleDestroy {
             ExchangeTypeEnum.DIRECT,
         );
 
+        // shipment order created queue
+        await this.setupExchangeQueueAndBind(
+            QueueEnum.SHIPMENT_ORDER_CREATED_QUEUE,
+            ExchangeNameEnum.ORDER_EXCHANGE,
+            RoutingKeyEnum.ORDER_CREATED,
+            ExchangeTypeEnum.DIRECT,
+        );
+
         // order paid queue
         await this.setupExchangeQueueAndBind(
             QueueEnum.ORDER_PAID_QUEUE,
