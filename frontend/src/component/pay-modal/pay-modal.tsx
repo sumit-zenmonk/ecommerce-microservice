@@ -15,10 +15,10 @@ interface PayModalProps {
     open: boolean;
     onClose: () => void;
     amount: number;
-    cart_uuid: string;
+    order_uuid: string;
 }
 
-export default function PayModal({ open, onClose, amount }: PayModalProps) {
+export default function PayModal({ open, onClose, amount, order_uuid }: PayModalProps) {
     const dispatch = useAppDispatch();
     const { cards, account, loading } = useAppSelector((state: RootState) => state.paymentReducer);
     const [selectedCard, setSelectedCard] = useState<string>("");
@@ -51,7 +51,7 @@ export default function PayModal({ open, onClose, amount }: PayModalProps) {
                 return;
             }
 
-            await dispatch(pay({ amount, card_uuid: selectedCard })).unwrap();
+            await dispatch(pay({ amount, card_uuid: selectedCard, order_uuid })).unwrap();
             onClose();
         } catch (err: any) {
             enqueueSnackbar(err, { variant: "warning" });
@@ -59,7 +59,7 @@ export default function PayModal({ open, onClose, amount }: PayModalProps) {
     };
 
     if (!open) return null;
-
+    console.log(account);
     return (
         <Box className={styles.overlay}>
             <Box className={styles.modal}>

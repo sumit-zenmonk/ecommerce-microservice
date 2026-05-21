@@ -3,7 +3,7 @@
 import { useEffect, useState } from "react";
 import InfiniteScroll from "react-infinite-scroll-component";
 import { useDispatch, useSelector } from "react-redux";
-import { Box, Card, CardContent, CircularProgress, Container, Typography } from "@mui/material";
+import { Box, Button, Card, CardContent, CircularProgress, Container, Typography } from "@mui/material";
 import { RootState, AppDispatch } from "@/redux/store";
 import styles from "./order.module.css";
 import { getOrders } from "@/redux/feature/order/order-action";
@@ -12,6 +12,7 @@ import { enqueueSnackbar } from "notistack";
 import Image from "next/image";
 import Slider from "react-slick";
 import { sliderSettings } from "../../config/slider";
+import PayModal from "@/component/pay-modal/pay-modal";
 
 export default function OrderPage() {
     const dispatch = useDispatch<AppDispatch>();
@@ -19,6 +20,7 @@ export default function OrderPage() {
     const [limit] = useState(Number(process.env.page_limit) || 10);
     const [offset, setOffset] = useState(Number(process.env.page_offset) || 0);
     const [hasMore, setHasMore] = useState(true);
+    const [openPayModal, setOpenPayModal] = useState(false);
 
     useEffect(() => {
         fetchOrders();
@@ -66,12 +68,21 @@ export default function OrderPage() {
                                     </Typography>
 
                                     <Box className={styles.statusBox}>
-                                        <Typography variant="body2">
-                                            Total Price: ${order.total_price}
-                                        </Typography>
+
+                                        <Button color="primary" onClick={() => setOpenPayModal(true)}>
+                                            Pay {order.total_price}
+                                        </Button>
+
                                         <Typography variant="body2">
                                             Status: {order.order_status} | Payment: {order.payment_status}
                                         </Typography>
+
+                                        <PayModal
+                                            open={openPayModal}
+                                            onClose={() => setOpenPayModal(false)}
+                                            amount={Number(order.total_price)}
+                                            order_uuid={order.uuid}
+                                        />
                                     </Box>
 
                                     <Slider {...sliderSettings} className={styles.slidercomp}>

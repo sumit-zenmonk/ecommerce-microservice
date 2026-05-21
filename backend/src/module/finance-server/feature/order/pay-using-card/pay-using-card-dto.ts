@@ -12,5 +12,5 @@ export class PayUsingCardDto {
 
     @IsString()
     @IsNotEmpty()
-    cart_uuid: string;
+    order_uuid: string;
 }
