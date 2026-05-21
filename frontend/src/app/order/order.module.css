@@ -49,28 +49,41 @@
 }
 
 .orderCard {
+    width: 100%;
+    height: 100%;
     margin-bottom: 15px;
     border: 1px solid #e5e7eb;
     border-radius: 8px;
     box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
+    position: relative;
 }
 
-.itemsWrapper {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 10px;
-    margin-top: 10px;
+.statusBox {
+    position: absolute;
+    top: 0;
+    right: 10;
+}
+
+.slidercomp {
+    width: 100%;
+    height: 100%;
+    /* background-color: rgb(44, 44, 44); */
+    padding: 1%;
+    border-radius: 16px;
+    background-color: rgb(236, 236, 236);
 }
 
 .itemCard {
+    width: 100%;
+    height: 20%;
     display: flex;
+    justify-content: center;
     align-items: center;
-    width: 200px;
     padding: 10px;
-    border: 1px solid #e5e7eb;
-    border-radius: 6px;
+    border: 1px solid #58aeff;
+    border-radius: 16px;
     background-color: #f9fafb;
-    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
+    box-shadow: inset 0 1px 3px 5px rgba(0, 0, 0, 0.05);
 }
 
 .itemContent {

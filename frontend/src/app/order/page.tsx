@@ -10,6 +10,8 @@ import { getOrders } from "@/redux/feature/order/order-action";
 import { Order } from "@/redux/feature/order/order-type";
 import { enqueueSnackbar } from "notistack";
 import Image from "next/image";
+import Slider from "react-slick";
+import { sliderSettings } from "../../config/slider";
 
 export default function OrderPage() {
     const dispatch = useDispatch<AppDispatch>();
@@ -62,34 +64,33 @@ export default function OrderPage() {
                                     <Typography variant="h6">
                                         Order ID: {order.uuid}
                                     </Typography>
-                                    <Typography variant="body2">
-                                        Total Paid: ${order.total_price}
-                                    </Typography>
-                                    <Typography variant="body2">
-                                        Status: {order.order_status} | Payment: {order.payment_status}
-                                    </Typography>
 
-                                    <Box className={styles.itemsWrapper}>
+                                    <Box className={styles.statusBox}>
+                                        <Typography variant="body2">
+                                            Total Price: ${order.total_price}
+                                        </Typography>
+                                        <Typography variant="body2">
+                                            Status: {order.order_status} | Payment: {order.payment_status}
+                                        </Typography>
+                                    </Box>
+
+                                    <Slider {...sliderSettings} className={styles.slidercomp}>
                                         {order.items.map((item) => (
                                             <Card key={item.uuid} className={styles.itemCard}>
                                                 <Image
                                                     width={100}
-                                                    height="100"
+                                                    height={100}
                                                     src={item.image_url}
                                                     alt={item.name}
                                                 />
                                                 <Box className={styles.itemContent}>
                                                     <Typography variant="subtitle1">{item.name}</Typography>
-                                                    <Typography variant="body2">
-                                                        Quantity: {item.quantity}
-                                                    </Typography>
-                                                    <Typography variant="body2">
-                                                        Price: ${item.price}
-                                                    </Typography>
+                                                    <Typography variant="body2">Quantity: {item.quantity}</Typography>
+                                                    <Typography variant="body2">Price: ${item.price}</Typography>
                                                 </Box>
                                             </Card>
                                         ))}
-                                    </Box>
+                                    </Slider>
                                 </CardContent>
                             </Card>
                         ))
