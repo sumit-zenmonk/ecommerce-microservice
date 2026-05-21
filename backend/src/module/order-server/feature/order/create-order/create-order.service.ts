@@ -3,21 +3,25 @@ import { UserEntity } from "src/module/user-server/domain/user/user.entity";
 import { CreateOrderDto } from "./create-order.dto";
 import { OrderRepository } from "src/module/order-server/infrastructure/repository/order.repo";
 import { OrderItemRepository } from "src/module/order-server/infrastructure/repository/order.item.repo";
+import { ExchangeNameEnum, RoutingKeyEnum } from "src/module/common/infrastruture/rabbit-mq/type-enum/rabbit-mq.enum";
+import { OutboxRepository } from "src/module/order-server/infrastructure/repository/outbox.repo";
 
 @Injectable()
 export class CreateOrderService {
     constructor(
         private readonly orderRepo: OrderRepository,
         private readonly orderItemRepo: OrderItemRepository,
+        private readonly outboxRepo: OutboxRepository,
     ) { }
 
     async createOrder(user: UserEntity, body: CreateOrderDto) {
-        const { cart_uuid, items, total_price } = body;
+        const { cart_uuid, items, total_price, order_address } = body;
 
         const order = await this.orderRepo.createOrder({
             cart_uuid,
             total_price,
-            user_uuid: user.uuid
+            user_uuid: user.uuid,
+            order_address,
         });
 
         const orderItems = await Promise.all(
@@ -34,6 +38,33 @@ export class CreateOrderService {
         );
 
         order.items = orderItems;
+
+        // not publish direct to mq-queue
+        // await this.rabbitMQService.publishToExchange(
+        //     ExchangeNameEnum.ORDER_EXCHANGE,
+        //     RoutingKeyEnum.ORDER_CREATED,
+        //     {
+        //         order_uuid: order.uuid,
+        //         cart_uuid,
+        //         user_uuid: user.uuid,
+        //         total_price,
+        //         created_at: new Date(),
+        //     }
+        // );
+
+        // make entry of publish exchange
+        await this.outboxRepo.createOutboxntry({
+            exchange_name: ExchangeNameEnum.ORDER_EXCHANGE,
+            routing_key: RoutingKeyEnum.ORDER_CREATED,
+            message_payload: {
+                order_uuid: order.uuid,
+                order: order,
+                cart_uuid,
+                user_uuid: user.uuid,
+                total_price,
+                created_at: new Date(),
+            },
+        });
 
         return {
             data: order,

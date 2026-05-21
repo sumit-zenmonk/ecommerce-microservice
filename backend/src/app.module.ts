@@ -24,6 +24,7 @@ import { PaymentCardModule } from './module/finance-server/feature/payment-card/
 import { shipmentDataSource } from './module/shipment-server/infrastructure/database/data-source';
 import { UserAddressModule } from './module/shipment-server/feature/user-address/user-address.module';
 import { OrderModule } from './module/order-server/feature/order/order.module';
+import * as OrderCronModule from './module/order-server/infrastructure/cron/cron.module';
 
 @Module({
   imports: [
@@ -76,6 +77,7 @@ import { OrderModule } from './module/order-server/feature/order/order.module';
       retryDelay: 5000
     }),
     OrderModule,
+    OrderCronModule.CronModule,
 
     // finance Modules
     TypeOrmModule.forRoot({

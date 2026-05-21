@@ -12,8 +12,10 @@ import * as ProductUserConsumer from 'src/module/product-server/infrastructure/r
 
 // Cart Service
 import * as CartServerUserRepo from 'src/module/cart-server/infrastructure/repository/user.repo';
+import * as CartServerCartRepo from 'src/module/cart-server/infrastructure/repository/cart.repo';
 import * as CartServerInboxRepo from 'src/module/cart-server/infrastructure/repository/inbox.repo';
 import * as CartUserConsumer from 'src/module/cart-server/infrastructure/rabbit-mq-consumer/user/user-registered/user-registered.consumer';
+import * as OrderCreatedConsumer from 'src/module/cart-server/infrastructure/rabbit-mq-consumer/order/order-created/order-created-consumer';
 
 // Order Service
 import * as OrderServerUserRepo from 'src/module/order-server/infrastructure/repository/user.repo';
@@ -47,8 +49,10 @@ import * as ShipmentUserConsumer from 'src/module/shipment-server/infrastructure
 
         // Cart Service
         CartServerUserRepo.UserRepository,
+        CartServerCartRepo.CartRepository,
         CartServerInboxRepo.InboxRepository,
         CartUserConsumer.UserRegisteredConsumer,
+        OrderCreatedConsumer.OrderCreatedConsumer,
 
         // order Service
         OrderServerUserRepo.UserRepository,
@@ -59,7 +63,6 @@ import * as ShipmentUserConsumer from 'src/module/shipment-server/infrastructure
         FinanceServerUserRepo.UserRepository,
         FinanceServerInboxRepo.InboxRepository,
         FinanceUserConsumer.UserRegisteredConsumer,
-
 
         // shipment Service
         ShipmentServerUserRepo.UserRepository,
