@@ -13,6 +13,7 @@ import Image from "next/image";
 import Slider from "react-slick";
 import { sliderSettings } from "../../config/slider";
 import PayModal from "@/component/pay-modal/pay-modal";
+import { OrderPaymentStatusEnum } from "@/enum/order.enum";
 
 export default function OrderPage() {
     const dispatch = useDispatch<AppDispatch>();
@@ -21,6 +22,7 @@ export default function OrderPage() {
     const [offset, setOffset] = useState(Number(process.env.page_offset) || 0);
     const [hasMore, setHasMore] = useState(true);
     const [openPayModal, setOpenPayModal] = useState(false);
+    const [payModalOrder, setPayModalOrder] = useState<string | null>(null);
 
     useEffect(() => {
         fetchOrders();
@@ -37,7 +39,7 @@ export default function OrderPage() {
             enqueueSnackbar(err, { variant: "warning", });
         }
     };
-
+    console.log(JSON.stringify(orders));
     return (
         <Container maxWidth="xl" className={styles.container}>
             <Box className={styles.header}>
@@ -67,19 +69,28 @@ export default function OrderPage() {
                                         Order ID: {order.uuid}
                                     </Typography>
 
-                                    <Box className={styles.statusBox}>
+                                    <Typography variant="h6">
+                                        Total Price: {order.total_price}
+                                    </Typography>
 
-                                        <Button color="primary" onClick={() => setOpenPayModal(true)}>
-                                            Pay {order.total_price}
-                                        </Button>
+                                    <Box className={styles.statusBox}>
+                                        {
+                                            order.payment_status !== OrderPaymentStatusEnum.PAID &&
+                                            <Button
+                                                color="primary"
+                                                onClick={() => setPayModalOrder(order.uuid)}
+                                            >
+                                                Pay {order.total_price}
+                                            </Button>
+                                        }
 
                                         <Typography variant="body2">
                                             Status: {order.order_status} | Payment: {order.payment_status}
                                         </Typography>
 
                                         <PayModal
-                                            open={openPayModal}
-                                            onClose={() => setOpenPayModal(false)}
+                                            open={payModalOrder === order.uuid}
+                                            onClose={() => setPayModalOrder(null)}
                                             amount={Number(order.total_price)}
                                             order_uuid={order.uuid}
                                         />
