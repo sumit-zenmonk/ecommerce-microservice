@@ -6,11 +6,14 @@ import {
     OrderPaymentStatusEnum,
     OrderStatusEnum,
 } from 'src/module/shipment-server/domain/order/order.enum';
+import { OutboxRepository } from '../../repository/outbox.repo';
+import { ExchangeNameEnum, RoutingKeyEnum } from 'src/module/common/infrastruture/rabbit-mq/type-enum/rabbit-mq.enum';
 
 @Injectable()
 export class PaidOrderStatusCronService {
     constructor(
         private readonly orderRepo: OrderRepository,
+        private readonly outboxRepo: OutboxRepository,
     ) { }
 
     private readonly logger = new Logger(PaidOrderStatusCronService.name);
@@ -50,6 +53,15 @@ export class PaidOrderStatusCronService {
                     order.uuid,
                     nextStatus,
                 );
+
+                await this.outboxRepo.createOutboxntry({
+                    exchange_name: ExchangeNameEnum.ORDER_EXCHANGE,
+                    routing_key: RoutingKeyEnum.ORDER_STATUS_CHANGED,
+                    message_payload: {
+                        order_uuid: order.uuid,
+                        nextStatus,
+                    },
+                });
 
                 this.logger.log(
                     `Order ${order.uuid} updated from ${order.order_status} to ${nextStatus}`,

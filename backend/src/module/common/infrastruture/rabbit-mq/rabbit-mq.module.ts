@@ -23,6 +23,7 @@ import * as OrderServerInboxRepo from 'src/module/order-server/infrastructure/re
 import * as OrderServerOrderRepo from 'src/module/order-server/infrastructure/repository/order.repo';
 import * as OrderUserConsumer from 'src/module/order-server/infrastructure/rabbit-mq-consumer/user/user-registered/user-registered.consumer';
 import * as OrderPaidConsumer from 'src/module/order-server/infrastructure/rabbit-mq-consumer/order/order-paid/order-paid.consumer';
+import * as OrderStatusChangedConsumer from 'src/module/order-server/infrastructure/rabbit-mq-consumer/order/order-status-changed/order-status-changed.consumer';
 
 // finance Service
 import * as FinanceServerUserRepo from 'src/module/finance-server/infrastructure/repository/user.repo';
@@ -66,6 +67,7 @@ import * as ShipmentOrderPaidConsumer from 'src/module/shipment-server/infrastru
         OrderUserConsumer.UserRegisteredConsumer,
         OrderPaidConsumer.OrderPaidConsumer,
         OrderServerOrderRepo.OrderRepository,
+        OrderStatusChangedConsumer.OrderStatusChangedConsumer,
 
         // finance Service
         FinanceServerUserRepo.UserRepository,
