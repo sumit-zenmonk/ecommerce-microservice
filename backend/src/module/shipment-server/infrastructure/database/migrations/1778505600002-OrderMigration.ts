@@ -5,7 +5,7 @@ export class orderMigration1778505600002 implements MigrationInterface {
 
     public async up(queryRunner: QueryRunner): Promise<void> {
         await queryRunner.query(`CREATE TYPE "shipment_schema"."payment_status_type_enum" AS ENUM('pending', 'paid', 'cancelled');`);
-        await queryRunner.query(`CREATE TYPE "shipment_schema"."order_status_type_enum" AS ENUM('pending', 'completed');`);
+        await queryRunner.query(`CREATE TYPE "shipment_schema"."order_status_type_enum" AS ENUM('pending', 'completed','delivered');`);
 
         await queryRunner.createTable(new Table({
             name: "order",
