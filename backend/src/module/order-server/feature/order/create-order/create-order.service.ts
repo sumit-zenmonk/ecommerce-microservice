@@ -58,10 +58,18 @@ export class CreateOrderService {
             routing_key: RoutingKeyEnum.ORDER_CREATED,
             message_payload: {
                 order_uuid: order.uuid,
-                order: order,
                 cart_uuid,
                 user_uuid: user.uuid,
                 total_price,
+                order_address,
+                items: orderItems.map(item => ({
+                    uuid: item.uuid,
+                    name: item.name,
+                    description: item.description,
+                    image_url: item.image_url,
+                    price: item.price,
+                    quantity: item.quantity,
+                })),
                 created_at: new Date(),
             },
         });

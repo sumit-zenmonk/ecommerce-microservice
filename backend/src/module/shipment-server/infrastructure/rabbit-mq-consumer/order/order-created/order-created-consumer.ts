@@ -25,13 +25,12 @@ export class OrderCreatedConsumer implements OnModuleInit {
             async (data) => {
                 const { outbox_uuid, payload } = data;
                 const {
-                    order: {
-                        cart_uuid,
-                        total_price,
-                        user_uuid,
-                        order_address,
-                        items,
-                    },
+                    order_uuid,
+                    cart_uuid,
+                    total_price,
+                    user_uuid,
+                    order_address,
+                    items,
                 } = payload;
 
                 this.logger.log(`Processing Order created: ${outbox_uuid}\n ${JSON.stringify(payload)}`);
@@ -43,6 +42,7 @@ export class OrderCreatedConsumer implements OnModuleInit {
                 }
 
                 const order = await this.orderRepo.createOrder({
+                    uuid: order_uuid,
                     cart_uuid,
                     total_price,
                     user_uuid: user_uuid,
@@ -52,6 +52,7 @@ export class OrderCreatedConsumer implements OnModuleInit {
                 await Promise.all(
                     items.map(item =>
                         this.orderItemRepo.createOrderItem({
+                            uuid: item.uuid,
                             order_uuid: order.uuid,
                             name: item.name,
                             description: item.description,

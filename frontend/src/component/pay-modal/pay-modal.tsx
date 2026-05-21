@@ -64,7 +64,7 @@ export default function PayModal({ open, onClose, amount, order_uuid }: PayModal
         <Box className={styles.overlay}>
             <Box className={styles.modal}>
                 <Typography className={styles.accountBalance}>
-                    Account balance {account?.balance}
+                    Account balance: ${account?.balance || 0}
                 </Typography>
 
                 <Typography variant="h6" mb={2}>
