@@ -10,7 +10,6 @@ import { getAddresses } from "@/redux/feature/address/address.action";
 import { enqueueSnackbar } from "notistack";
 import { useAppDispatch, useAppSelector } from "@/redux/hooks.ts";
 import { CartItem } from "@/redux/feature/cart/cart.type";
-import PayModal from "@/component/pay-modal/pay-modal";
 import UserAddressModal from "@/component/user-address-modal/user-address-modal";
 import PlaceOrderDialog from "@/component/place-order-comp/place-order.comp";
 
@@ -18,7 +17,6 @@ export default function CartPage() {
     const dispatch = useAppDispatch();
     const { cart, loading } = useAppSelector((state: RootState) => state.cartReducer);
     const { addresses } = useAppSelector((state: RootState) => state.userAddressReducer);
-    const [openPayModal, setOpenPayModal] = useState(false);
     const [openUserAddressModal, setOpenUserAddressModal] = useState(false);
     const [openPlaceOrderDialog, setOpenPlaceOrderDialog] = useState(false);
 
@@ -206,22 +204,10 @@ export default function CartPage() {
                         Place Order
                     </Button>
 
-                    <Button color="primary" onClick={() => setOpenPayModal(true)}>
-                        Pay
-                    </Button>
-
                     <Button onClick={() => setOpenUserAddressModal(true)}>
                         Add address
                     </Button>
                 </Box>
-            )}
-
-            {cart && (
-                <PayModal
-                    open={openPayModal}
-                    onClose={() => setOpenPayModal(false)}
-                    amount={Number(cart.total_price)}
-                />
             )}
             <UserAddressModal isOpen={openUserAddressModal} onClose={handleAddAddressClose} />
 

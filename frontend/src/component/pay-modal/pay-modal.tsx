@@ -15,6 +15,7 @@ interface PayModalProps {
     open: boolean;
     onClose: () => void;
     amount: number;
+    cart_uuid: string;
 }
 
 export default function PayModal({ open, onClose, amount }: PayModalProps) {
