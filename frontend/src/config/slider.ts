@@ -1,5 +1,5 @@
 export const sliderSettings = {
-    dots: true,
+    // dots: true,
     infinite: false,
     slidesToShow: 4,
     slidesToScroll: 1,
