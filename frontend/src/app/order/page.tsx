@@ -13,7 +13,10 @@ import Image from "next/image";
 import Slider from "react-slick";
 import { sliderSettings } from "../../config/slider";
 import PayModal from "@/component/pay-modal/pay-modal";
-import { OrderPaymentStatusEnum } from "@/enum/order.enum";
+import { OrderPaymentStatusEnum, OrderStatusEnum } from "@/enum/order.enum";
+import Stepper from "@mui/material/Stepper";
+import Step from "@mui/material/Step";
+import StepLabel from "@mui/material/StepLabel";
 
 export default function OrderPage() {
     const dispatch = useDispatch<AppDispatch>();
@@ -39,7 +42,18 @@ export default function OrderPage() {
             enqueueSnackbar(err, { variant: "warning", });
         }
     };
-    console.log(JSON.stringify(orders));
+
+    const orderSteps = [
+        OrderStatusEnum.PENDING,
+        OrderStatusEnum.PROCESSING,
+        OrderStatusEnum.PACKED,
+        OrderStatusEnum.DELIVERED,
+    ];
+
+    const getActiveStep = (status: OrderStatusEnum) => {
+        return orderSteps.indexOf(status);
+    };
+
     return (
         <Container maxWidth="xl" className={styles.container}>
             <Box className={styles.header}>
@@ -64,6 +78,24 @@ export default function OrderPage() {
                     {orders && orders.length > 0 ? (
                         orders.map((order: Order) => (
                             <Card key={order.uuid} className={styles.orderCard}>
+
+                                <Stepper activeStep={getActiveStep(order.order_status as OrderStatusEnum)} alternativeLabel className={styles.stepper}>
+                                    {orderSteps.map((step) => (
+                                        <Step key={step}>
+                                            <StepLabel
+                                                sx={{
+                                                    "& .MuiStepLabel-label": {
+                                                        textTransform: "capitalize",
+                                                        fontSize: "0.85rem",
+                                                    },
+                                                }}
+                                            >
+                                                {step}
+                                            </StepLabel>
+                                        </Step>
+                                    ))}
+                                </Stepper>
+
                                 <CardContent>
                                     <Typography variant="h6">
                                         Order ID: {order.uuid}
@@ -73,7 +105,7 @@ export default function OrderPage() {
                                         Total Price: {order.total_price}
                                     </Typography>
 
-                                    <Box className={styles.statusBox}>
+                                    <Box>
                                         {
                                             order.payment_status !== OrderPaymentStatusEnum.PAID &&
                                             <Button
@@ -84,9 +116,14 @@ export default function OrderPage() {
                                             </Button>
                                         }
 
-                                        <Typography variant="body2">
-                                            Status: {order.order_status} | Payment: {order.payment_status}
-                                        </Typography>
+                                        <Box sx={{ width: "100%", mt: 2 }}>
+                                            <Typography
+                                                variant="body2"
+                                                sx={{ mt: 1, textAlign: "center" }}
+                                            >
+                                                Payment: {order.payment_status.toUpperCase()}
+                                            </Typography>
+                                        </Box>
 
                                         <PayModal
                                             open={payModalOrder === order.uuid}

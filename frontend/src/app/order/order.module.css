@@ -55,18 +55,11 @@
     border: 1px solid #e5e7eb;
     border-radius: 8px;
     box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
-    position: relative;
 }
 
-.statusBox {
-    position: absolute;
-    top: 0;
-    right: 10;
-    margin-top: 1%;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
+.stepper {
+    width: 100%;
+    margin: 2% 0;
 }
 
 .slidercomp {
