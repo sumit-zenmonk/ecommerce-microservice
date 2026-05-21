@@ -28,6 +28,7 @@ import * as OrderCronModule from './module/order-server/infrastructure/cron/cron
 import { PaymentOrderModule } from './module/finance-server/feature/order/order.module';
 import * as FinanceCronModule from './module/finance-server/infrastructure/cron/cron.module';
 import * as ShipmentCronModule from './module/shipment-server/infrastructure/cron/cron.module';
+import { SocketModule } from './module/common/socket/socket.module';
 
 @Module({
   imports: [
@@ -43,6 +44,7 @@ import * as ShipmentCronModule from './module/shipment-server/infrastructure/cro
     }),
     RabbitMQModule,
     ScheduleModule.forRoot(),
+    SocketModule,
 
     //User Modules
     TypeOrmModule.forRoot({

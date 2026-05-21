@@ -24,7 +24,6 @@ export default function OrderPage() {
     const [limit] = useState(Number(process.env.page_limit) || 10);
     const [offset, setOffset] = useState(Number(process.env.page_offset) || 0);
     const [hasMore, setHasMore] = useState(true);
-    const [openPayModal, setOpenPayModal] = useState(false);
     const [payModalOrder, setPayModalOrder] = useState<string | null>(null);
 
     useEffect(() => {

@@ -5,12 +5,14 @@ import { PayUsingCardDto } from "./pay-using-card-dto";
 import { PaymentHistoryTypeEnum } from "src/module/finance-server/domain/payment-history/payment.type.enum";
 import { OutboxRepository } from "src/module/finance-server/infrastructure/repository/outbox.repo";
 import { ExchangeNameEnum, RoutingKeyEnum } from "src/module/common/infrastruture/rabbit-mq/type-enum/rabbit-mq.enum";
+import { SocketService } from "src/module/common/socket/socket.service";
 
 @Injectable()
 export class PayUsingCardService {
     constructor(
         private readonly financeRepo: FinanceRepository,
         private readonly outboxRepo: OutboxRepository,
+        private readonly socketService: SocketService,
     ) { }
 
     async payUsingCard(user: UserEntity, body: PayUsingCardDto) {
@@ -66,6 +68,8 @@ export class PayUsingCardService {
                 order_uuid: body.order_uuid,
             },
         });
+
+        await this.socketService.emitToUser(user.uuid, 'order_paid', { order_uuid: body.order_uuid });
 
         return {
             data: saved,
