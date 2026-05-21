@@ -27,6 +27,7 @@ import { OrderModule } from './module/order-server/feature/order/order.module';
 import * as OrderCronModule from './module/order-server/infrastructure/cron/cron.module';
 import { PaymentOrderModule } from './module/finance-server/feature/order/order.module';
 import * as FinanceCronModule from './module/finance-server/infrastructure/cron/cron.module';
+import * as ShipmentCronModule from './module/shipment-server/infrastructure/cron/cron.module';
 
 @Module({
   imports: [
@@ -100,7 +101,8 @@ import * as FinanceCronModule from './module/finance-server/infrastructure/cron/
       retryAttempts: 10,
       retryDelay: 5000
     }),
-    UserAddressModule
+    UserAddressModule,
+    ShipmentCronModule.CronModule,
   ],
   controllers: [AppController],
   providers: [AppService, BcryptService, UserRepository, JwtHelperService],

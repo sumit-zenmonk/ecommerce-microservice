@@ -6,6 +6,7 @@ export enum OrderPaymentStatusEnum {
 
 export enum OrderStatusEnum {
     PENDING = 'pending',
-    COMPLETED = 'completed',
+    PROCESSING = 'processing',
+    PACKED = 'packed',
     DELIVERED = 'delivered'
 }

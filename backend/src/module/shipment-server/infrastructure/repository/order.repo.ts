@@ -56,4 +56,16 @@ export class OrderRepository extends Repository<OrderEntity> {
             }
         )
     }
+
+    async findTopTenPaidButNotDeliveredOrderStatus() {
+        return await this.find({
+            where: {
+                payment_status: OrderPaymentStatusEnum.PAID,
+                order_status: Not(OrderStatusEnum.DELIVERED)
+            },
+            order: {
+                created_at: 'ASC'
+            },
+        });
+    }
 }
