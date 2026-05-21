@@ -1,16 +1,16 @@
 import { BadRequestException, Injectable } from "@nestjs/common";
 import { FinanceRepository } from "src/module/finance-server/infrastructure/repository/finance.repo";
-import { UserEntity } from "src/module/user-server/domain/user/user.entity";
-import { PayDto } from "./pay-dto";
+import { UserEntity } from "src/module/finance-server/domain/user/user.entity";
+import { PayUsingCardDto } from "./pay-using-card-dto";
 import { PaymentHistoryTypeEnum } from "src/module/finance-server/domain/payment-history/payment.type.enum";
 
 @Injectable()
-export class PayService {
+export class PayUsingCardService {
     constructor(
         private readonly financeRepo: FinanceRepository,
     ) { }
 
-    async pay(user: UserEntity, body: PayDto) {
+    async payUsingCard(user: UserEntity, body: PayUsingCardDto) {
         const amount = Number(body.amount);
         // amount should be reasonlabe
         if (!amount || amount <= 0) {
@@ -28,7 +28,7 @@ export class PayService {
             account = await this.financeRepo.createAccount({ user_uuid: user.uuid, balance: 0 });
         }
 
-        // amount is too much to pay than in user account
+        // amount is too much to PayUsingCard than in user account
         if (account.balance < amount) {
             throw new BadRequestException("Insufficient balance in account");
         }
@@ -37,18 +37,18 @@ export class PayService {
         account.balance -= amount;
         const saved = await this.financeRepo.saveAccount(account);
 
-        // make payment history
+        // make PayUsingCardment history
         await this.financeRepo.createHistory({
             user_uuid: user.uuid,
             amount,
-            type: PaymentHistoryTypeEnum.PAYMENT,
+            type: PaymentHistoryTypeEnum.PAYMENT_USING_CARD,
             card_uuid: isCardExists.uuid,
             description: `Paid with card ${isCardExists.uuid}`,
         });
 
         return {
             data: saved,
-            message: "Payment processed and account updated"
+            message: "PayUsingCardment processed and account updated"
         };
     }
 }
