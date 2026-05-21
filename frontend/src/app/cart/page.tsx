@@ -1,25 +1,30 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import { Box, Card, CardContent, CardMedia, Container, IconButton, Typography, CircularProgress, Button } from "@mui/material";
+import { Box, Card, CardContent, CardMedia, Container, IconButton, Typography, CircularProgress, Button, Dialog, DialogTitle, DialogContent, DialogActions, RadioGroup, FormControlLabel, Radio, Divider } from "@mui/material";
 import DeleteIcon from "@mui/icons-material/Delete";
 import styles from "./cart.module.css";
 import { RootState } from "@/redux/store";
 import { getCart, removeCartItem, updateCartItem } from "@/redux/feature/cart/cart-action";
+import { getAddresses } from "@/redux/feature/address/address.action";
 import { enqueueSnackbar } from "notistack";
 import { useAppDispatch, useAppSelector } from "@/redux/hooks.ts";
 import { CartItem } from "@/redux/feature/cart/cart.type";
 import PayModal from "@/component/pay-modal/pay-modal";
 import UserAddressModal from "@/component/user-address-modal/user-address-modal";
+import PlaceOrderDialog from "@/component/place-order-comp/place-order.comp";
 
 export default function CartPage() {
     const dispatch = useAppDispatch();
     const { cart, loading } = useAppSelector((state: RootState) => state.cartReducer);
+    const { addresses } = useAppSelector((state: RootState) => state.userAddressReducer);
     const [openPayModal, setOpenPayModal] = useState(false);
     const [openUserAddressModal, setOpenUserAddressModal] = useState(false);
+    const [openPlaceOrderDialog, setOpenPlaceOrderDialog] = useState(false);
 
     useEffect(() => {
         fetchCart();
+        fetchAddresses();
     }, []);
 
     const fetchCart = async () => {
@@ -27,6 +32,14 @@ export default function CartPage() {
             await dispatch(getCart()).unwrap();
         } catch (err: any) {
             enqueueSnackbar(err, { variant: "warning" });
+        }
+    };
+
+    const fetchAddresses = async () => {
+        try {
+            await dispatch(getAddresses()).unwrap();
+        } catch (err: any) {
+            console.error("Error fetching addresses:", err);
         }
     };
 
@@ -58,6 +71,13 @@ export default function CartPage() {
         } catch (err: any) {
             enqueueSnackbar(err, { variant: "warning" });
         }
+    };
+
+    const handleAddAddressClose = () => {
+        setOpenUserAddressModal(false);
+        setTimeout(() => {
+            fetchAddresses();
+        }, 500);
     };
 
     return (
@@ -178,6 +198,14 @@ export default function CartPage() {
 
             {cart && cart?.items?.length > 0 && (
                 <Box className={styles.paybox}>
+                    <Button
+                        color="primary"
+                        onClick={() => setOpenPlaceOrderDialog(true)}
+                        variant="contained"
+                    >
+                        Place Order
+                    </Button>
+
                     <Button color="primary" onClick={() => setOpenPayModal(true)}>
                         Pay
                     </Button>
@@ -195,7 +223,15 @@ export default function CartPage() {
                     amount={Number(cart.total_price)}
                 />
             )}
-            <UserAddressModal isOpen={openUserAddressModal} onClose={() => setOpenUserAddressModal(false)} />
+            <UserAddressModal isOpen={openUserAddressModal} onClose={handleAddAddressClose} />
+
+            <PlaceOrderDialog
+                open={openPlaceOrderDialog}
+                onClose={() => setOpenPlaceOrderDialog(false)}
+                addresses={addresses || []}
+                cart={cart}
+                onAddAddressClick={() => setOpenUserAddressModal(true)}
+            />
         </Container>
     );
 }
