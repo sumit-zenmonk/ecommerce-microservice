@@ -26,6 +26,7 @@ import { UserAddressModule } from './module/shipment-server/feature/user-address
 import { OrderModule } from './module/order-server/feature/order/order.module';
 import * as OrderCronModule from './module/order-server/infrastructure/cron/cron.module';
 import { PaymentOrderModule } from './module/finance-server/feature/order/order.module';
+import * as FinanceCronModule from './module/finance-server/infrastructure/cron/cron.module';
 
 @Module({
   imports: [
@@ -90,6 +91,7 @@ import { PaymentOrderModule } from './module/finance-server/feature/order/order.
     }),
     PaymentModule,
     PaymentCardModule,
+    FinanceCronModule.CronModule,
 
     // shipment Modules
     TypeOrmModule.forRoot({

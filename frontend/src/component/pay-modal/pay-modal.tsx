@@ -59,7 +59,7 @@ export default function PayModal({ open, onClose, amount, order_uuid }: PayModal
     };
 
     if (!open) return null;
-    console.log(account);
+
     return (
         <Box className={styles.overlay}>
             <Box className={styles.modal}>

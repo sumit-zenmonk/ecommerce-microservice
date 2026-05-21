@@ -3,11 +3,14 @@ import { FinanceRepository } from "src/module/finance-server/infrastructure/repo
 import { UserEntity } from "src/module/finance-server/domain/user/user.entity";
 import { PayUsingCardDto } from "./pay-using-card-dto";
 import { PaymentHistoryTypeEnum } from "src/module/finance-server/domain/payment-history/payment.type.enum";
+import { OutboxRepository } from "src/module/finance-server/infrastructure/repository/outbox.repo";
+import { ExchangeNameEnum, RoutingKeyEnum } from "src/module/common/infrastruture/rabbit-mq/type-enum/rabbit-mq.enum";
 
 @Injectable()
 export class PayUsingCardService {
     constructor(
         private readonly financeRepo: FinanceRepository,
+        private readonly outboxRepo: OutboxRepository,
     ) { }
 
     async payUsingCard(user: UserEntity, body: PayUsingCardDto) {
@@ -44,6 +47,24 @@ export class PayUsingCardService {
             type: PaymentHistoryTypeEnum.PAYMENT_USING_CARD,
             card_uuid: isCardExists.uuid,
             description: `Paid with card ${isCardExists.uuid}`,
+        });
+
+        // not publish direct to mq-queue
+        // await this.rabbitMQService.publishToExchange(
+        //     ExchangeNameEnum.ORDER_EXCHANGE,
+        //     RoutingKeyEnum.ORDER_PAID,
+        //     {
+        //        order_uuid: body.order_uuid,
+        //     }
+        // );
+
+        // make entry of publish exchange
+        await this.outboxRepo.createOutboxntry({
+            exchange_name: ExchangeNameEnum.ORDER_EXCHANGE,
+            routing_key: RoutingKeyEnum.ORDER_PAID,
+            message_payload: {
+                order_uuid: body.order_uuid,
+            },
         });
 
         return {
