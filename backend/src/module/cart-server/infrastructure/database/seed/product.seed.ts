@@ -11,6 +11,7 @@ const products: Partial<ProductEntity>[] = [
         description: 'Apple smartphone with A17 Pro chip and titanium body.',
         image_url: 'https://picsum.photos/seed/iphone15pro/640/480',
         price: 139999,
+        stock: 10,
     },
     {
         id: 2,
@@ -19,6 +20,7 @@ const products: Partial<ProductEntity>[] = [
         description: 'Premium Android smartphone with 200MP camera.',
         image_url: 'https://picsum.photos/seed/s24ultra/640/480',
         price: 129999,
+        stock: 10,
     },
     {
         id: 3,
@@ -27,6 +29,7 @@ const products: Partial<ProductEntity>[] = [
         description: 'Lightweight Apple laptop powered by M3 chip.',
         image_url: 'https://picsum.photos/seed/macbookairm3/640/480',
         price: 154999,
+        stock: 10,
     },
     {
         id: 4,
@@ -35,6 +38,7 @@ const products: Partial<ProductEntity>[] = [
         description: 'High-performance ultrabook with InfinityEdge display.',
         image_url: 'https://picsum.photos/seed/dellxps15/640/480',
         price: 179999,
+        stock: 10,
     },
     {
         id: 5,
@@ -43,6 +47,7 @@ const products: Partial<ProductEntity>[] = [
         description: 'Industry-leading noise cancelling headphones.',
         image_url: 'https://picsum.photos/seed/sonyxm5/640/480',
         price: 29999,
+        stock: 10,
     },
     {
         id: 6,
@@ -51,6 +56,7 @@ const products: Partial<ProductEntity>[] = [
         description: 'Wireless earbuds with active noise cancellation.',
         image_url: 'https://picsum.photos/seed/airpodspro2/640/480',
         price: 24999,
+        stock: 10,
     },
     {
         id: 7,
@@ -59,6 +65,7 @@ const products: Partial<ProductEntity>[] = [
         description: 'Apple tablet with Liquid Retina XDR display.',
         image_url: 'https://picsum.photos/seed/ipadpro/640/480',
         price: 119999,
+        stock: 10,
     },
     {
         id: 8,
@@ -67,6 +74,7 @@ const products: Partial<ProductEntity>[] = [
         description: 'Android flagship tablet with AMOLED display.',
         image_url: 'https://picsum.photos/seed/tabs9/640/480',
         price: 89999,
+        stock: 10,
     },
     {
         id: 9,
@@ -75,6 +83,7 @@ const products: Partial<ProductEntity>[] = [
         description: 'Advanced wireless productivity mouse.',
         image_url: 'https://picsum.photos/seed/mxmaster3s/640/480',
         price: 9999,
+        stock: 10,
     },
     {
         id: 10,
@@ -83,6 +92,7 @@ const products: Partial<ProductEntity>[] = [
         description: 'Wireless mechanical keyboard for developers.',
         image_url: 'https://picsum.photos/seed/keychronk8/640/480',
         price: 8499,
+        stock: 10,
     },
     {
         id: 11,
@@ -91,6 +101,7 @@ const products: Partial<ProductEntity>[] = [
         description: 'Smart speaker with Alexa voice assistant.',
         image_url: 'https://picsum.photos/seed/echodot5/640/480',
         price: 5499,
+        stock: 10,
     },
     {
         id: 12,
@@ -99,6 +110,7 @@ const products: Partial<ProductEntity>[] = [
         description: 'Smart display for home automation.',
         image_url: 'https://picsum.photos/seed/nesthub/640/480',
         price: 8999,
+        stock: 10,
     },
     {
         id: 13,
@@ -107,6 +119,7 @@ const products: Partial<ProductEntity>[] = [
         description: 'Mirrorless camera for creators and vloggers.',
         image_url: 'https://picsum.photos/seed/canoneosr50/640/480',
         price: 74999,
+        stock: 10,
     },
     {
         id: 14,
@@ -115,6 +128,7 @@ const products: Partial<ProductEntity>[] = [
         description: 'Action camera with 5.3K video recording.',
         image_url: 'https://picsum.photos/seed/gopro12/640/480',
         price: 44999,
+        stock: 10,
     },
     {
         id: 15,
@@ -123,6 +137,7 @@ const products: Partial<ProductEntity>[] = [
         description: 'Next-gen gaming console from Sony.',
         image_url: 'https://picsum.photos/seed/ps5/640/480',
         price: 54999,
+        stock: 10,
     },
     {
         id: 16,
@@ -131,6 +146,7 @@ const products: Partial<ProductEntity>[] = [
         description: 'Powerful gaming console from Microsoft.',
         image_url: 'https://picsum.photos/seed/xboxseriesx/640/480',
         price: 52999,
+        stock: 10,
     },
     {
         id: 17,
@@ -139,6 +155,7 @@ const products: Partial<ProductEntity>[] = [
         description: 'Portable gaming console with OLED screen.',
         image_url: 'https://picsum.photos/seed/switcholed/640/480',
         price: 32999,
+        stock: 10,
     },
     {
         id: 18,
@@ -147,6 +164,7 @@ const products: Partial<ProductEntity>[] = [
         description: 'Portable waterproof Bluetooth speaker.',
         image_url: 'https://picsum.photos/seed/jblflip6/640/480',
         price: 11999,
+        stock: 10,
     },
     {
         id: 19,
@@ -155,6 +173,7 @@ const products: Partial<ProductEntity>[] = [
         description: 'Cordless vacuum cleaner with laser detection.',
         image_url: 'https://picsum.photos/seed/dysonv15/640/480',
         price: 64999,
+        stock: 10,
     },
     {
         id: 20,
@@ -163,6 +182,7 @@ const products: Partial<ProductEntity>[] = [
         description: 'Affordable fitness tracking smart band.',
         image_url: 'https://picsum.photos/seed/miband8/640/480',
         price: 3999,
+        stock: 10,
     },
     {
         id: 21,
@@ -171,6 +191,7 @@ const products: Partial<ProductEntity>[] = [
         description: 'Advanced smartwatch with health tracking.',
         image_url: 'https://picsum.photos/seed/applewatch9/640/480',
         price: 45999,
+        stock: 10,
     },
     {
         id: 22,
@@ -179,6 +200,7 @@ const products: Partial<ProductEntity>[] = [
         description: 'Wear OS smartwatch with fitness features.',
         image_url: 'https://picsum.photos/seed/galaxywatch6/640/480',
         price: 32999,
+        stock: 10,
     },
     {
         id: 23,
@@ -187,6 +209,7 @@ const products: Partial<ProductEntity>[] = [
         description: 'Gaming laptop with RTX graphics.',
         image_url: 'https://picsum.photos/seed/rogstrixg16/640/480',
         price: 189999,
+        stock: 10,
     },
     {
         id: 24,
@@ -195,6 +218,7 @@ const products: Partial<ProductEntity>[] = [
         description: 'Reliable everyday performance laptop.',
         image_url: 'https://picsum.photos/seed/hppavilion15/640/480',
         price: 69999,
+        stock: 10,
     },
     {
         id: 25,
@@ -203,6 +227,7 @@ const products: Partial<ProductEntity>[] = [
         description: 'Business ultrabook with premium build quality.',
         image_url: 'https://picsum.photos/seed/thinkpadx1/640/480',
         price: 164999,
+        stock: 10,
     },
     {
         id: 26,
@@ -211,6 +236,7 @@ const products: Partial<ProductEntity>[] = [
         description: 'Flagship Android smartphone with fast charging.',
         image_url: 'https://picsum.photos/seed/oneplus12/640/480',
         price: 69999,
+        stock: 10,
     },
     {
         id: 27,
@@ -219,6 +245,7 @@ const products: Partial<ProductEntity>[] = [
         description: 'Stylish smartphone with Glyph interface.',
         image_url: 'https://picsum.photos/seed/nothingphone2/640/480',
         price: 44999,
+        stock: 10,
     },
     {
         id: 28,
@@ -227,6 +254,7 @@ const products: Partial<ProductEntity>[] = [
         description: 'Performance-focused smartphone with AMOLED display.',
         image_url: 'https://picsum.photos/seed/realmegt6/640/480',
         price: 38999,
+        stock: 10,
     },
     {
         id: 29,
@@ -235,6 +263,7 @@ const products: Partial<ProductEntity>[] = [
         description: 'Budget wireless earbuds with long battery life.',
         image_url: 'https://picsum.photos/seed/airdopes141/640/480',
         price: 1499,
+        stock: 10,
     },
     {
         id: 30,
@@ -243,6 +272,7 @@ const products: Partial<ProductEntity>[] = [
         description: 'Fast charging portable power bank.',
         image_url: 'https://picsum.photos/seed/ankerpb/640/480',
         price: 4999,
+        stock: 10,
     },
     {
         id: 31,
@@ -251,6 +281,7 @@ const products: Partial<ProductEntity>[] = [
         description: 'Dual-band WiFi router for home use.',
         image_url: 'https://picsum.photos/seed/archerc6/640/480',
         price: 2999,
+        stock: 10,
     },
     {
         id: 32,
@@ -259,6 +290,7 @@ const products: Partial<ProductEntity>[] = [
         description: 'Premium OLED smart television with Dolby Vision.',
         image_url: 'https://picsum.photos/seed/lgoledc3/640/480',
         price: 149999,
+        stock: 10,
     },
     {
         id: 33,
@@ -267,6 +299,7 @@ const products: Partial<ProductEntity>[] = [
         description: '4K UHD smart TV with vibrant colors.',
         image_url: 'https://picsum.photos/seed/samsung4ktv/640/480',
         price: 65999,
+        stock: 10,
     },
     {
         id: 34,
@@ -275,6 +308,7 @@ const products: Partial<ProductEntity>[] = [
         description: 'E-reader with glare-free display.',
         image_url: 'https://picsum.photos/seed/kindlepaperwhite/640/480',
         price: 13999,
+        stock: 10,
     },
     {
         id: 35,
@@ -283,6 +317,7 @@ const products: Partial<ProductEntity>[] = [
         description: 'Comfortable lifestyle sneakers from Nike.',
         image_url: 'https://picsum.photos/seed/airmax270/640/480',
         price: 12999,
+        stock: 10,
     },
     {
         id: 36,
@@ -291,6 +326,7 @@ const products: Partial<ProductEntity>[] = [
         description: 'Running shoes with responsive cushioning.',
         image_url: 'https://picsum.photos/seed/ultraboost22/640/480',
         price: 14999,
+        stock: 10,
     },
     {
         id: 37,
@@ -299,6 +335,7 @@ const products: Partial<ProductEntity>[] = [
         description: 'Durable backpack for daily and gym use.',
         image_url: 'https://picsum.photos/seed/pumabag/640/480',
         price: 2499,
+        stock: 10,
     },
     {
         id: 38,
@@ -307,6 +344,7 @@ const products: Partial<ProductEntity>[] = [
         description: 'Large hiking backpack with rain cover.',
         image_url: 'https://picsum.photos/seed/wildcraftbag/640/480',
         price: 4999,
+        stock: 10,
     },
     {
         id: 39,
@@ -315,6 +353,7 @@ const products: Partial<ProductEntity>[] = [
         description: 'Shock-resistant analog digital watch.',
         image_url: 'https://picsum.photos/seed/gshockga2100/640/480',
         price: 8999,
+        stock: 10,
     },
     {
         id: 40,
@@ -323,6 +362,7 @@ const products: Partial<ProductEntity>[] = [
         description: 'Stylish smartwatch powered by Wear OS.',
         image_url: 'https://picsum.photos/seed/fossilgen6/640/480',
         price: 22999,
+        stock: 10,
     }, {
         id: 41,
         uuid: '550e8400-e29b-41d4-a716-446655440041',
@@ -330,6 +370,7 @@ const products: Partial<ProductEntity>[] = [
         description: 'Gaming laptop with high refresh rate display.',
         image_url: 'https://picsum.photos/seed/acernitro5/640/480',
         price: 94999,
+        stock: 10,
     },
     {
         id: 42,
@@ -338,6 +379,7 @@ const products: Partial<ProductEntity>[] = [
         description: 'Performance gaming laptop with RTX graphics.',
         image_url: 'https://picsum.photos/seed/msigf66/640/480',
         price: 114999,
+        stock: 10,
     },
     {
         id: 43,
@@ -346,6 +388,7 @@ const products: Partial<ProductEntity>[] = [
         description: 'Ergonomic gaming mouse with optical switches.',
         image_url: 'https://picsum.photos/seed/deathadderv3/640/480',
         price: 6999,
+        stock: 10,
     },
     {
         id: 44,
@@ -354,6 +397,7 @@ const products: Partial<ProductEntity>[] = [
         description: 'Wireless gaming headset with surround sound.',
         image_url: 'https://picsum.photos/seed/arctis7/640/480',
         price: 15999,
+        stock: 10,
     },
     {
         id: 45,
@@ -362,6 +406,7 @@ const products: Partial<ProductEntity>[] = [
         description: 'Mechanical gaming keyboard with RGB lighting.',
         image_url: 'https://picsum.photos/seed/corsairk95/640/480',
         price: 17999,
+        stock: 10,
     },
     {
         id: 46,
@@ -370,6 +415,7 @@ const products: Partial<ProductEntity>[] = [
         description: '27-inch gaming monitor with 144Hz refresh rate.',
         image_url: 'https://picsum.photos/seed/benqmobiuz/640/480',
         price: 28999,
+        stock: 10,
     },
     {
         id: 47,
@@ -378,6 +424,7 @@ const products: Partial<ProductEntity>[] = [
         description: 'QHD gaming monitor with HDR support.',
         image_url: 'https://picsum.photos/seed/lgultragear/640/480',
         price: 34999,
+        stock: 10,
     },
     {
         id: 48,
@@ -386,6 +433,7 @@ const products: Partial<ProductEntity>[] = [
         description: 'Portable high-speed external solid state drive.',
         image_url: 'https://picsum.photos/seed/sandiskssd/640/480',
         price: 10999,
+        stock: 10,
     },
     {
         id: 49,
@@ -394,6 +442,7 @@ const products: Partial<ProductEntity>[] = [
         description: 'Portable external hard drive for backups.',
         image_url: 'https://picsum.photos/seed/wdpassport/640/480',
         price: 6999,
+        stock: 10,
     },
     {
         id: 50,
@@ -402,6 +451,7 @@ const products: Partial<ProductEntity>[] = [
         description: 'Internal hard drive for desktop storage.',
         image_url: 'https://picsum.photos/seed/barracuda4tb/640/480',
         price: 8499,
+        stock: 10,
     },
     {
         id: 51,
@@ -410,6 +460,7 @@ const products: Partial<ProductEntity>[] = [
         description: 'Smart lighting kit with app control.',
         image_url: 'https://picsum.photos/seed/philipshue/640/480',
         price: 12999,
+        stock: 10,
     },
     {
         id: 52,
@@ -418,6 +469,7 @@ const products: Partial<ProductEntity>[] = [
         description: 'Smart robotic vacuum cleaner with mop feature.',
         image_url: 'https://picsum.photos/seed/mirobotvacuum/640/480',
         price: 21999,
+        stock: 10,
     },
     {
         id: 53,
@@ -426,6 +478,7 @@ const products: Partial<ProductEntity>[] = [
         description: 'Multi-use electric pressure cooker.',
         image_url: 'https://picsum.photos/seed/instantpotduo/640/480',
         price: 9999,
+        stock: 10,
     },
     {
         id: 54,
@@ -434,6 +487,7 @@ const products: Partial<ProductEntity>[] = [
         description: 'High-speed personal blender for smoothies.',
         image_url: 'https://picsum.photos/seed/nutribullet/640/480',
         price: 6499,
+        stock: 10,
     },
     {
         id: 55,
@@ -442,6 +496,7 @@ const products: Partial<ProductEntity>[] = [
         description: 'Energy efficient induction stove.',
         image_url: 'https://picsum.photos/seed/prestigeinduction/640/480',
         price: 3499,
+        stock: 10,
     },
     {
         id: 56,
@@ -450,6 +505,7 @@ const products: Partial<ProductEntity>[] = [
         description: 'Premium mixer for baking and cooking.',
         image_url: 'https://picsum.photos/seed/kitchenaidmixer/640/480',
         price: 45999,
+        stock: 10,
     },
     {
         id: 57,
@@ -458,6 +514,7 @@ const products: Partial<ProductEntity>[] = [
         description: 'Automatic drip coffee machine.',
         image_url: 'https://picsum.photos/seed/borosilcoffee/640/480',
         price: 4999,
+        stock: 10,
     },
     {
         id: 58,
@@ -466,6 +523,7 @@ const products: Partial<ProductEntity>[] = [
         description: 'Vacuum insulated stainless steel water bottle.',
         image_url: 'https://picsum.photos/seed/miltonbottle/640/480',
         price: 899,
+        stock: 10,
     },
     {
         id: 59,
@@ -474,6 +532,7 @@ const products: Partial<ProductEntity>[] = [
         description: 'Elegant analog wrist watch for men.',
         image_url: 'https://picsum.photos/seed/titanneo/640/480',
         price: 5499,
+        stock: 10,
     },
     {
         id: 60,
@@ -482,6 +541,7 @@ const products: Partial<ProductEntity>[] = [
         description: 'Iconic aviator sunglasses with UV protection.',
         image_url: 'https://picsum.photos/seed/raybanaviator/640/480',
         price: 8999,
+        stock: 10,
     },
     {
         id: 61,
@@ -490,6 +550,7 @@ const products: Partial<ProductEntity>[] = [
         description: 'Durable travel suitcase with spinner wheels.',
         image_url: 'https://picsum.photos/seed/trolleybag/640/480',
         price: 7499,
+        stock: 10,
     },
     {
         id: 62,
@@ -498,6 +559,7 @@ const products: Partial<ProductEntity>[] = [
         description: 'Spacious backpack with laptop compartment.',
         image_url: 'https://picsum.photos/seed/safaribag/640/480',
         price: 1999,
+        stock: 10,
     },
     {
         id: 63,
@@ -506,6 +568,7 @@ const products: Partial<ProductEntity>[] = [
         description: 'Breathable sports t-shirt for workouts.',
         image_url: 'https://picsum.photos/seed/nikedrifit/640/480',
         price: 2499,
+        stock: 10,
     },
     {
         id: 64,
@@ -514,6 +577,7 @@ const products: Partial<ProductEntity>[] = [
         description: 'Comfortable athletic wear for training.',
         image_url: 'https://picsum.photos/seed/adidastrackpants/640/480',
         price: 3299,
+        stock: 10,
     },
     {
         id: 65,
@@ -522,6 +586,7 @@ const products: Partial<ProductEntity>[] = [
         description: 'Training gloves with enhanced grip.',
         image_url: 'https://picsum.photos/seed/uagloves/640/480',
         price: 1499,
+        stock: 10,
     },
     {
         id: 66,
@@ -530,6 +595,7 @@ const products: Partial<ProductEntity>[] = [
         description: 'Non-slip yoga mat for fitness and exercise.',
         image_url: 'https://picsum.photos/seed/yogamat/640/480',
         price: 1199,
+        stock: 10,
     },
     {
         id: 67,
@@ -538,6 +604,7 @@ const products: Partial<ProductEntity>[] = [
         description: 'Durable football suitable for outdoor play.',
         image_url: 'https://picsum.photos/seed/coscofootball/640/480',
         price: 799,
+        stock: 10,
     },
     {
         id: 68,
@@ -546,6 +613,7 @@ const products: Partial<ProductEntity>[] = [
         description: 'Lightweight racket for intermediate players.',
         image_url: 'https://picsum.photos/seed/yonexracket/640/480',
         price: 2999,
+        stock: 10,
     },
     {
         id: 69,
@@ -554,6 +622,7 @@ const products: Partial<ProductEntity>[] = [
         description: 'E-reader with note-taking capabilities.',
         image_url: 'https://picsum.photos/seed/kindlescribe/640/480',
         price: 32999,
+        stock: 10,
     },
     {
         id: 70,
@@ -562,6 +631,7 @@ const products: Partial<ProductEntity>[] = [
         description: 'Compact external SSD with USB-C connectivity.',
         image_url: 'https://picsum.photos/seed/samsungt7/640/480',
         price: 11999,
+        stock: 10,
     },
     {
         id: 71,
@@ -570,6 +640,7 @@ const products: Partial<ProductEntity>[] = [
         description: 'Slim ultrabook with OLED display.',
         image_url: 'https://picsum.photos/seed/zenbook14/640/480',
         price: 104999,
+        stock: 10,
     },
     {
         id: 72,
@@ -578,6 +649,7 @@ const products: Partial<ProductEntity>[] = [
         description: 'Productivity-focused Android tablet.',
         image_url: 'https://picsum.photos/seed/matepad11/640/480',
         price: 42999,
+        stock: 10,
     },
     {
         id: 73,
@@ -586,6 +658,7 @@ const products: Partial<ProductEntity>[] = [
         description: 'Mid-range smartphone with high refresh display.',
         image_url: 'https://picsum.photos/seed/redminote13pro/640/480',
         price: 27999,
+        stock: 10,
     },
     {
         id: 74,
@@ -594,6 +667,7 @@ const products: Partial<ProductEntity>[] = [
         description: 'Camera-centric flagship smartphone.',
         image_url: 'https://picsum.photos/seed/vivox100/640/480',
         price: 63999,
+        stock: 10,
     },
     {
         id: 75,
@@ -602,6 +676,7 @@ const products: Partial<ProductEntity>[] = [
         description: 'True wireless earbuds with deep bass.',
         image_url: 'https://picsum.photos/seed/oppoencoair3/640/480',
         price: 3999,
+        stock: 10,
     },
     {
         id: 76,
@@ -610,6 +685,7 @@ const products: Partial<ProductEntity>[] = [
         description: 'Portable Bluetooth speaker with rich sound.',
         image_url: 'https://picsum.photos/seed/marshallemberton/640/480',
         price: 14999,
+        stock: 10,
     },
     {
         id: 77,
@@ -618,6 +694,7 @@ const products: Partial<ProductEntity>[] = [
         description: 'Affordable smartwatch with Bluetooth calling.',
         image_url: 'https://picsum.photos/seed/fireboltt/640/480',
         price: 1999,
+        stock: 10,
     },
     {
         id: 78,
@@ -626,6 +703,7 @@ const products: Partial<ProductEntity>[] = [
         description: 'Compact room heater for winter comfort.',
         image_url: 'https://picsum.photos/seed/ushheater/640/480',
         price: 2499,
+        stock: 10,
     },
     {
         id: 79,
@@ -634,6 +712,7 @@ const products: Partial<ProductEntity>[] = [
         description: 'Energy efficient split air conditioner.',
         image_url: 'https://picsum.photos/seed/voltasac/640/480',
         price: 42999,
+        stock: 10,
     },
     {
         id: 80,
@@ -642,6 +721,7 @@ const products: Partial<ProductEntity>[] = [
         description: 'Fully automatic washing machine with steam wash.',
         image_url: 'https://picsum.photos/seed/ifbwashing/640/480',
         price: 38999,
+        stock: 10,
     },
 ];
 
