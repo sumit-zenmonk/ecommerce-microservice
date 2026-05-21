@@ -140,8 +140,11 @@ export default function CartPage() {
                                     <Typography className={styles.quantity}>
                                         Quantity: {item.quantity}
                                     </Typography>
+                                    <Typography className={styles.stock}>
+                                        Stock: ₹ {Number(item.product?.stock)}
+                                    </Typography>
                                     <Typography className={styles.price}>
-                                        ₹ {Number(item.product?.price) * item.quantity}
+                                        Price:  ₹ {Number(item.product?.price) * item.quantity}
                                     </Typography>
                                 </Box>
 
@@ -173,6 +176,7 @@ export default function CartPage() {
                                     onClick={() =>
                                         handleUpdateQuantity(item.uuid, item.quantity + 1)
                                     }
+                                    disabled={Number(item.product?.stock) < item.quantity + 1}
                                 >
                                     +
                                 </Button>
