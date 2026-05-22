@@ -27,7 +27,9 @@ export default function OrderPage() {
     const [payModalOrder, setPayModalOrder] = useState<string | null>(null);
 
     useEffect(() => {
-        fetchOrders();
+        if (!orders?.length) {
+            fetchOrders();
+        }
     }, []);
 
     const fetchOrders = async () => {
