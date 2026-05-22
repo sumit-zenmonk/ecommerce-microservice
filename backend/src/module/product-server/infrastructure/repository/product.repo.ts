@@ -47,4 +47,14 @@ export class ProductRepository extends Repository<ProductEntity> {
         product.stock -= quantity;
         await this.save(product);
     }
+
+    async increaseStock(productUuid: string, quantity: number): Promise<void> {
+        const product = await this.findByUuid(productUuid);
+        if (!product) {
+            throw new Error(`Product not found: ${productUuid}`);
+        }
+
+        product.stock += quantity;
+        await this.save(product);
+    }
 }

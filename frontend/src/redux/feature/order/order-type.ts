@@ -35,6 +35,10 @@ export interface OrderResponse {
     message: string;
 }
 
+export interface returnOrderResponse {
+    message: string;
+}
+
 export interface CreateOrderPayload {
     cart_uuid: string;
     total_price: number;

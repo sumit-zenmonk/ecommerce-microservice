@@ -1,7 +1,7 @@
 "use client"
 import { SocketEventNameEnum } from "@/enum/socket.enum";
 import { socketUpdateOrderPaymentStatus, socketUpdateOrderStatus } from "@/redux/feature/order/order-slice";
-import { socketProductStockDeduct } from "@/redux/feature/product/product-slice";
+import { socketProductStockDeduct, socketProductStockIncrease } from "@/redux/feature/product/product-slice";
 import { useAppDispatch, useAppSelector } from "@/redux/hooks.ts";
 import { RootState } from "@/redux/store";
 import { connectSocket, disconnectSocket } from "@/service/socket";
@@ -29,6 +29,11 @@ export default function RootSocketListener() {
             socket.on(SocketEventNameEnum.PRODUCT_STOCK_DEDUCT, (message) => {
                 enqueueSnackbar(`Stock Deduct Success`, { variant: "info" });
                 dispatch(socketProductStockDeduct(message));
+            });
+
+            socket.on(SocketEventNameEnum.PRODUCT_STOCK_INCREASE, (message) => {
+                enqueueSnackbar(`Stock increase as refund Success`, { variant: "info" });
+                dispatch(socketProductStockIncrease(message));
             });
 
             return () => {

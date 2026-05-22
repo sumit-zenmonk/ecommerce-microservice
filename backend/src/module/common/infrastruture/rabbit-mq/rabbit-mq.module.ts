@@ -11,6 +11,7 @@ import * as ProductServerProductRepo from 'src/module/product-server/infrastruct
 import * as ProductServerInboxRepo from 'src/module/product-server/infrastructure/repository/inbox.repo';
 import * as ProductUserConsumer from 'src/module/product-server/infrastructure/rabbit-mq-consumer/user/user-registered/user-registered.consumer';
 import * as ProductOrderPaidDeductConsumer from 'src/module/product-server/infrastructure/rabbit-mq-consumer/order/order-paid-deduct-stock/order-paid-deduct-stock.consumer';
+import * as ProductOrderRefundConsumer from 'src/module/product-server/infrastructure/rabbit-mq-consumer/order/order-return/order-return.consumer';
 
 // Cart Service
 import * as CartServerUserRepo from 'src/module/cart-server/infrastructure/repository/user.repo';
@@ -20,6 +21,7 @@ import * as CartServerInboxRepo from 'src/module/cart-server/infrastructure/repo
 import * as CartUserConsumer from 'src/module/cart-server/infrastructure/rabbit-mq-consumer/user/user-registered/user-registered.consumer';
 import * as CartOrderCreatedConsumer from 'src/module/cart-server/infrastructure/rabbit-mq-consumer/order/order-created/order-created-consumer';
 import * as OrderOrderPaidDeductConsumer from 'src/module/cart-server/infrastructure/rabbit-mq-consumer/order/order-paid-deduct-stock/order-paid-deduct-stock.consumer';
+import * as CartOrderRefundConsumer from 'src/module/cart-server/infrastructure/rabbit-mq-consumer/order/order-refund/order-refund.consumer';
 
 // Order Service
 import * as OrderServerUserRepo from 'src/module/order-server/infrastructure/repository/user.repo';
@@ -43,6 +45,7 @@ import * as ShipmentOrderItemRepository from 'src/module/shipment-server/infrast
 import * as ShipmentUserConsumer from 'src/module/shipment-server/infrastructure/rabbit-mq-consumer/user/user-registered/user-registered.consumer';
 import * as ShipentOrderCreatedConsumer from 'src/module/shipment-server/infrastructure/rabbit-mq-consumer/order/order-created/order-created-consumer';
 import * as ShipmentOrderPaidConsumer from 'src/module/shipment-server/infrastructure/rabbit-mq-consumer/order/order-paid/order-paid.consumer';
+import * as ShipmentOrderRefundConsumer from 'src/module/shipment-server/infrastructure/rabbit-mq-consumer/order/order-return/order-return.consumer';
 
 @Global()
 @Module({
@@ -60,6 +63,7 @@ import * as ShipmentOrderPaidConsumer from 'src/module/shipment-server/infrastru
         ProductServerInboxRepo.InboxRepository,
         ProductUserConsumer.UserRegisteredConsumer,
         ProductOrderPaidDeductConsumer.ProductOrderPaidDeductStockConsumer,
+        ProductOrderRefundConsumer.ProductOrderReturnConsumer,
 
         // Cart Service
         CartServerUserRepo.UserRepository,
@@ -69,6 +73,7 @@ import * as ShipmentOrderPaidConsumer from 'src/module/shipment-server/infrastru
         CartUserConsumer.UserRegisteredConsumer,
         CartOrderCreatedConsumer.OrderCreatedConsumer,
         OrderOrderPaidDeductConsumer.CartOrderPaidDeductStockConsumer,
+        CartOrderRefundConsumer.ProductOrderRefundConsumer,
 
         // order Service
         OrderServerUserRepo.UserRepository,

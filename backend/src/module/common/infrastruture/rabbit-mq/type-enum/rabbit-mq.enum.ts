@@ -23,6 +23,7 @@ export enum RoutingKeyEnum {
     ORDER_PAID = 'order.paid',
     ORDER_STATUS_CHANGED = 'order.status.changed',
     ORDER_PAID_DEDUCT_STOCK = 'order.paid.stock.deduct',
+    ORDER_RETURNED = 'order.returned',
 }
 
 // queue name (server name) + routing key + endfix(queue)
@@ -39,6 +40,9 @@ export enum QueueEnum {
     PRODUCT_ORDER_PAID_DEDUCT_STOCK_QUEUE = 'product.order.paid.deduct.stock.queue',
     CART_ORDER_PAID_DEDUCT_STOCK_QUEUE = 'cart.order.paid.deduct.stock.queue',
     ORDER_STATUS_CHANGED_QUEUE = 'order.status.changed.queue',
+    PRODUCT_ORDER_RETURNED_QUEUE = 'product.order.returned.queue',
+    CART_ORDER_RETURNED_QUEUE = 'cart.order.returned.queue',
+    SHIPMENT_ORDER_RETURNED_QUEUE = 'shipment.order.returned.queue',
 }
 
 export enum RetryMechanismHeaderEnum {
