@@ -80,7 +80,7 @@ const orderSlice = createSlice({
             .addCase(createOrder.fulfilled, (state, action) => {
                 state.loading = false;
                 state.status = "succeed";
-                if (state.orders) state.orders.push(action.payload.data as any);
+                if (state.orders) state.orders.unshift(action.payload.data as any);
                 else state.orders = [action.payload.data as any];
                 state.error = null;
             })
