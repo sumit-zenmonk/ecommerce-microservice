@@ -34,7 +34,7 @@ export default function OrderPage() {
         try {
             const result = await dispatch(getOrders({ limit, offset }));
             const fetchedOrders = (result.payload as any)?.data || [];
-            setOffset(offset + limit);
+            setOffset(prevOffset => prevOffset + limit);
             if (fetchedOrders.length < limit) setHasMore(false);
         } catch (err: any) {
             console.log(err);
@@ -75,7 +75,7 @@ export default function OrderPage() {
                     scrollableTarget="scrollableDiv"
                 >
                     {orders && orders.length > 0 ? (
-                        orders.map((order: Order) => (
+                        orders.map((order: Order, idx: number) => (
                             <Card key={order.uuid} className={styles.orderCard}>
 
                                 <Stepper activeStep={(getActiveStep(order.order_status as OrderStatusEnum) === orderSteps.length + 1) ? orderSteps.length + 2 : getActiveStep(order.order_status as OrderStatusEnum)} alternativeLabel className={styles.stepper}>
@@ -95,7 +95,12 @@ export default function OrderPage() {
                                     ))}
                                 </Stepper>
 
+                                <Box className={styles.orderLabel}>
+                                    # {idx}
+                                </Box>
+
                                 <CardContent>
+
                                     <Typography variant="h6">
                                         Order ID: {order.uuid}
                                     </Typography>
