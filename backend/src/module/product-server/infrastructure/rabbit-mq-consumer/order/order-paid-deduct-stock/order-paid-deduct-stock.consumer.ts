@@ -3,6 +3,8 @@ import { RabbitMQService } from 'src/module/common/infrastruture/rabbit-mq/rabbi
 import { ExchangeNameEnum, ExchangeTypeEnum, QueueEnum, RoutingKeyEnum } from 'src/module/common/infrastruture/rabbit-mq/type-enum/rabbit-mq.enum';
 import { InboxRepository } from '../../../repository/inbox.repo';
 import { ProductRepository } from '../../../repository/product.repo';
+import { SocketService } from 'src/module/common/socket/socket.service';
+import { SocketEventNameEnum } from 'src/module/common/socket/socket.enum';
 
 @Injectable()
 export class ProductOrderPaidDeductStockConsumer implements OnModuleInit {
@@ -12,6 +14,7 @@ export class ProductOrderPaidDeductStockConsumer implements OnModuleInit {
         private readonly rabbitMQService: RabbitMQService,
         private readonly inboxRepo: InboxRepository,
         private readonly productRepo: ProductRepository,
+        private readonly socketService: SocketService,
     ) { }
 
     async onModuleInit() {
@@ -46,6 +49,7 @@ export class ProductOrderPaidDeductStockConsumer implements OnModuleInit {
                 });
 
                 await Promise.all(deductions);
+                await this.socketService.emitToUser(order.user_uuid, SocketEventNameEnum.PRODUCT_STOCK_DEDUCT, order.items);
 
                 await this.inboxRepo.createEntry({ outbox_uuid });
             },

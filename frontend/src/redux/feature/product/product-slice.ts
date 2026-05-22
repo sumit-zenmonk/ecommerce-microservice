@@ -22,6 +22,19 @@ const productSlice = createSlice({
             state.error = null;
             state.status = "pending";
         },
+        socketProductStockDeduct: (state, action) => {
+            const productsToDeduct: { product_uuid: string; quantity: number }[] = action.payload;
+
+            productsToDeduct.forEach(({ product_uuid, quantity }) => {
+                const productIndex = state.products.findIndex(p => p.uuid === product_uuid);
+
+                if (productIndex !== -1) {
+                    const currentStock = Number(state.products[productIndex].stock || "0");
+                    const deductQuantity = Number(quantity || 0);
+                    state.products[productIndex].stock = String(Math.max(currentStock - deductQuantity, 0));
+                }
+            });
+        },
     },
     extraReducers: (builder) => {
         builder
@@ -56,5 +69,5 @@ const productSlice = createSlice({
     },
 });
 
-export const { resetProductError } = productSlice.actions;
+export const { resetProductError, socketProductStockDeduct } = productSlice.actions;
 export default productSlice.reducer;
