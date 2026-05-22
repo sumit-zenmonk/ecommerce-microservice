@@ -15,9 +15,11 @@ import * as ProductOrderPaidDeductConsumer from 'src/module/product-server/infra
 // Cart Service
 import * as CartServerUserRepo from 'src/module/cart-server/infrastructure/repository/user.repo';
 import * as CartServerCartRepo from 'src/module/cart-server/infrastructure/repository/cart.repo';
+import * as OrderServerProductRepo from 'src/module/cart-server/infrastructure/repository/product.repo';
 import * as CartServerInboxRepo from 'src/module/cart-server/infrastructure/repository/inbox.repo';
 import * as CartUserConsumer from 'src/module/cart-server/infrastructure/rabbit-mq-consumer/user/user-registered/user-registered.consumer';
-import * as OrderCreatedConsumer from 'src/module/cart-server/infrastructure/rabbit-mq-consumer/order/order-created/order-created-consumer';
+import * as CartOrderCreatedConsumer from 'src/module/cart-server/infrastructure/rabbit-mq-consumer/order/order-created/order-created-consumer';
+import * as OrderOrderPaidDeductConsumer from 'src/module/cart-server/infrastructure/rabbit-mq-consumer/order/order-paid-deduct-stock/order-paid-deduct-stock.consumer';
 
 // Order Service
 import * as OrderServerUserRepo from 'src/module/order-server/infrastructure/repository/user.repo';
@@ -62,9 +64,11 @@ import * as ShipmentOrderPaidConsumer from 'src/module/shipment-server/infrastru
         // Cart Service
         CartServerUserRepo.UserRepository,
         CartServerCartRepo.CartRepository,
+        OrderServerProductRepo.ProductRepository,
         CartServerInboxRepo.InboxRepository,
         CartUserConsumer.UserRegisteredConsumer,
-        OrderCreatedConsumer.OrderCreatedConsumer,
+        CartOrderCreatedConsumer.OrderCreatedConsumer,
+        OrderOrderPaidDeductConsumer.CartOrderPaidDeductStockConsumer,
 
         // order Service
         OrderServerUserRepo.UserRepository,

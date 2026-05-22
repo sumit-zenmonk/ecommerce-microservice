@@ -37,6 +37,7 @@ export enum QueueEnum {
     SHIPMENT_ORDER_PAID_QUEUE = 'shipment.order.paid.queue',
     ORDER_PAID_QUEUE = 'order.paid.queue',
     PRODUCT_ORDER_PAID_DEDUCT_STOCK_QUEUE = 'product.order.paid.deduct.stock.queue',
+    CART_ORDER_PAID_DEDUCT_STOCK_QUEUE = 'cart.order.paid.deduct.stock.queue',
     ORDER_STATUS_CHANGED_QUEUE = 'order.status.changed.queue',
 }
 
