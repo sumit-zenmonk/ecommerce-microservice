@@ -8,8 +8,8 @@ import { OrderRepository } from '../../../repository/order.repo';
 import { OrderPaymentStatusEnum, OrderStatusEnum } from 'src/module/shipment-server/domain/order/order.enum';
 
 @Injectable()
-export class ShipmentOrderRefundConsumer implements OnModuleInit {
-    private readonly logger = new Logger(ShipmentOrderRefundConsumer.name);
+export class ShipmentOrderReturnConsumer implements OnModuleInit {
+    private readonly logger = new Logger(ShipmentOrderReturnConsumer.name);
 
     constructor(
         private readonly rabbitMQService: RabbitMQService,
@@ -24,7 +24,7 @@ export class ShipmentOrderRefundConsumer implements OnModuleInit {
             async (data) => {
                 const { outbox_uuid, payload } = data;
 
-                this.logger.log(`Processing Order refund Stock increase: ${outbox_uuid} \n ${JSON.stringify(payload)}`);
+                this.logger.log(`Processing Order return Stock increase: ${outbox_uuid} \n ${JSON.stringify(payload)}`);
 
                 const alreadyProcessed = await this.inboxRepo.findByOutboxUuid(outbox_uuid);
                 if (alreadyProcessed) {
@@ -39,7 +39,7 @@ export class ShipmentOrderRefundConsumer implements OnModuleInit {
                     return;
                 }
 
-                // make order returned and payment refunded 
+                // make order returned and payment returned 
                 await this.orderRepo.updateOrderStatus(payload.order_uuid, OrderStatusEnum.RETURNED);
                 await this.orderRepo.updateOrderPaymentStatus(payload.order_uuid, OrderPaymentStatusEnum.REFUND);
 

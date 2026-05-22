@@ -1,29 +1,30 @@
-import { Injectable, Logger, OnModuleInit } from '@nestjs/common';
+import { BadRequestException, Injectable, Logger, OnModuleInit } from '@nestjs/common';
 import { RabbitMQService } from 'src/module/common/infrastruture/rabbit-mq/rabbit-mq.service';
 import { ExchangeNameEnum, ExchangeTypeEnum, QueueEnum, RoutingKeyEnum } from 'src/module/common/infrastruture/rabbit-mq/type-enum/rabbit-mq.enum';
 import { InboxRepository } from '../../../repository/inbox.repo';
-import { ProductRepository } from '../../../repository/product.repo';
 import { SocketService } from 'src/module/common/socket/socket.service';
 import { SocketEventNameEnum } from 'src/module/common/socket/socket.enum';
+import { FinanceRepository } from '../../../repository/finance.repo';
+import { PaymentHistoryTypeEnum } from 'src/module/finance-server/domain/payment-history/payment.enum';
 
 @Injectable()
-export class ProductOrderReturnConsumer implements OnModuleInit {
-    private readonly logger = new Logger(ProductOrderReturnConsumer.name);
+export class FinanceOrderReturnConsumer implements OnModuleInit {
+    private readonly logger = new Logger(FinanceOrderReturnConsumer.name);
 
     constructor(
         private readonly rabbitMQService: RabbitMQService,
         private readonly inboxRepo: InboxRepository,
-        private readonly productRepo: ProductRepository,
         private readonly socketService: SocketService,
+        private readonly financeRepo: FinanceRepository,
     ) { }
 
     async onModuleInit() {
         await this.rabbitMQService.consumeMessages(
-            QueueEnum.PRODUCT_ORDER_RETURNED_QUEUE,
+            QueueEnum.FINANCE_ORDER_RETURNED_QUEUE,
             async (data) => {
                 const { outbox_uuid, payload } = data;
 
-                this.logger.log(`Processing Order return Stock increase: ${outbox_uuid} \n ${JSON.stringify(payload)}`);
+                this.logger.log(`Processing Order returned and payment return: ${outbox_uuid} \n ${JSON.stringify(payload)}`);
 
                 const alreadyProcessed = await this.inboxRepo.findByOutboxUuid(outbox_uuid);
                 if (alreadyProcessed) {
@@ -38,18 +39,22 @@ export class ProductOrderReturnConsumer implements OnModuleInit {
                     return;
                 }
 
-                // increase stock one by one
-                const increase = order.items.map(async (item) => {
-                    try {
-                        await this.productRepo.increaseStock(item.product_uuid, item.quantity);
-                        this.logger.log(`Deducted ${item.quantity} from ${item.name} (UUID: ${item.product_uuid})`);
-                    } catch (err: any) {
-                        this.logger.error(`Failed to return Stock increase for ${item.name}: ${err.message}`);
-                    }
-                });
+                // make payment returned 
+                let account = await this.financeRepo.findAccount(order.user.uuid);
+                if (!account) {
+                    throw new BadRequestException("Account not found for return");
+                }
 
-                await Promise.all(increase);
-                await this.socketService.emitToUser(order.user_uuid, SocketEventNameEnum.PRODUCT_STOCK_INCREASE, order.items);
+                const returnAmount = Number(order.total_price);
+                account.balance += returnAmount;
+
+                await this.financeRepo.saveAccount(account);
+                await this.financeRepo.createHistory({
+                    user_uuid: order.user.uuid,
+                    amount: returnAmount,
+                    type: PaymentHistoryTypeEnum.REFUND,
+                    description: 'Order return And Money Refund',
+                });
 
                 await this.inboxRepo.createEntry({ outbox_uuid });
             },

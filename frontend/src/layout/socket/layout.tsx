@@ -32,7 +32,7 @@ export default function RootSocketListener() {
             });
 
             socket.on(SocketEventNameEnum.PRODUCT_STOCK_INCREASE, (message) => {
-                enqueueSnackbar(`Stock increase as refund Success`, { variant: "info" });
+                enqueueSnackbar(`Stock increase as order return Success`, { variant: "info" });
                 dispatch(socketProductStockIncrease(message));
             });
 

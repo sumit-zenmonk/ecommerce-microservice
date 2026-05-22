@@ -21,7 +21,7 @@ export class ReturnOrderService {
             throw new BadRequestException("Your Order not found");
         }
         if (order.order_status == OrderStatusEnum.RETURNED && order.payment_status == OrderPaymentStatusEnum.REFUND) {
-            throw new BadRequestException("Your Order already refunded");
+            throw new BadRequestException("Your Order already returned");
         } else if (order.order_status == OrderStatusEnum.RETURNED && order.payment_status !== OrderPaymentStatusEnum.REFUND) {
             throw new BadRequestException("Your Order returned and refund of money is in process");
         }

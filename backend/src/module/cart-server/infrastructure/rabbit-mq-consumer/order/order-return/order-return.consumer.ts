@@ -7,8 +7,8 @@ import { SocketService } from 'src/module/common/socket/socket.service';
 import { SocketEventNameEnum } from 'src/module/common/socket/socket.enum';
 
 @Injectable()
-export class ProductOrderRefundConsumer implements OnModuleInit {
-    private readonly logger = new Logger(ProductOrderRefundConsumer.name);
+export class ProductOrderReturnConsumer implements OnModuleInit {
+    private readonly logger = new Logger(ProductOrderReturnConsumer.name);
 
     constructor(
         private readonly rabbitMQService: RabbitMQService,
@@ -23,7 +23,7 @@ export class ProductOrderRefundConsumer implements OnModuleInit {
             async (data) => {
                 const { outbox_uuid, payload } = data;
 
-                this.logger.log(`Processing Order refund Stock increase: ${outbox_uuid} \n ${JSON.stringify(payload)}`);
+                this.logger.log(`Processing Order return Stock increase: ${outbox_uuid} \n ${JSON.stringify(payload)}`);
 
                 const alreadyProcessed = await this.inboxRepo.findByOutboxUuid(outbox_uuid);
                 if (alreadyProcessed) {
@@ -44,7 +44,7 @@ export class ProductOrderRefundConsumer implements OnModuleInit {
                         await this.productRepo.increaseStock(item.product_uuid, item.quantity);
                         this.logger.log(`Deducted ${item.quantity} from ${item.name} (UUID: ${item.product_uuid})`);
                     } catch (err: any) {
-                        this.logger.error(`Failed to refund Stock increase for ${item.name}: ${err.message}`);
+                        this.logger.error(`Failed to return Stock increase for ${item.name}: ${err.message}`);
                     }
                 });
 

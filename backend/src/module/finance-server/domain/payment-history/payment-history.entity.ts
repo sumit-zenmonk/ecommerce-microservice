@@ -19,6 +19,9 @@ export class PaymentHistoryEntity {
     @Column({ type: "uuid", nullable: false })
     user_uuid: string;
 
+    @Column({ type: "uuid", nullable: true })
+    order_uuid: string;
+
     @Column({ type: "uuid", nullable: false })
     card_uuid: string | null;
 

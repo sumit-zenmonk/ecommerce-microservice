@@ -21,7 +21,7 @@ export class PaidOrderStatusCronService {
 
     private readonly logger = new Logger(PaidOrderStatusCronService.name);
 
-    @Cron(CronExpression.EVERY_5_SECONDS)
+    @Cron(CronExpression.EVERY_MINUTE)
     async handleCron() {
         // Fetch top 10 paid orders
         const orders = await this.orderRepo.findTopTenPaidButNotDeliveredOrderStatus();
@@ -31,6 +31,10 @@ export class PaidOrderStatusCronService {
         }
 
         for (const order of orders) {
+            if (order.order_status == OrderStatusEnum.RETURNED) {
+                this.logger.log(`Order Returned so can't process it`);
+            }
+
             let nextStatus: OrderStatusEnum | null = null;
 
             switch (order.order_status) {

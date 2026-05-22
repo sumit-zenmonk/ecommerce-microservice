@@ -21,6 +21,9 @@ export class ItemAddToCartService {
         if (!product) {
             throw new BadRequestException("Product not found");
         }
+        if (quantity > product.stock) {
+            throw new BadRequestException("Quantity is Greater than Stock of product");
+        }
 
         // find/create cart
         let cart = await this.cartRepo.findByUserUuid(user.uuid);
@@ -35,6 +38,9 @@ export class ItemAddToCartService {
         if (existingCartItem) {
             // update only quantity if already exists
             const updatedQuantity = existingCartItem.quantity + quantity;
+            if (updatedQuantity > product.stock) {
+                throw new BadRequestException("Quantity is Greater than Stock of product");
+            }
             cartItem = await this.cartItemRepo.updateQuantity(existingCartItem.uuid, updatedQuantity,);
         } else {
             // create new cart item

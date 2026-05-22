@@ -42,10 +42,11 @@ export class PayUsingCardService {
         // deduct amount from account
         account.balance -= amount;
         const saved = await this.financeRepo.saveAccount(account);
-
+console.log(body);
         // make PayUsingCardment history
         await this.financeRepo.createHistory({
             user_uuid: user.uuid,
+            order_uuid: body.order_uuid,
             amount,
             type: PaymentHistoryTypeEnum.PAYMENT_USING_CARD,
             card_uuid: isCardExists.uuid,

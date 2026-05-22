@@ -139,7 +139,7 @@ export default function OrderPage() {
                                             <Button
                                                 onClick={() => handleReturnOrder(order.uuid)}
                                             >
-                                                Cancel and Refund {order.total_price}
+                                                Return Order and Get Refund {order.total_price}
                                             </Button>
                                         }
 
