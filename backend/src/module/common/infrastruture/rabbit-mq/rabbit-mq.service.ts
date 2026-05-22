@@ -139,6 +139,14 @@ export class RabbitMQService implements OnModuleInit, OnModuleDestroy {
             ExchangeTypeEnum.DIRECT,
         );
 
+        // order paid so deduct stock in product server queue
+        await this.setupExchangeQueueAndBind(
+            QueueEnum.PRODUCT_ORDER_PAID_DEDUCT_STOCK_QUEUE,
+            ExchangeNameEnum.ORDER_EXCHANGE,
+            RoutingKeyEnum.ORDER_PAID_DEDUCT_STOCK,
+            ExchangeTypeEnum.DIRECT,
+        );
+
         await this.setupRetryQueue(QueueEnum.PRODUCT_USER_REGISTERED_QUEUE);
         await this.setupRetryQueue(QueueEnum.CART_USER_REGISTERED_QUEUE);
         await this.setupRetryQueue(QueueEnum.ORDER_USER_REGISTERED_QUEUE);
@@ -147,6 +155,7 @@ export class RabbitMQService implements OnModuleInit, OnModuleDestroy {
         await this.setupRetryQueue(QueueEnum.ORDER_PAID_QUEUE);
         await this.setupRetryQueue(QueueEnum.SHIPMENT_ORDER_PAID_QUEUE);
         await this.setupRetryQueue(QueueEnum.ORDER_STATUS_CHANGED_QUEUE);
+        await this.setupRetryQueue(QueueEnum.PRODUCT_ORDER_PAID_DEDUCT_STOCK_QUEUE);
     }
 
     private async setupRetryQueue(originalQueue: string, retryDelay = 15000) {

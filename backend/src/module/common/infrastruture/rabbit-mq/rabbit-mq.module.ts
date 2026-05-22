@@ -7,8 +7,10 @@ import * as UserServerUserRepo from 'src/module/user-server/infrastructure/repos
 
 // Product Service
 import * as ProductServerUserRepo from 'src/module/product-server/infrastructure/repository/user.repo';
+import * as ProductServerProductRepo from 'src/module/product-server/infrastructure/repository/product.repo';
 import * as ProductServerInboxRepo from 'src/module/product-server/infrastructure/repository/inbox.repo';
 import * as ProductUserConsumer from 'src/module/product-server/infrastructure/rabbit-mq-consumer/user/user-registered/user-registered.consumer';
+import * as ProductOrderPaidDeductConsumer from 'src/module/product-server/infrastructure/rabbit-mq-consumer/order/order-paid-deduct-stock/order-paid-deduct-stock.consumer';
 
 // Cart Service
 import * as CartServerUserRepo from 'src/module/cart-server/infrastructure/repository/user.repo';
@@ -21,6 +23,7 @@ import * as OrderCreatedConsumer from 'src/module/cart-server/infrastructure/rab
 import * as OrderServerUserRepo from 'src/module/order-server/infrastructure/repository/user.repo';
 import * as OrderServerInboxRepo from 'src/module/order-server/infrastructure/repository/inbox.repo';
 import * as OrderServerOrderRepo from 'src/module/order-server/infrastructure/repository/order.repo';
+import * as OrderServerOutboxRepo from 'src/module/order-server/infrastructure/repository/outbox.repo';
 import * as OrderUserConsumer from 'src/module/order-server/infrastructure/rabbit-mq-consumer/user/user-registered/user-registered.consumer';
 import * as OrderPaidConsumer from 'src/module/order-server/infrastructure/rabbit-mq-consumer/order/order-paid/order-paid.consumer';
 import * as OrderStatusChangedConsumer from 'src/module/order-server/infrastructure/rabbit-mq-consumer/order/order-status-changed/order-status-changed.consumer';
@@ -51,8 +54,10 @@ import * as ShipmentOrderPaidConsumer from 'src/module/shipment-server/infrastru
 
         // Product Service
         ProductServerUserRepo.UserRepository,
+        ProductServerProductRepo.ProductRepository,
         ProductServerInboxRepo.InboxRepository,
         ProductUserConsumer.UserRegisteredConsumer,
+        ProductOrderPaidDeductConsumer.ProductOrderPaidDeductStockConsumer,
 
         // Cart Service
         CartServerUserRepo.UserRepository,
@@ -64,9 +69,10 @@ import * as ShipmentOrderPaidConsumer from 'src/module/shipment-server/infrastru
         // order Service
         OrderServerUserRepo.UserRepository,
         OrderServerInboxRepo.InboxRepository,
-        OrderUserConsumer.UserRegisteredConsumer,
-        OrderPaidConsumer.OrderPaidConsumer,
+        OrderServerOutboxRepo.OutboxRepository,
         OrderServerOrderRepo.OrderRepository,
+        OrderPaidConsumer.OrderPaidConsumer,
+        OrderUserConsumer.UserRegisteredConsumer,
         OrderStatusChangedConsumer.OrderStatusChangedConsumer,
 
         // finance Service
