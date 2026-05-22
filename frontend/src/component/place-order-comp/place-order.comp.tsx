@@ -62,6 +62,7 @@ export default function PlaceOrderDialog({
                 total_price: Number(cart.total_price),
                 order_address: concatenated,
                 items: cart.items.map(item => ({
+                    product_uuid: item.product_uuid,
                     name: item.product?.name || "",
                     description: item.product?.description || "",
                     image_url: item.product?.image_url || "",

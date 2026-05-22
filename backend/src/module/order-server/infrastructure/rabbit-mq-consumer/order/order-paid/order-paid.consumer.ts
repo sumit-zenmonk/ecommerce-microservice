@@ -36,7 +36,7 @@ export class OrderPaidConsumer implements OnModuleInit {
                     this.logger.warn(`Order not found so skipped: ${payload.order_uuid}`);
                     return;
                 }
-
+console.log('sumit',JSON.stringify(isOrderExists));
                 await this.orderRepo.updateOrderPaymentStatus(payload.order_uuid, OrderPaymentStatusEnum.PAID)
 
                 await this.outboxRepo.createOutboxntry({
