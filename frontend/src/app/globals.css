@@ -37,6 +37,10 @@ p {
   width: 9%;
 }
 
+.birdAnimation:hover {
+  width: 18%;
+}
+
 button,
 .MuiButtonBase-root {
   padding: 0.5rem 1rem;
