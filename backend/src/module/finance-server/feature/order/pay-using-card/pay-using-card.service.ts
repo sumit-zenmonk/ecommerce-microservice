@@ -2,7 +2,7 @@ import { BadRequestException, Injectable } from "@nestjs/common";
 import { FinanceRepository } from "src/module/finance-server/infrastructure/repository/finance.repo";
 import { UserEntity } from "src/module/finance-server/domain/user/user.entity";
 import { PayUsingCardDto } from "./pay-using-card-dto";
-import { PaymentHistoryTypeEnum } from "src/module/finance-server/domain/payment-history/payment.type.enum";
+import { PaymentHistoryTypeEnum } from "src/module/finance-server/domain/payment-history/payment.enum";
 import { OutboxRepository } from "src/module/finance-server/infrastructure/repository/outbox.repo";
 import { ExchangeNameEnum, RoutingKeyEnum } from "src/module/common/infrastruture/rabbit-mq/type-enum/rabbit-mq.enum";
 import { SocketService } from "src/module/common/socket/socket.service";

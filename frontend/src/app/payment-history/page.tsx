@@ -6,6 +6,7 @@ import { Box, Card, CardContent, CircularProgress, Container, Typography } from 
 import { RootState, AppDispatch } from "@/redux/store";
 import styles from "./payment-history.module.css"
 import { getAccount, getHistories } from "@/redux/feature/payment/payment.action";
+import { PaymentHistoryTypeEnum } from "@/enum/payment.enum";
 
 export default function PaymentHistoryPage() {
     const dispatch = useDispatch<AppDispatch>();
@@ -53,9 +54,18 @@ export default function PaymentHistoryPage() {
             <Box className={styles.historyList}>
                 {histories.map((item, idx) => (
                     <Card key={item.uuid} className={styles.historyCard}>
+                        <Box
+                            className={`${styles.historyLabel} ${item.type === PaymentHistoryTypeEnum.TOPUP
+                                    ? styles.topup
+                                    : styles.payment
+                                }`}
+                        >
+                            {item.type?.toUpperCase()}
+                        </Box>
+
                         <CardContent>
-                            <Typography variant="subtitle1">{idx}</Typography>
-                            <Typography variant="subtitle2">Type: {item.type?.toUpperCase()}</Typography>
+                            <Typography variant="subtitle1" className={styles.HistoryIndex}>#{idx + 1}</Typography>
+                            {/* <Typography variant="subtitle2">Type: {item.type?.toUpperCase()}</Typography> */}
                             <Typography>Amount: ₹ {Number(item.amount).toFixed(2)}</Typography>
                             <Typography>{item.description || "No description"}</Typography>
                             <Typography color="textSecondary">

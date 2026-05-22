@@ -17,17 +17,17 @@ export default function RootSocketListener() {
             const socket = connectSocket(token);
 
             socket.on(SocketEventNameEnum.ORDER_STATUS_CHANGED, (message) => {
-                enqueueSnackbar(`Order Status ${message.nextStatus} changed`, { variant: "info" });
+                enqueueSnackbar(`Order Status ${message.nextStatus} changed Success`, { variant: "info" });
                 dispatch(socketUpdateOrderStatus(message));
             });
 
             socket.on(SocketEventNameEnum.ORDER_PAID, (message) => {
-                enqueueSnackbar(`Order paid ${JSON.stringify(message)}`, { variant: "info" });
+                enqueueSnackbar(`Order's Payment paid Success`, { variant: "info" });
                 dispatch(socketUpdateOrderPaymentStatus(message));
             });
 
             socket.on(SocketEventNameEnum.PRODUCT_STOCK_DEDUCT, (message) => {
-                enqueueSnackbar(`Stock Deduct ${JSON.stringify(message)}`, { variant: "info" });
+                enqueueSnackbar(`Stock Deduct Success`, { variant: "info" });
                 dispatch(socketProductStockDeduct(message));
             });
 

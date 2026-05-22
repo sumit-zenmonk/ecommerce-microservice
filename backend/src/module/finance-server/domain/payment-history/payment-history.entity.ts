@@ -1,5 +1,5 @@
 import { Column, CreateDateColumn, DeleteDateColumn, Entity, JoinColumn, ManyToOne, PrimaryGeneratedColumn, UpdateDateColumn } from "typeorm";
-import { PaymentHistoryTypeEnum } from "./payment.type.enum";
+import { PaymentHistoryTypeEnum } from "./payment.enum";
 import { UserEntity } from "../user/user.entity";
 import { PaymentCardEntity } from "../payment-card/payment-card.entity";
 
