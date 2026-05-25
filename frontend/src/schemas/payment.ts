@@ -1,5 +1,6 @@
 import { z } from "zod";
 const currentYear = new Date().getFullYear(); // e.g., 2026
+const maxYear = currentYear + 100;
 
 export const addCardSchema = z.object({
     name_on_card: z.string().min(2, "Name is required"),
@@ -11,8 +12,11 @@ export const addCardSchema = z.object({
         .regex(/^(0[1-9]|1[0-2])$/, "Month must be between 01 and 12"),
     expiry_year: z.string()
         .regex(/^\d{4}$/, "Year must be a 4-digit number")
-        .refine((val) => parseInt(val, 10) >= currentYear, {
-            message: `Year must be ${currentYear} or later`,
+        .refine((val) => {
+            const year = parseInt(val, 10);
+            return year >= currentYear && year <= maxYear;
+        }, {
+            message: `Year must be between ${currentYear} and ${maxYear}`,
         }),
 }).refine((data) => {
     const year = parseInt(data.expiry_year, 10);

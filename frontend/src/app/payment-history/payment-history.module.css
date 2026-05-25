@@ -86,15 +86,15 @@
 }
 
 .topup {
-    background-color: #00b806;
+    background-color: #009305;
 }
 
 .payment {
-    background-color: #c50d00;
+    background-color: hsl(4, 100%, 36%);
 }
 
 .refund {
-    background-color: #0059c5;
+    background-color: #004396;
 }
 
 .HistoryIndex {

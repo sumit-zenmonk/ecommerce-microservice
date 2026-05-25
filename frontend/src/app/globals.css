@@ -77,3 +77,7 @@ button:disabled {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
+
+.MuiPaper-root.MuiCard-root {
+  box-shadow: 0px 0 0 transparent;
+}

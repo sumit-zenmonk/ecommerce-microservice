@@ -178,10 +178,11 @@ export default function OrderPage() {
                                                     <Card key={item.uuid} className={styles.itemCard}>
                                                         <Box className={styles.imageWrapper}>
                                                             <Image
-                                                                width={100}
+                                                                width={200}
                                                                 height={100}
                                                                 src={item.image_url}
                                                                 alt={item.name}
+                                                                className={styles.itemImage}
                                                             />
                                                         </Box>
                                                         <Box className={styles.itemContent}>
