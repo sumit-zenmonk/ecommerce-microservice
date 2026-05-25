@@ -93,7 +93,14 @@ export default function OrderPage() {
 
                                 <Stepper activeStep={getActiveStep((order.returned_from_status || order.order_status) as OrderStatusEnum)} alternativeLabel className={styles.stepper}>
                                     {orderSteps.map((step) => (
-                                        <Step key={step}>
+                                        <Step
+                                            key={step}
+                                            completed={
+                                                order.order_status === OrderStatusEnum.DELIVERED
+                                                    ? true
+                                                    : undefined
+                                            }
+                                        >
                                             <StepLabel
                                                 error={order.payment_status === OrderPaymentStatusEnum.REFUND && order.returned_from_status === step}
                                                 sx={{
@@ -113,8 +120,7 @@ export default function OrderPage() {
                                     # {idx}
                                 </Box>
 
-                                <CardContent>
-
+                                <CardContent className={styles.orderDetail}>
                                     <Typography variant="h6">
                                         Order ID: {order.uuid}
                                     </Typography>
@@ -163,23 +169,27 @@ export default function OrderPage() {
                                         />
                                     </Box>
 
-                                    <Slider {...sliderSettings} className={styles.slidercomp}>
-                                        {order.items.map((item) => (
-                                            <Card key={item.uuid} className={styles.itemCard}>
-                                                <Image
-                                                    width={100}
-                                                    height={100}
-                                                    src={item.image_url}
-                                                    alt={item.name}
-                                                />
-                                                <Box className={styles.itemContent}>
-                                                    <Typography variant="subtitle1">{item.name}</Typography>
-                                                    <Typography variant="body2">Quantity: {item.quantity}</Typography>
-                                                    <Typography variant="body2">Price: ${item.price}</Typography>
-                                                </Box>
-                                            </Card>
-                                        ))}
-                                    </Slider>
+                                    <Box className={styles.slidercomp}>
+                                        <Slider {...sliderSettings}>
+                                            {order.items.map((item) => (
+                                                <Card key={item.uuid} className={styles.itemCard}>
+                                                    <Box className={styles.imageWrapper}>
+                                                        <Image
+                                                            width={100}
+                                                            height={100}
+                                                            src={item.image_url}
+                                                            alt={item.name}
+                                                        />
+                                                    </Box>
+                                                    <Box className={styles.itemContent}>
+                                                        <Typography variant="subtitle1">{item.name}</Typography>
+                                                        <Typography variant="body2">Quantity: {item.quantity}</Typography>
+                                                        <Typography variant="body2">Price: ${item.price}</Typography>
+                                                    </Box>
+                                                </Card>
+                                            ))}
+                                        </Slider>
+                                    </Box>
                                 </CardContent>
                             </Card>
                         ))
