@@ -1,9 +1,8 @@
 import { Injectable, Logger, OnModuleInit } from '@nestjs/common';
 import { RabbitMQService } from 'src/module/common/infrastruture/rabbit-mq/rabbit-mq.service';
 import { QueueEnum } from 'src/module/common/infrastruture/rabbit-mq/type-enum/rabbit-mq.enum';
-import { OrderPaymentStatusEnum, OrderStatusEnum } from 'src/module/order-server/domain/order/order.enum';
 import { InboxRepository } from '../../../repository/inbox.repo';
-import { OrderRepository } from '../../../repository/order.repo';
+import { OrderReturnService } from 'src/module/order-server/feature/order/order-return/order.return.service';
 
 @Injectable()
 export class OrderOrderReturnConsumer implements OnModuleInit {
@@ -12,7 +11,7 @@ export class OrderOrderReturnConsumer implements OnModuleInit {
     constructor(
         private readonly rabbitMQService: RabbitMQService,
         private readonly inboxRepo: InboxRepository,
-        private readonly orderRepo: OrderRepository,
+        private readonly orderReturnService: OrderReturnService,
     ) { }
 
     async onModuleInit() {
@@ -36,11 +35,7 @@ export class OrderOrderReturnConsumer implements OnModuleInit {
                     return;
                 }
 
-                if (order.returned_from_status) {
-                    await this.orderRepo.updateReturnedFromStatus(order.uuid, order.returned_from_status);
-                }
-                await this.orderRepo.updateOrderStatus(order.uuid, OrderStatusEnum.RETURNED);
-                await this.orderRepo.updateOrderPaymentStatus(order.uuid, OrderPaymentStatusEnum.REFUND);
+                await this.orderReturnService.orderReturn(order);
 
                 await this.inboxRepo.createEntry({ outbox_uuid });
             },

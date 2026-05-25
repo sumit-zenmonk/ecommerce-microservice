@@ -35,6 +35,10 @@ import * as OrderServerUserRepo from 'src/module/order-server/infrastructure/rep
 import * as OrderServerInboxRepo from 'src/module/order-server/infrastructure/repository/inbox.repo';
 import * as OrderServerOrderRepo from 'src/module/order-server/infrastructure/repository/order.repo';
 import * as OrderServerOutboxRepo from 'src/module/order-server/infrastructure/repository/outbox.repo';
+import * as OrderUserRegisterService from 'src/module/order-server/feature/user/user-register/user-register.service';
+import * as OrderPaidService from 'src/module/order-server/feature/order/order-paid/order-paid.service';
+import * as OrderReturnService from 'src/module/order-server/feature/order/order-return/order.return.service';
+import * as OrderStatusChangedService from 'src/module/order-server/feature/order/order-status-changed/order.status.changed.service';
 import * as OrderUserConsumer from 'src/module/order-server/infrastructure/rabbit-mq-consumer/user/user-registered/user-registered.consumer';
 import * as OrderPaidConsumer from 'src/module/order-server/infrastructure/rabbit-mq-consumer/order/order-paid/order-paid.consumer';
 import * as OrderStatusChangedConsumer from 'src/module/order-server/infrastructure/rabbit-mq-consumer/order/order-status-changed/order-status-changed.consumer';
@@ -99,6 +103,10 @@ import * as ShipmentOrderReturnConsumer from 'src/module/shipment-server/infrast
         OrderServerInboxRepo.InboxRepository,
         OrderServerOutboxRepo.OutboxRepository,
         OrderServerOrderRepo.OrderRepository,
+        OrderUserRegisterService.UserRegisterService,
+        OrderPaidService.OrderPaidService,
+        OrderReturnService.OrderReturnService,
+        OrderStatusChangedService.OrderStatusChangedService,
         OrderPaidConsumer.OrderPaidConsumer,
         OrderUserConsumer.UserRegisteredConsumer,
         OrderStatusChangedConsumer.OrderStatusChangedConsumer,

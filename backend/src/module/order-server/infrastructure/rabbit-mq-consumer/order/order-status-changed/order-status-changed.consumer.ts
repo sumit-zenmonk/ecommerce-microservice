@@ -2,8 +2,7 @@ import { Injectable, Logger, OnModuleInit } from '@nestjs/common';
 import { RabbitMQService } from 'src/module/common/infrastruture/rabbit-mq/rabbit-mq.service';
 import { ExchangeNameEnum, ExchangeTypeEnum, QueueEnum, RoutingKeyEnum } from 'src/module/common/infrastruture/rabbit-mq/type-enum/rabbit-mq.enum';
 import { InboxRepository } from '../../../repository/inbox.repo';
-import { OrderRepository } from '../../../repository/order.repo';
-import { OrderPaymentStatusEnum, } from 'src/module/order-server/domain/order/order.enum';
+import { OrderStatusChangedService } from 'src/module/order-server/feature/order/order-status-changed/order.status.changed.service';
 
 @Injectable()
 export class OrderStatusChangedConsumer implements OnModuleInit {
@@ -12,7 +11,7 @@ export class OrderStatusChangedConsumer implements OnModuleInit {
     constructor(
         private readonly rabbitMQService: RabbitMQService,
         private readonly inboxRepo: InboxRepository,
-        private readonly orderRepo: OrderRepository,
+        private readonly orderReturnService: OrderStatusChangedService,
     ) { }
 
     async onModuleInit() {
@@ -29,7 +28,7 @@ export class OrderStatusChangedConsumer implements OnModuleInit {
                     return;
                 }
 
-                await this.orderRepo.updateOrderStatus(payload.order_uuid, payload.nextStatus)
+                await this.orderReturnService.OrderStatusChanged(payload);
 
                 await this.inboxRepo.createEntry({ outbox_uuid });
             },
