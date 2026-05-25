@@ -2,7 +2,7 @@ import { Injectable, Logger, OnModuleInit } from '@nestjs/common';
 import { RabbitMQService } from 'src/module/common/infrastruture/rabbit-mq/rabbit-mq.service';
 import { ExchangeNameEnum, ExchangeTypeEnum, QueueEnum, RoutingKeyEnum } from 'src/module/common/infrastruture/rabbit-mq/type-enum/rabbit-mq.enum';
 import { InboxRepository } from '../../../repository/inbox.repo';
-import { ProductRepository } from '../../../repository/product.repo';
+import { OrderPaidDeductStockService } from 'src/module/cart-server/feature/order/order-paid-deduct-stock/order.paid.deduct.stock.service';
 
 @Injectable()
 export class CartOrderPaidDeductStockConsumer implements OnModuleInit {
@@ -11,7 +11,7 @@ export class CartOrderPaidDeductStockConsumer implements OnModuleInit {
     constructor(
         private readonly rabbitMQService: RabbitMQService,
         private readonly inboxRepo: InboxRepository,
-        private readonly productRepo: ProductRepository,
+        private readonly orderPaidDeductStock: OrderPaidDeductStockService,
     ) { }
 
     async onModuleInit() {
@@ -35,17 +35,7 @@ export class CartOrderPaidDeductStockConsumer implements OnModuleInit {
                     return;
                 }
 
-                // Deduct stock one by one
-                const deductions = order.items.map(async (item) => {
-                    try {
-                        await this.productRepo.deductStock(item.product_uuid, item.quantity);
-                        this.logger.log(`Deducted ${item.quantity} from ${item.name} (UUID: ${item.product_uuid})`);
-                    } catch (err: any) {
-                        this.logger.error(`Failed to deduct stock for ${item.name}: ${err.message}`);
-                    }
-                });
-
-                await Promise.all(deductions);
+                await this.orderPaidDeductStock.orderPaidDeductStock(order);
 
                 await this.inboxRepo.createEntry({ outbox_uuid });
             },

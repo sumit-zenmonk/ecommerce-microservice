@@ -1,9 +1,8 @@
 import { Injectable, Logger, OnModuleInit } from '@nestjs/common';
-import { UserRepository } from '../../../repository/user.repo';
 import { RabbitMQService } from 'src/module/common/infrastruture/rabbit-mq/rabbit-mq.service';
 import { ExchangeNameEnum, ExchangeTypeEnum, QueueEnum, RoutingKeyEnum } from 'src/module/common/infrastruture/rabbit-mq/type-enum/rabbit-mq.enum';
 import { InboxRepository } from '../../../repository/inbox.repo';
-import { CartRepository } from '../../../repository/cart.repo';
+import { OrderCreateService } from 'src/module/cart-server/feature/order/order-create/order.create.service';
 
 @Injectable()
 export class OrderCreatedConsumer implements OnModuleInit {
@@ -11,9 +10,8 @@ export class OrderCreatedConsumer implements OnModuleInit {
 
     constructor(
         private readonly rabbitMQService: RabbitMQService,
-        private readonly userRepo: UserRepository,
         private readonly inboxRepo: InboxRepository,
-        private readonly cartRepo: CartRepository,
+        private readonly orderCreateService: OrderCreateService,
     ) { }
 
     async onModuleInit() {
@@ -30,8 +28,7 @@ export class OrderCreatedConsumer implements OnModuleInit {
                     return;
                 }
 
-                await this.cartRepo.deleteCart(payload.cart_uuid);
-                await this.cartRepo.createCart({ user_uuid: payload.user_uuid });
+                await this.orderCreateService.orderCreate(payload);
 
                 await this.inboxRepo.createEntry({ outbox_uuid });
             },
