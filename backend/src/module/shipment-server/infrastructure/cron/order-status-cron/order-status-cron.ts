@@ -21,7 +21,7 @@ export class PaidOrderStatusCronService {
 
     private readonly logger = new Logger(PaidOrderStatusCronService.name);
 
-    @Cron(CronExpression.EVERY_MINUTE)
+    @Cron(process.env.SHIPMENT_ORDER_STATUS_CRON_TIMER || CronExpression.EVERY_30_SECONDS)
     async handleCron() {
         // Fetch top 10 paid orders
         const orders = await this.orderRepo.findTopTenPaidButNotDeliveredOrderStatus();

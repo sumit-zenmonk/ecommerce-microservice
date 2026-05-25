@@ -13,7 +13,7 @@ export class OutboxEntryPublisherCronService {
 
     private readonly logger = new Logger(OutboxEntryPublisherCronService.name,);
 
-    @Cron(CronExpression.EVERY_SECOND)
+    @Cron(process.env.SHIPMENT_OUTBOX_CRON_TIMER || CronExpression.EVERY_10_SECONDS)
     async handleCron() {
         // fecth top 10 pending enteries
         const pendingEntries = await this.outboxRepo.findTopTenPendingOutBoxEntries();
