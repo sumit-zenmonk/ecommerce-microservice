@@ -22,7 +22,7 @@ import { financeDataSource } from './module/finance-server/infrastructure/databa
 import { PaymentModule } from './module/finance-server/feature/payment/payment.module';
 import { PaymentCardModule } from './module/finance-server/feature/payment-card/payment-card.module';
 import { shipmentDataSource } from './module/shipment-server/infrastructure/database/data-source';
-import { UserAddressModule } from './module/shipment-server/feature/user-address/user-address.module';
+import { UserAddressModule } from './module/shipment-server/feature/user/user-address.module';
 import { OrderModule } from './module/order-server/feature/order/order.module';
 import * as OrderCronModule from './module/order-server/infrastructure/cron/cron.module';
 import { PaymentOrderModule } from './module/finance-server/feature/order/order.module';
