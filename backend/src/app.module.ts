@@ -16,8 +16,8 @@ import { AuthenticateMiddleware } from './module/common/infrastruture/middleware
 import { userDataSource } from './module/user-module/infrastructure/database/data-source';
 import { UserRepository } from './module/user-module/infrastructure/repository/user.repo';
 import { JwtHelperService } from './module/user-module/infrastructure/services/jwt.service';
-import * as AuthCronModule from './module/user-module/infrastructure/cron/cron.module';
-import * as AuthModule from './module/user-module/feature/user/user.module';
+import * as UserCronModule from './module/user-module/infrastructure/cron/cron.module';
+import { UserModule } from './module/user-module/feature/user/user.module';
 
 // Product Module
 import { productDataSource } from './module/product-module/infrastructure/database/data-source';
@@ -68,8 +68,8 @@ import { ShipmentOrderModule } from './module/shipment-module/feature/order/orde
       retryAttempts: 10,
       retryDelay: 5000
     }),
-    AuthModule.UserModule,
-    AuthCronModule.CronModule,
+    UserModule,
+    UserCronModule.CronModule,
 
     // Product Modules
     TypeOrmModule.forRoot({
