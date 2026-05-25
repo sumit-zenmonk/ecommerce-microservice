@@ -16,11 +16,15 @@ import * as ProductOrderReturnConsumer from 'src/module/product-server/infrastru
 // Cart Service
 import * as CartServerUserRepo from 'src/module/cart-server/infrastructure/repository/user.repo';
 import * as CartServerCartRepo from 'src/module/cart-server/infrastructure/repository/cart.repo';
-import * as OrderServerProductRepo from 'src/module/cart-server/infrastructure/repository/product.repo';
+import * as CartOrderServerProductRepo from 'src/module/cart-server/infrastructure/repository/product.repo';
 import * as CartServerInboxRepo from 'src/module/cart-server/infrastructure/repository/inbox.repo';
+import * as CartOrderCreateService from 'src/module/cart-server/feature/order/order-create/order.create.service';
+import * as CartOrderReturnService from 'src/module/cart-server/feature/order/order-return/order.return.service';
+import * as CartUserRegisterService from 'src/module/cart-server/feature/user/user-register/user-register.service';
+import * as CartOrderPaidDeductStockService from 'src/module/cart-server/feature/order/order-paid-deduct-stock/order.paid.deduct.stock.service';
 import * as CartUserConsumer from 'src/module/cart-server/infrastructure/rabbit-mq-consumer/user/user-registered/user-registered.consumer';
 import * as CartOrderCreatedConsumer from 'src/module/cart-server/infrastructure/rabbit-mq-consumer/order/order-created/order-created-consumer';
-import * as OrderOrderPaidDeductConsumer from 'src/module/cart-server/infrastructure/rabbit-mq-consumer/order/order-paid-deduct-stock/order-paid-deduct-stock.consumer';
+import * as CartOrderPaidDeductConsumer from 'src/module/cart-server/infrastructure/rabbit-mq-consumer/order/order-paid-deduct-stock/order-paid-deduct-stock.consumer';
 import * as CartOrderReturnConsumer from 'src/module/cart-server/infrastructure/rabbit-mq-consumer/order/order-return/order-return.consumer';
 
 // Order Service
@@ -37,6 +41,8 @@ import * as OrderReturnConsumer from 'src/module/order-server/infrastructure/rab
 import * as FinanceServerUserRepo from 'src/module/finance-server/infrastructure/repository/user.repo';
 import * as FinanceServerInboxRepo from 'src/module/finance-server/infrastructure/repository/inbox.repo';
 import * as FinanceServerFinanceRepo from 'src/module/finance-server/infrastructure/repository/finance.repo';
+import * as FinanceUserRegisterService from 'src/module/finance-server/feature/user/user-register/user-register.service';
+import * as FinanceOrderReturnService from 'src/module/finance-server/feature/order/order-return/order.return.service';
 import * as FinanceUserConsumer from 'src/module/finance-server/infrastructure/rabbit-mq-consumer/user/user-registered/user-registered.consumer';
 import * as FinanceOrderReturnConsumer from 'src/module/finance-server/infrastructure/rabbit-mq-consumer/order/order-return/order-return.consumer';
 
@@ -71,11 +77,15 @@ import * as ShipmentOrderReturnConsumer from 'src/module/shipment-server/infrast
         // Cart Service
         CartServerUserRepo.UserRepository,
         CartServerCartRepo.CartRepository,
-        OrderServerProductRepo.ProductRepository,
+        CartOrderServerProductRepo.ProductRepository,
         CartServerInboxRepo.InboxRepository,
+        CartOrderReturnService.OrderReturnService,
+        CartOrderCreateService.OrderCreateService,
+        CartUserRegisterService.UserRegisterService,
+        CartOrderPaidDeductStockService.OrderPaidDeductStockService,
         CartUserConsumer.UserRegisteredConsumer,
         CartOrderCreatedConsumer.OrderCreatedConsumer,
-        OrderOrderPaidDeductConsumer.CartOrderPaidDeductStockConsumer,
+        CartOrderPaidDeductConsumer.CartOrderPaidDeductStockConsumer,
         CartOrderReturnConsumer.ProductOrderReturnConsumer,
 
         // order Service
@@ -92,6 +102,8 @@ import * as ShipmentOrderReturnConsumer from 'src/module/shipment-server/infrast
         FinanceServerUserRepo.UserRepository,
         FinanceServerInboxRepo.InboxRepository,
         FinanceServerFinanceRepo.FinanceRepository,
+        FinanceUserRegisterService.UserRegisterService,
+        FinanceOrderReturnService.OrderReturnService,
         FinanceUserConsumer.UserRegisteredConsumer,
         FinanceOrderReturnConsumer.FinanceOrderReturnConsumer,
 

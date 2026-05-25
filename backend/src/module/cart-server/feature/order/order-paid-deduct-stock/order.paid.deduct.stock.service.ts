@@ -7,9 +7,7 @@ export class OrderPaidDeductStockService {
         private readonly productRepo: ProductRepository,
     ) { }
 
-    async orderPaidDeductStock(payload: any) {
-        const order = payload.order;
-
+    async orderPaidDeductStock(order: any) {
         // Deduct stock one by one
         const deductions = order.items.map(async (item) => {
             try {
