@@ -21,6 +21,9 @@ export class ItemAddToCartService {
         if (!product) {
             throw new BadRequestException("Product not found");
         }
+        if (product.stock == 0) {
+            throw new BadRequestException("Stock of product is exhausted");
+        }
         if (quantity > product.stock) {
             throw new BadRequestException("Quantity is Greater than Stock of product");
         }
