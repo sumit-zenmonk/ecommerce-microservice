@@ -88,111 +88,116 @@ export default function OrderPage() {
                     scrollableTarget="scrollableDiv"
                 >
                     {orders && orders.length > 0 ? (
-                        orders.map((order: Order, idx: number) => (
-                            <Card key={order.uuid} className={styles.orderCard}>
+                        orders.map((order: Order, idx: number) => {
+                            const descendingIndex = orders.length - 1 - idx;
 
-                                <Stepper activeStep={getActiveStep((order.returned_from_status || order.order_status) as OrderStatusEnum)} alternativeLabel className={styles.stepper}>
-                                    {orderSteps.map((step) => (
-                                        <Step
-                                            key={step}
-                                            completed={
-                                                order.order_status === OrderStatusEnum.DELIVERED
-                                                    ? true
-                                                    : undefined
+                            return (
+                                <Card key={order.uuid} className={styles.orderCard}>
+
+                                    <Stepper activeStep={getActiveStep((order.returned_from_status || order.order_status) as OrderStatusEnum)} alternativeLabel className={styles.stepper}>
+                                        {orderSteps.map((step) => (
+                                            <Step
+                                                key={step}
+                                                completed={
+                                                    order.order_status === OrderStatusEnum.DELIVERED
+                                                        ? true
+                                                        : undefined
+                                                }
+                                            >
+                                                <StepLabel
+                                                    error={order.payment_status === OrderPaymentStatusEnum.REFUND && order.returned_from_status === step}
+                                                    sx={{
+                                                        "& .MuiStepLabel-label": {
+                                                            textTransform: "capitalize",
+                                                            fontSize: "0.85rem",
+                                                        },
+                                                    }}
+                                                >
+                                                    {step}
+                                                </StepLabel>
+                                            </Step>
+                                        ))}
+                                    </Stepper>
+
+                                    <Box className={styles.orderLabel}>
+                                        # {descendingIndex + 1}
+                                    </Box>
+
+                                    <CardContent className={styles.orderDetail}>
+                                        <Typography variant="h6">
+                                            Order ID: {order.uuid}
+                                        </Typography>
+
+                                        <Typography variant="h6">
+                                            Total Price: {order.total_price}
+                                        </Typography>
+
+                                        <Box>
+                                            {
+                                                order.payment_status !== OrderPaymentStatusEnum.PAID &&
+                                                order.payment_status !== OrderPaymentStatusEnum.REFUND &&
+                                                order.order_status !== OrderStatusEnum.RETURNED &&
+                                                <Button
+                                                    color="primary"
+                                                    onClick={() => setPayModalOrder(order.uuid)}
+                                                >
+                                                    Pay {order.total_price}
+                                                </Button>
                                             }
-                                        >
-                                            <StepLabel
-                                                error={order.payment_status === OrderPaymentStatusEnum.REFUND && order.returned_from_status === step}
-                                                sx={{
-                                                    "& .MuiStepLabel-label": {
-                                                        textTransform: "capitalize",
-                                                        fontSize: "0.85rem",
-                                                    },
-                                                }}
-                                            >
-                                                {step}
-                                            </StepLabel>
-                                        </Step>
-                                    ))}
-                                </Stepper>
 
-                                <Box className={styles.orderLabel}>
-                                    # {idx}
-                                </Box>
+                                            {
+                                                order.payment_status === OrderPaymentStatusEnum.PAID &&
+                                                order.order_status !== OrderStatusEnum.RETURNED &&
+                                                <Button
+                                                    onClick={() => handleReturnOrder(order.uuid)}
+                                                >
+                                                    Return Order and Get Refund {order.total_price}
+                                                </Button>
+                                            }
 
-                                <CardContent className={styles.orderDetail}>
-                                    <Typography variant="h6">
-                                        Order ID: {order.uuid}
-                                    </Typography>
+                                            <Box sx={{ width: "100%", mt: 2 }}>
+                                                <Typography
+                                                    variant="body2"
+                                                    sx={{ mt: 1, textAlign: "center" }}
+                                                >
+                                                    Payment: {order.payment_status.toUpperCase()}
+                                                </Typography>
+                                            </Box>
 
-                                    <Typography variant="h6">
-                                        Total Price: {order.total_price}
-                                    </Typography>
-
-                                    <Box>
-                                        {
-                                            order.payment_status !== OrderPaymentStatusEnum.PAID &&
-                                            order.payment_status !== OrderPaymentStatusEnum.REFUND &&
-                                            order.order_status !== OrderStatusEnum.RETURNED &&
-                                            <Button
-                                                color="primary"
-                                                onClick={() => setPayModalOrder(order.uuid)}
-                                            >
-                                                Pay {order.total_price}
-                                            </Button>
-                                        }
-
-                                        {
-                                            order.payment_status === OrderPaymentStatusEnum.PAID &&
-                                            order.order_status !== OrderStatusEnum.RETURNED &&
-                                            <Button
-                                                onClick={() => handleReturnOrder(order.uuid)}
-                                            >
-                                                Return Order and Get Refund {order.total_price}
-                                            </Button>
-                                        }
-
-                                        <Box sx={{ width: "100%", mt: 2 }}>
-                                            <Typography
-                                                variant="body2"
-                                                sx={{ mt: 1, textAlign: "center" }}
-                                            >
-                                                Payment: {order.payment_status.toUpperCase()}
-                                            </Typography>
+                                            <PayModal
+                                                open={payModalOrder === order.uuid}
+                                                onClose={() => setPayModalOrder(null)}
+                                                amount={Number(order.total_price)}
+                                                order_uuid={order.uuid}
+                                            />
                                         </Box>
 
-                                        <PayModal
-                                            open={payModalOrder === order.uuid}
-                                            onClose={() => setPayModalOrder(null)}
-                                            amount={Number(order.total_price)}
-                                            order_uuid={order.uuid}
-                                        />
-                                    </Box>
+                                        <Box className={styles.slidercomp}>
+                                            <Slider {...sliderSettings}>
+                                                {order.items.map((item) => (
+                                                    <Card key={item.uuid} className={styles.itemCard}>
+                                                        <Box className={styles.imageWrapper}>
+                                                            <Image
+                                                                width={100}
+                                                                height={100}
+                                                                src={item.image_url}
+                                                                alt={item.name}
+                                                            />
+                                                        </Box>
+                                                        <Box className={styles.itemContent}>
+                                                            <Typography variant="subtitle1">{item.name}</Typography>
+                                                            <Typography variant="body2">Quantity: {item.quantity}</Typography>
+                                                            <Typography variant="body2">Price: ${item.price}</Typography>
+                                                        </Box>
+                                                    </Card>
+                                                ))}
+                                            </Slider>
+                                        </Box>
+                                    </CardContent>
+                                </Card>
+                            );
 
-                                    <Box className={styles.slidercomp}>
-                                        <Slider {...sliderSettings}>
-                                            {order.items.map((item) => (
-                                                <Card key={item.uuid} className={styles.itemCard}>
-                                                    <Box className={styles.imageWrapper}>
-                                                        <Image
-                                                            width={100}
-                                                            height={100}
-                                                            src={item.image_url}
-                                                            alt={item.name}
-                                                        />
-                                                    </Box>
-                                                    <Box className={styles.itemContent}>
-                                                        <Typography variant="subtitle1">{item.name}</Typography>
-                                                        <Typography variant="body2">Quantity: {item.quantity}</Typography>
-                                                        <Typography variant="body2">Price: ${item.price}</Typography>
-                                                    </Box>
-                                                </Card>
-                                            ))}
-                                        </Slider>
-                                    </Box>
-                                </CardContent>
-                            </Card>
-                        ))
+                        })
                     ) : (!loading && <Typography>No Orders Found</Typography>)}
                 </InfiniteScroll>
             </Box>
