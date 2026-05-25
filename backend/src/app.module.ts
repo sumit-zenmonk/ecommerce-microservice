@@ -4,31 +4,45 @@ import { AppService } from './app.service';
 import { JwtModule } from '@nestjs/jwt';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { ConfigModule } from '@nestjs/config';
-import { userDataSource } from './module/user-module/infrastructure/database/data-source';
+import { ScheduleModule } from '@nestjs/schedule';
+
+// Common Module
 import { BcryptService } from './module/common/services/bcrypt.service';
-import { UserRepository } from './module/user-module/infrastructure/repository/user.repo';
-import { JwtHelperService } from './module/user-module/infrastructure/services/jwt.service';
+import { SocketModule } from './module/common/socket/socket.module';
 import { RabbitMQModule } from './module/common/infrastruture/rabbit-mq/rabbit-mq.module';
 import { AuthenticateMiddleware } from './module/common/infrastruture/middleware/authenticate.middleware';
+
+// User Module
+import { userDataSource } from './module/user-module/infrastructure/database/data-source';
+import { UserRepository } from './module/user-module/infrastructure/repository/user.repo';
+import { JwtHelperService } from './module/user-module/infrastructure/services/jwt.service';
 import * as AuthCronModule from './module/user-module/infrastructure/cron/cron.module';
 import * as AuthModule from './module/user-module/feature/user/user.module';
-import { ScheduleModule } from '@nestjs/schedule';
+
+// Product Module
 import { productDataSource } from './module/product-module/infrastructure/database/data-source';
 import { ProductModule } from './module/product-module/feature/product/product.module';
+
+// Cart Module
 import { cartDataSource } from './module/cart-module/infrastructure/database/data-source';
 import { CartModule } from './module/cart-module/feature/cart/cart.module';
+
+// Order Module
 import { orderDataSource } from './module/order-module/infrastructure/database/data-source';
+import { OrderModule } from './module/order-module/feature/order/order.module';
+import * as OrderCronModule from './module/order-module/infrastructure/cron/cron.module';
+
+// Finance Module
 import { financeDataSource } from './module/finance-module/infrastructure/database/data-source';
 import { PaymentModule } from './module/finance-module/feature/payment/payment.module';
 import { PaymentCardModule } from './module/finance-module/feature/payment-card/payment-card.module';
-import { shipmentDataSource } from './module/shipment-module/infrastructure/database/data-source';
-import { UserAddressModule } from './module/shipment-module/feature/user/user-address.module';
-import { OrderModule } from './module/order-module/feature/order/order.module';
-import * as OrderCronModule from './module/order-module/infrastructure/cron/cron.module';
 import { PaymentOrderModule } from './module/finance-module/feature/order/order.module';
 import * as FinanceCronModule from './module/finance-module/infrastructure/cron/cron.module';
+
+// Shipment Module
+import { shipmentDataSource } from './module/shipment-module/infrastructure/database/data-source';
+import { UserAddressModule } from './module/shipment-module/feature/user/user-address.module';
 import * as ShipmentCronModule from './module/shipment-module/infrastructure/cron/cron.module';
-import { SocketModule } from './module/common/socket/socket.module';
 import { ShipmentOrderModule } from './module/shipment-module/feature/order/order.module';
 
 @Module({
