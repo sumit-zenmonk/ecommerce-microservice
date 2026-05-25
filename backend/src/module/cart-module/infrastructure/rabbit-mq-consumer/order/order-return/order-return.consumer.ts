@@ -5,7 +5,7 @@ import { InboxRepository } from '../../../repository/inbox.repo';
 import { ProductRepository } from '../../../repository/product.repo';
 import { SocketService } from 'src/module/common/socket/socket.service';
 import { SocketEventNameEnum } from 'src/module/common/socket/socket.enum';
-import { OrderReturnService } from 'src/module/cart-server/feature/order/order-return/order.return.service';
+import { OrderReturnService } from 'src/module/cart-module/feature/order/order-return/order.return.service';
 
 @Injectable()
 export class ProductOrderReturnConsumer implements OnModuleInit {

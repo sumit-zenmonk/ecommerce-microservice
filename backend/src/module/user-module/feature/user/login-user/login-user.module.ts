@@ -1,8 +1,8 @@
 import { Module } from "@nestjs/common";
 import { LoginUserController } from "./login-user.controller";
 import { LoginUserService } from "./login-user.service";
-import { UserRepository } from "src/module/user-server/infrastructure/repository/user.repo";
-import { JwtHelperService } from "src/module/user-server/infrastructure/services/jwt.service";
+import { UserRepository } from "src/module/user-module/infrastructure/repository/user.repo";
+import { JwtHelperService } from "src/module/user-module/infrastructure/services/jwt.service";
 import { BcryptService } from "src/module/common/services/bcrypt.service";
 
 @Module({

@@ -1,6 +1,6 @@
 import { BadRequestException, Injectable, } from "@nestjs/common";
-import { UserEntity } from "src/module/cart-server/domain/user/user.entity";
-import { CartRepository } from "src/module/cart-server/infrastructure/repository/cart.repo";
+import { UserEntity } from "src/module/cart-module/domain/user/user.entity";
+import { CartRepository } from "src/module/cart-module/infrastructure/repository/cart.repo";
 
 @Injectable()
 export class GetCartService {

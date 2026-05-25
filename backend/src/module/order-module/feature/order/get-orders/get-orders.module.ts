@@ -1,7 +1,7 @@
 import { Module } from "@nestjs/common";
 import { GetOrderListingController } from "./get-orders.controller";
 import { GetOrderListingService } from "./get-orders.service";
-import { OrderRepository } from "src/module/order-server/infrastructure/repository/order.repo";
+import { OrderRepository } from "src/module/order-module/infrastructure/repository/order.repo";
 
 @Module({
     imports: [],

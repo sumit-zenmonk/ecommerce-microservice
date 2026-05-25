@@ -1,5 +1,5 @@
 import { Module } from "@nestjs/common";
-import { FinanceRepository } from "src/module/finance-server/infrastructure/repository/finance.repo";
+import { FinanceRepository } from "src/module/finance-module/infrastructure/repository/finance.repo";
 import { GetCardsController } from "./get-cards.controller";
 import { GetCardsService } from "./get-cards.service";
 

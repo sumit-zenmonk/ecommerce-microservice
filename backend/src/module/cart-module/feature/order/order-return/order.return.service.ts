@@ -1,5 +1,5 @@
 import { BadRequestException, Injectable, } from "@nestjs/common";
-import { ProductRepository } from "src/module/cart-server/infrastructure/repository/product.repo";
+import { ProductRepository } from "src/module/cart-module/infrastructure/repository/product.repo";
 
 @Injectable()
 export class OrderReturnService {

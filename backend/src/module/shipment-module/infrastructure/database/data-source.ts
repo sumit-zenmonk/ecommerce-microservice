@@ -23,7 +23,7 @@ const options: DataSourceOptions = {
     ],
     schema: process.env.DB_POSTGRES_SHIPMENT_SCHEMA || 'shipment_schema',
     synchronize: false,
-    migrations: ['dist/module/shipment-server/infrastructure/database/migrations/*{.ts,.js}'],
+    migrations: ['dist/module/shipment-module/infrastructure/database/migrations/*{.ts,.js}'],
 };
 
 const shipmentDataSource = new DataSource(options);

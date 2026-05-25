@@ -1,5 +1,5 @@
 import { Module } from "@nestjs/common";
-import { FinanceRepository } from "src/module/finance-server/infrastructure/repository/finance.repo";
+import { FinanceRepository } from "src/module/finance-module/infrastructure/repository/finance.repo";
 import { GetPayHistoryController } from "./get-pay-history.controller";
 import { GetPayHistoryService } from "./get-pay-history.service";
 

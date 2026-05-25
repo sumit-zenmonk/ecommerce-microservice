@@ -1,8 +1,8 @@
 import { BadRequestException, Injectable } from "@nestjs/common";
-import { UserRepository } from "src/module/user-server/infrastructure/repository/user.repo";
+import { UserRepository } from "src/module/user-module/infrastructure/repository/user.repo";
 import { CreateUserAddressDto } from "./create-user-address.dto";
-import { UserEntity } from "src/module/shipment-server/domain/user/user.entity";
-import { UserAddressRepository } from "src/module/shipment-server/infrastructure/repository/user.address.repo";
+import { UserEntity } from "src/module/shipment-module/domain/user/user.entity";
+import { UserAddressRepository } from "src/module/shipment-module/infrastructure/repository/user.address.repo";
 
 @Injectable()
 export class CreateUserAddressService {

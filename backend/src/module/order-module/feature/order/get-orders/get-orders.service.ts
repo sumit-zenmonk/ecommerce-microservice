@@ -1,6 +1,6 @@
 import { BadRequestException, Injectable } from "@nestjs/common";
-import { UserEntity } from "src/module/order-server/domain/user/user.entity";
-import { OrderRepository } from "src/module/order-server/infrastructure/repository/order.repo";
+import { UserEntity } from "src/module/order-module/domain/user/user.entity";
+import { OrderRepository } from "src/module/order-module/infrastructure/repository/order.repo";
 
 @Injectable()
 export class GetOrderListingService {

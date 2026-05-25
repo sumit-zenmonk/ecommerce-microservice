@@ -1,6 +1,6 @@
 import { BadRequestException, Injectable } from "@nestjs/common";
-import { OrderPaymentStatusEnum, OrderStatusEnum } from "src/module/order-server/domain/order/order.enum";
-import { OrderRepository } from "src/module/order-server/infrastructure/repository/order.repo";
+import { OrderPaymentStatusEnum, OrderStatusEnum } from "src/module/order-module/domain/order/order.enum";
+import { OrderRepository } from "src/module/order-module/infrastructure/repository/order.repo";
 
 @Injectable()
 export class OrderReturnService {

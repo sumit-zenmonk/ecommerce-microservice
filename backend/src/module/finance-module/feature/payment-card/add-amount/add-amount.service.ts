@@ -1,7 +1,7 @@
 import { BadRequestException, Injectable } from "@nestjs/common";
-import { PaymentHistoryTypeEnum } from "src/module/finance-server/domain/payment-history/payment.enum";
-import { FinanceRepository } from "src/module/finance-server/infrastructure/repository/finance.repo";
-import { UserEntity } from "src/module/user-server/domain/user/user.entity";
+import { PaymentHistoryTypeEnum } from "src/module/finance-module/domain/payment-history/payment.enum";
+import { FinanceRepository } from "src/module/finance-module/infrastructure/repository/finance.repo";
+import { UserEntity } from "src/module/user-module/domain/user/user.entity";
 
 @Injectable()
 export class AddAmountService {

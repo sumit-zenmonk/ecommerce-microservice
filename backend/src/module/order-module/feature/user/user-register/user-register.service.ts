@@ -1,5 +1,5 @@
 import { BadRequestException, Injectable, } from "@nestjs/common";
-import { UserRepository } from "src/module/order-server/infrastructure/repository/user.repo";
+import { UserRepository } from "src/module/order-module/infrastructure/repository/user.repo";
 
 @Injectable()
 export class UserRegisterService {

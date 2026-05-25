@@ -23,7 +23,7 @@ const options: DataSourceOptions = {
     ],
     schema: process.env.DB_POSTGRES_FINANCE_SCHEMA || 'finance_schema',
     synchronize: false,
-    migrations: ['dist/module/finance-server/infrastructure/database/migrations/*{.ts,.js}'],
+    migrations: ['dist/module/finance-module/infrastructure/database/migrations/*{.ts,.js}'],
 };
 
 const financeDataSource = new DataSource(options);

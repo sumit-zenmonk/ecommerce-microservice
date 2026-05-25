@@ -26,7 +26,7 @@ export enum RoutingKeyEnum {
     ORDER_RETURNED = 'order.returned',
 }
 
-// queue name (server name) + routing key + endfix(queue)
+// queue name (module name) + routing key + endfix(queue)
 export enum QueueEnum {
     PRODUCT_USER_REGISTERED_QUEUE = 'product.user.registered.queue',
     CART_USER_REGISTERED_QUEUE = 'cart.user.registered.queue',

@@ -2,7 +2,7 @@ import { BadRequestException, Injectable, Logger, OnModuleInit } from '@nestjs/c
 import { RabbitMQService } from 'src/module/common/infrastruture/rabbit-mq/rabbit-mq.service';
 import { ExchangeNameEnum, ExchangeTypeEnum, QueueEnum, RoutingKeyEnum } from 'src/module/common/infrastruture/rabbit-mq/type-enum/rabbit-mq.enum';
 import { InboxRepository } from '../../../repository/inbox.repo';
-import { OrderReturnService } from 'src/module/finance-server/feature/order/order-return/order.return.service';
+import { OrderReturnService } from 'src/module/finance-module/feature/order/order-return/order.return.service';
 
 @Injectable()
 export class FinanceOrderReturnConsumer implements OnModuleInit {

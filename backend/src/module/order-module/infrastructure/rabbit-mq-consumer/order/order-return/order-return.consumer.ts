@@ -2,7 +2,7 @@ import { Injectable, Logger, OnModuleInit } from '@nestjs/common';
 import { RabbitMQService } from 'src/module/common/infrastruture/rabbit-mq/rabbit-mq.service';
 import { QueueEnum } from 'src/module/common/infrastruture/rabbit-mq/type-enum/rabbit-mq.enum';
 import { InboxRepository } from '../../../repository/inbox.repo';
-import { OrderReturnService } from 'src/module/order-server/feature/order/order-return/order.return.service';
+import { OrderReturnService } from 'src/module/order-module/feature/order/order-return/order.return.service';
 
 @Injectable()
 export class OrderOrderReturnConsumer implements OnModuleInit {

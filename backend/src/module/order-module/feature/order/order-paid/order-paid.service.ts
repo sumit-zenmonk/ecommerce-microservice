@@ -1,8 +1,8 @@
 import { BadRequestException, Injectable, } from "@nestjs/common";
 import { ExchangeNameEnum, RoutingKeyEnum } from "src/module/common/infrastruture/rabbit-mq/type-enum/rabbit-mq.enum";
-import { OrderPaymentStatusEnum } from "src/module/order-server/domain/order/order.enum";
-import { OrderRepository } from "src/module/order-server/infrastructure/repository/order.repo";
-import { OutboxRepository } from "src/module/order-server/infrastructure/repository/outbox.repo";
+import { OrderPaymentStatusEnum } from "src/module/order-module/domain/order/order.enum";
+import { OrderRepository } from "src/module/order-module/infrastructure/repository/order.repo";
+import { OutboxRepository } from "src/module/order-module/infrastructure/repository/outbox.repo";
 
 @Injectable()
 export class OrderPaidService {

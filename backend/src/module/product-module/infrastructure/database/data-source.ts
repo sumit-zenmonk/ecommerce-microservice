@@ -19,7 +19,7 @@ const options: DataSourceOptions = {
     ],
     schema: process.env.DB_POSTGRES_PRODUCT_SCHEMA || 'product_schema',
     synchronize: false,
-    migrations: ['dist/module/product-server/infrastructure/database/migrations/*{.ts,.js}'],
+    migrations: ['dist/module/product-module/infrastructure/database/migrations/*{.ts,.js}'],
 };
 
 const productDataSource = new DataSource(options);

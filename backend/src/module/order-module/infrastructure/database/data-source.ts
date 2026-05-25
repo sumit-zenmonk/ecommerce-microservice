@@ -7,7 +7,7 @@ import { InboxEntity } from "../../domain/inbox/inbox.entity";
 import { UserEntity } from "../../domain/user/user.entity";
 import { OrderEntity } from "../../domain/order/order.entity";
 import { OrderItemEntity } from "../../domain/order-item/order-item.entity";
-import { OutboxEntity } from "src/module/order-server/domain/outbox/outbox.entity";
+import { OutboxEntity } from "src/module/order-module/domain/outbox/outbox.entity";
 
 const options: DataSourceOptions = {
     type: process.env.DB_POSTGRES_TYPE as any,
@@ -22,7 +22,7 @@ const options: DataSourceOptions = {
     ],
     schema: process.env.DB_POSTGRES_ORDER_SCHEMA || 'order_schema',
     synchronize: false,
-    migrations: ['dist/module/order-server/infrastructure/database/migrations/*{.ts,.js}'],
+    migrations: ['dist/module/order-module/infrastructure/database/migrations/*{.ts,.js}'],
 };
 
 const orderDataSource = new DataSource(options);

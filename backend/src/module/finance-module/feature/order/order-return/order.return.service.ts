@@ -1,7 +1,7 @@
 import { BadRequestException, Injectable } from "@nestjs/common";
 import { SocketService } from "src/module/common/socket/socket.service";
-import { PaymentHistoryTypeEnum } from "src/module/finance-server/domain/payment-history/payment.enum";
-import { FinanceRepository } from "src/module/finance-server/infrastructure/repository/finance.repo";
+import { PaymentHistoryTypeEnum } from "src/module/finance-module/domain/payment-history/payment.enum";
+import { FinanceRepository } from "src/module/finance-module/infrastructure/repository/finance.repo";
 
 @Injectable()
 export class OrderReturnService {

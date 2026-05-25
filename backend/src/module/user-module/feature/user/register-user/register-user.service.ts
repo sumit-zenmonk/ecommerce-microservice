@@ -2,11 +2,11 @@ import { BadRequestException, Injectable } from "@nestjs/common";
 import { RegisterUserDto } from "./register-user.dto";
 import type { Request } from "express";
 import { RabbitMQService } from "src/module/common/infrastruture/rabbit-mq/rabbit-mq.service";
-import { UserRepository } from "src/module/user-server/infrastructure/repository/user.repo";
+import { UserRepository } from "src/module/user-module/infrastructure/repository/user.repo";
 import { BcryptService } from "src/module/common/services/bcrypt.service";
-import { JwtHelperService } from "src/module/user-server/infrastructure/services/jwt.service";
+import { JwtHelperService } from "src/module/user-module/infrastructure/services/jwt.service";
 import { ExchangeNameEnum, RoutingKeyEnum } from "src/module/common/infrastruture/rabbit-mq/type-enum/rabbit-mq.enum";
-import { OutboxRepository } from "src/module/user-server/infrastructure/repository/outbox.repo";
+import { OutboxRepository } from "src/module/user-module/infrastructure/repository/outbox.repo";
 
 @Injectable()
 export class RegisterUserService {

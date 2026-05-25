@@ -1,5 +1,5 @@
 import { BadRequestException, Injectable } from "@nestjs/common";
-import { OrderRepository } from "src/module/order-server/infrastructure/repository/order.repo";
+import { OrderRepository } from "src/module/order-module/infrastructure/repository/order.repo";
 
 @Injectable()
 export class OrderStatusChangedService {

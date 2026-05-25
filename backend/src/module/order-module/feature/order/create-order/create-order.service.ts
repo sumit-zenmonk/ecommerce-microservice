@@ -1,10 +1,10 @@
 import { BadRequestException, Injectable } from "@nestjs/common";
-import { UserEntity } from "src/module/user-server/domain/user/user.entity";
+import { UserEntity } from "src/module/user-module/domain/user/user.entity";
 import { CreateOrderDto } from "./create-order.dto";
-import { OrderRepository } from "src/module/order-server/infrastructure/repository/order.repo";
-import { OrderItemRepository } from "src/module/order-server/infrastructure/repository/order.item.repo";
+import { OrderRepository } from "src/module/order-module/infrastructure/repository/order.repo";
+import { OrderItemRepository } from "src/module/order-module/infrastructure/repository/order.item.repo";
 import { ExchangeNameEnum, RoutingKeyEnum } from "src/module/common/infrastruture/rabbit-mq/type-enum/rabbit-mq.enum";
-import { OutboxRepository } from "src/module/order-server/infrastructure/repository/outbox.repo";
+import { OutboxRepository } from "src/module/order-module/infrastructure/repository/outbox.repo";
 
 @Injectable()
 export class CreateOrderService {

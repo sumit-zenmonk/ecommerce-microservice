@@ -3,8 +3,8 @@ import { RabbitMQService } from 'src/module/common/infrastruture/rabbit-mq/rabbi
 import { ExchangeNameEnum, ExchangeTypeEnum, QueueEnum, RoutingKeyEnum } from 'src/module/common/infrastruture/rabbit-mq/type-enum/rabbit-mq.enum';
 import { InboxRepository } from '../../../repository/inbox.repo';
 import { OrderRepository } from '../../../repository/order.repo';
-import { OrderPaymentStatusEnum, } from 'src/module/order-server/domain/order/order.enum';
-import { OrderPaidService } from 'src/module/shipment-server/feature/order/order-paid/order.paid.service';
+import { OrderPaymentStatusEnum, } from 'src/module/order-module/domain/order/order.enum';
+import { OrderPaidService } from 'src/module/shipment-module/feature/order/order-paid/order.paid.service';
 
 @Injectable()
 export class OrderPaidConsumer implements OnModuleInit {

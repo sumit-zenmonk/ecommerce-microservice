@@ -1,6 +1,6 @@
 import { BadRequestException, Injectable } from "@nestjs/common";
-import { FinanceRepository } from "src/module/finance-server/infrastructure/repository/finance.repo";
-import { UserEntity } from "src/module/user-server/domain/user/user.entity";
+import { FinanceRepository } from "src/module/finance-module/infrastructure/repository/finance.repo";
+import { UserEntity } from "src/module/user-module/domain/user/user.entity";
 import { AddCardDto } from "./add-card-dto";
 
 @Injectable()

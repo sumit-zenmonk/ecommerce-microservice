@@ -1,6 +1,6 @@
 import { BadRequestException, Injectable, } from "@nestjs/common";
-import { OrderItemRepository } from "src/module/shipment-server/infrastructure/repository/order.item.repo";
-import { OrderRepository } from "src/module/shipment-server/infrastructure/repository/order.repo";
+import { OrderItemRepository } from "src/module/shipment-module/infrastructure/repository/order.item.repo";
+import { OrderRepository } from "src/module/shipment-module/infrastructure/repository/order.repo";
 
 @Injectable()
 export class OrderCreatedService {

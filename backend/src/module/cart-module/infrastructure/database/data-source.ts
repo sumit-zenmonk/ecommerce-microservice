@@ -21,7 +21,7 @@ const options: DataSourceOptions = {
     ],
     schema: process.env.DB_POSTGRES_CART_SCHEMA || 'cart_schema',
     synchronize: false,
-    migrations: ['dist/module/cart-server/infrastructure/database/migrations/*{.ts,.js}'],
+    migrations: ['dist/module/cart-module/infrastructure/database/migrations/*{.ts,.js}'],
 };
 
 const cartDataSource = new DataSource(options);
