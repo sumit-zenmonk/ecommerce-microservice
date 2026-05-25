@@ -57,11 +57,13 @@ import * as FinanceOrderReturnConsumer from 'src/module/finance-server/infrastru
 import * as ShipmentServerUserRepo from 'src/module/shipment-server/infrastructure/repository/user.repo';
 import * as ShipmentServerInboxRepo from 'src/module/shipment-server/infrastructure/repository/inbox.repo';
 import * as ShipmentOrderRepository from 'src/module/shipment-server/infrastructure/repository/order.repo';
+import * as ShipmentUserRegisterService from 'src/module/shipment-server/feature/user/user-register/user-register.service';
+import * as ShipmentOrderPaidService from 'src/module/shipment-server/feature/order/order-paid/order.paid.service';
+import * as ShipmentOrderCreatedService from 'src/module/shipment-server/feature/order/order-created/order.created.service';
 import * as ShipmentOrderItemRepository from 'src/module/shipment-server/infrastructure/repository/order.item.repo';
 import * as ShipmentUserConsumer from 'src/module/shipment-server/infrastructure/rabbit-mq-consumer/user/user-registered/user-registered.consumer';
 import * as ShipentOrderCreatedConsumer from 'src/module/shipment-server/infrastructure/rabbit-mq-consumer/order/order-created/order-created-consumer';
 import * as ShipmentOrderPaidConsumer from 'src/module/shipment-server/infrastructure/rabbit-mq-consumer/order/order-paid/order-paid.consumer';
-import * as ShipmentOrderReturnConsumer from 'src/module/shipment-server/infrastructure/rabbit-mq-consumer/order/order-return/order-return.consumer';
 
 @Global()
 @Module({
@@ -124,12 +126,14 @@ import * as ShipmentOrderReturnConsumer from 'src/module/shipment-server/infrast
         // shipment Service
         ShipmentServerUserRepo.UserRepository,
         ShipmentServerInboxRepo.InboxRepository,
+        ShipmentUserRegisterService.UserRegisterService,
+        ShipmentOrderCreatedService.OrderCreatedService,
+        ShipmentOrderPaidService.OrderPaidService,
         ShipmentUserConsumer.UserRegisteredConsumer,
         ShipentOrderCreatedConsumer.OrderCreatedConsumer,
         ShipmentOrderRepository.OrderRepository,
         ShipmentOrderItemRepository.OrderItemRepository,
         ShipmentOrderPaidConsumer.OrderPaidConsumer,
-        ShipmentOrderReturnConsumer.ShipmentOrderReturnConsumer,
     ],
     exports: [RabbitMQService],
 })

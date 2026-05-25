@@ -1,10 +1,8 @@
 import { Injectable, Logger, OnModuleInit } from '@nestjs/common';
-import { UserRepository } from '../../../repository/user.repo';
 import { RabbitMQService } from 'src/module/common/infrastruture/rabbit-mq/rabbit-mq.service';
 import { ExchangeNameEnum, ExchangeTypeEnum, QueueEnum, RoutingKeyEnum } from 'src/module/common/infrastruture/rabbit-mq/type-enum/rabbit-mq.enum';
 import { InboxRepository } from '../../../repository/inbox.repo';
-import { OrderRepository } from '../../../repository/order.repo';
-import { OrderItemRepository } from '../../../repository/order.item.repo';
+import { OrderCreatedService } from 'src/module/shipment-server/feature/order/order-created/order.created.service';
 
 @Injectable()
 export class OrderCreatedConsumer implements OnModuleInit {
@@ -12,10 +10,8 @@ export class OrderCreatedConsumer implements OnModuleInit {
 
     constructor(
         private readonly rabbitMQService: RabbitMQService,
-        private readonly userRepo: UserRepository,
+        private readonly orderCreatedService: OrderCreatedService,
         private readonly inboxRepo: InboxRepository,
-        private readonly orderRepo: OrderRepository,
-        private readonly orderItemRepo: OrderItemRepository,
 
     ) { }
 
@@ -24,14 +20,6 @@ export class OrderCreatedConsumer implements OnModuleInit {
             QueueEnum.SHIPMENT_ORDER_CREATED_QUEUE,
             async (data) => {
                 const { outbox_uuid, payload } = data;
-                const {
-                    order_uuid,
-                    cart_uuid,
-                    total_price,
-                    user_uuid,
-                    order_address,
-                    items,
-                } = payload;
 
                 this.logger.log(`Processing Order created: ${outbox_uuid}\n ${JSON.stringify(payload)}`);
 
@@ -41,28 +29,7 @@ export class OrderCreatedConsumer implements OnModuleInit {
                     return;
                 }
 
-                const order = await this.orderRepo.createOrder({
-                    uuid: order_uuid,
-                    cart_uuid,
-                    total_price,
-                    user_uuid: user_uuid,
-                    order_address,
-                });
-
-                await Promise.all(
-                    items.map(item =>
-                        this.orderItemRepo.createOrderItem({
-                            uuid: item.uuid,
-                            order_uuid: order.uuid,
-                            product_uuid: item.product_uuid,
-                            name: item.name,
-                            description: item.description,
-                            image_url: item.image_url,
-                            price: item.price,
-                            quantity: item.quantity
-                        })
-                    )
-                );
+                await this.orderCreatedService.orderCreated(payload);
 
                 await this.inboxRepo.createEntry({ outbox_uuid });
             },

@@ -4,6 +4,7 @@ import { ExchangeNameEnum, ExchangeTypeEnum, QueueEnum, RoutingKeyEnum } from 's
 import { InboxRepository } from '../../../repository/inbox.repo';
 import { OrderRepository } from '../../../repository/order.repo';
 import { OrderPaymentStatusEnum, } from 'src/module/order-server/domain/order/order.enum';
+import { OrderPaidService } from 'src/module/shipment-server/feature/order/order-paid/order.paid.service';
 
 @Injectable()
 export class OrderPaidConsumer implements OnModuleInit {
@@ -12,7 +13,7 @@ export class OrderPaidConsumer implements OnModuleInit {
     constructor(
         private readonly rabbitMQService: RabbitMQService,
         private readonly inboxRepo: InboxRepository,
-        private readonly orderRepo: OrderRepository,
+        private readonly orderPaidService: OrderPaidService,
     ) { }
 
     async onModuleInit() {
@@ -29,7 +30,7 @@ export class OrderPaidConsumer implements OnModuleInit {
                     return;
                 }
 
-                await this.orderRepo.updateOrderPaymentStatus(payload.order_uuid, OrderPaymentStatusEnum.PAID)
+                await this.orderPaidService.orderPaid(payload);
 
                 await this.inboxRepo.createEntry({ outbox_uuid });
             },

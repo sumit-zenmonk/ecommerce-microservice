@@ -43,7 +43,6 @@ export enum QueueEnum {
     ORDER_RETURNED_QUEUE = 'order.returned.queue',
     PRODUCT_ORDER_RETURNED_QUEUE = 'product.order.returned.queue',
     CART_ORDER_RETURNED_QUEUE = 'cart.order.returned.queue',
-    SHIPMENT_ORDER_RETURNED_QUEUE = 'shipment.order.returned.queue',
     FINANCE_ORDER_RETURNED_QUEUE = 'finance.order.returned.queue',
 }
 
