@@ -9,6 +9,9 @@ import * as UserServerUserRepo from 'src/module/user-server/infrastructure/repos
 import * as ProductServerUserRepo from 'src/module/product-server/infrastructure/repository/user.repo';
 import * as ProductServerProductRepo from 'src/module/product-server/infrastructure/repository/product.repo';
 import * as ProductServerInboxRepo from 'src/module/product-server/infrastructure/repository/inbox.repo';
+import * as ProductUserRegisterService from 'src/module/product-server/feature/user/user-register/user-register.service';
+import * as ProductOrderPaidDeductStockService from 'src/module/product-server/feature/order/order-paid-deduct-stock/order.paid.deduct.stock.service';
+import * as ProductOrderReturnService from 'src/module/product-server/feature/order/order-return/order.return.service';
 import * as ProductUserConsumer from 'src/module/product-server/infrastructure/rabbit-mq-consumer/user/user-registered/user-registered.consumer';
 import * as ProductOrderPaidDeductConsumer from 'src/module/product-server/infrastructure/rabbit-mq-consumer/order/order-paid-deduct-stock/order-paid-deduct-stock.consumer';
 import * as ProductOrderReturnConsumer from 'src/module/product-server/infrastructure/rabbit-mq-consumer/order/order-return/order-return.consumer';
@@ -70,6 +73,9 @@ import * as ShipmentOrderReturnConsumer from 'src/module/shipment-server/infrast
         ProductServerUserRepo.UserRepository,
         ProductServerProductRepo.ProductRepository,
         ProductServerInboxRepo.InboxRepository,
+        ProductUserRegisterService.UserRegisterService,
+        ProductOrderPaidDeductStockService.OrderPaidDeductStockService,
+        ProductOrderReturnService.OrderReturnService,
         ProductUserConsumer.UserRegisteredConsumer,
         ProductOrderPaidDeductConsumer.ProductOrderPaidDeductStockConsumer,
         ProductOrderReturnConsumer.ProductOrderReturnConsumer,

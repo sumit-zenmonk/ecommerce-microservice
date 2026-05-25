@@ -2,9 +2,7 @@ import { Injectable, Logger, OnModuleInit } from '@nestjs/common';
 import { RabbitMQService } from 'src/module/common/infrastruture/rabbit-mq/rabbit-mq.service';
 import { ExchangeNameEnum, ExchangeTypeEnum, QueueEnum, RoutingKeyEnum } from 'src/module/common/infrastruture/rabbit-mq/type-enum/rabbit-mq.enum';
 import { InboxRepository } from '../../../repository/inbox.repo';
-import { ProductRepository } from '../../../repository/product.repo';
-import { SocketService } from 'src/module/common/socket/socket.service';
-import { SocketEventNameEnum } from 'src/module/common/socket/socket.enum';
+import { OrderPaidDeductStockService } from 'src/module/product-server/feature/order/order-paid-deduct-stock/order.paid.deduct.stock.service';
 
 @Injectable()
 export class ProductOrderPaidDeductStockConsumer implements OnModuleInit {
@@ -13,8 +11,7 @@ export class ProductOrderPaidDeductStockConsumer implements OnModuleInit {
     constructor(
         private readonly rabbitMQService: RabbitMQService,
         private readonly inboxRepo: InboxRepository,
-        private readonly productRepo: ProductRepository,
-        private readonly socketService: SocketService,
+        private readonly orderPaidDeductStockService: OrderPaidDeductStockService,
     ) { }
 
     async onModuleInit() {
@@ -38,18 +35,7 @@ export class ProductOrderPaidDeductStockConsumer implements OnModuleInit {
                     return;
                 }
 
-                // Deduct stock one by one
-                const deductions = order.items.map(async (item) => {
-                    try {
-                        await this.productRepo.deductStock(item.product_uuid, item.quantity);
-                        this.logger.log(`Deducted ${item.quantity} from ${item.name} (UUID: ${item.product_uuid})`);
-                    } catch (err: any) {
-                        this.logger.error(`Failed to deduct stock for ${item.name}: ${err.message}`);
-                    }
-                });
-
-                await Promise.all(deductions);
-                await this.socketService.emitToUser(order.user_uuid, SocketEventNameEnum.PRODUCT_STOCK_DEDUCT, order.items);
+                await this.orderPaidDeductStockService.orderPaidDeductStock(order);
 
                 await this.inboxRepo.createEntry({ outbox_uuid });
             },

@@ -1,10 +1,13 @@
 import { BadRequestException, Injectable, } from "@nestjs/common";
-import { ProductRepository } from "src/module/cart-server/infrastructure/repository/product.repo";
+import { SocketEventNameEnum } from "src/module/common/socket/socket.enum";
+import { SocketService } from "src/module/common/socket/socket.service";
+import { ProductRepository } from "src/module/product-server/infrastructure/repository/product.repo";
 
 @Injectable()
 export class OrderPaidDeductStockService {
     constructor(
         private readonly productRepo: ProductRepository,
+        private readonly socketService: SocketService,
     ) { }
 
     async orderPaidDeductStock(order: any) {
@@ -17,7 +20,9 @@ export class OrderPaidDeductStockService {
                 console.error(`Failed to deduct stock for ${item.name}: ${err.message}`);
             }
         });
+
         await Promise.all(deductions);
+        await this.socketService.emitToUser(order.user_uuid, SocketEventNameEnum.PRODUCT_STOCK_DEDUCT, order.items);
 
         return;
     }

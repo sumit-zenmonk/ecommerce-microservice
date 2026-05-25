@@ -1,8 +1,8 @@
 import { Injectable, Logger, OnModuleInit } from '@nestjs/common';
-import { UserRepository } from '../../../repository/user.repo';
 import { RabbitMQService } from 'src/module/common/infrastruture/rabbit-mq/rabbit-mq.service';
 import { ExchangeNameEnum, ExchangeTypeEnum, QueueEnum, RoutingKeyEnum } from 'src/module/common/infrastruture/rabbit-mq/type-enum/rabbit-mq.enum';
 import { InboxRepository } from '../../../repository/inbox.repo';
+import { UserRegisterService } from 'src/module/product-server/feature/user/user-register/user-register.service';
 
 @Injectable()
 export class UserRegisteredConsumer implements OnModuleInit {
@@ -10,7 +10,7 @@ export class UserRegisteredConsumer implements OnModuleInit {
 
     constructor(
         private readonly rabbitMQService: RabbitMQService,
-        private readonly userRepo: UserRepository,
+        private readonly userRegisterService: UserRegisterService,
         private readonly inboxRepo: InboxRepository,
     ) { }
 
@@ -28,13 +28,8 @@ export class UserRegisteredConsumer implements OnModuleInit {
                     return;
                 }
 
-                const isUserExists = await this.userRepo.findByEmail(payload.email);
-                if (isUserExists.length) {
-                    this.logger.warn(`Duplicate skipped: ${isUserExists[0].email}`);
-                    return;
-                }
+                await this.userRegisterService.userRegister(payload);
 
-                await this.userRepo.register(payload);
                 await this.inboxRepo.createEntry({ outbox_uuid });
             },
         );
