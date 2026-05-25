@@ -5,7 +5,7 @@ import { OrderPaymentStatusEnum, OrderStatusEnum } from "src/module/shipment-mod
 import { OrderRepository } from "src/module/shipment-module/infrastructure/repository/order.repo";
 import { OutboxRepository } from "src/module/shipment-module/infrastructure/repository/outbox.repo";
 import { ReturnOrderDto } from "./return-order.dto";
-import isReturnPolicyExpired from "src/module/common/services/return.policy.service";
+import isReturnPolicyExpired from "src/module/common/infrastruture/services/return.policy.service";
 
 @Injectable()
 export class ReturnOrderService {

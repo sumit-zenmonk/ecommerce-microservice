@@ -1,6 +1,6 @@
 import { BadRequestException, Injectable, } from "@nestjs/common";
-import { SocketEventNameEnum } from "src/module/common/socket/socket.enum";
-import { SocketService } from "src/module/common/socket/socket.service";
+import { SocketEventNameEnum } from "src/module/common/infrastruture/socket/socket.enum";
+import { SocketService } from "src/module/common/infrastruture/socket/socket.service";
 import { ProductRepository } from "src/module/product-module/infrastructure/repository/product.repo";
 
 @Injectable()

@@ -7,8 +7,8 @@ import { ConfigModule } from '@nestjs/config';
 import { ScheduleModule } from '@nestjs/schedule';
 
 // Common Module
-import { BcryptService } from './module/common/services/bcrypt.service';
-import { SocketModule } from './module/common/socket/socket.module';
+import { BcryptService } from './module/common/infrastruture/services/bcrypt.service';
+import { SocketModule } from './module/common/infrastruture/socket/socket.module';
 import { RabbitMQModule } from './module/common/infrastruture/rabbit-mq/rabbit-mq.module';
 import { AuthenticateMiddleware } from './module/common/infrastruture/middleware/authenticate.middleware';
 

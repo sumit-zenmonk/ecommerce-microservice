@@ -8,8 +8,8 @@ import {
 } from 'src/module/shipment-module/domain/order/order.enum';
 import { OutboxRepository } from '../../repository/outbox.repo';
 import { ExchangeNameEnum, RoutingKeyEnum } from 'src/module/common/infrastruture/rabbit-mq/type-enum/rabbit-mq.enum';
-import { SocketService } from 'src/module/common/socket/socket.service';
-import { SocketEventNameEnum } from 'src/module/common/socket/socket.enum';
+import { SocketService } from 'src/module/common/infrastruture/socket/socket.service';
+import { SocketEventNameEnum } from 'src/module/common/infrastruture/socket/socket.enum';
 
 @Injectable()
 export class PaidOrderStatusCronService {

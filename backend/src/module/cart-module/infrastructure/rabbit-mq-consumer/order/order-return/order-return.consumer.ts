@@ -3,8 +3,8 @@ import { RabbitMQService } from 'src/module/common/infrastruture/rabbit-mq/rabbi
 import { ExchangeNameEnum, ExchangeTypeEnum, QueueEnum, RoutingKeyEnum } from 'src/module/common/infrastruture/rabbit-mq/type-enum/rabbit-mq.enum';
 import { InboxRepository } from '../../../repository/inbox.repo';
 import { ProductRepository } from '../../../repository/product.repo';
-import { SocketService } from 'src/module/common/socket/socket.service';
-import { SocketEventNameEnum } from 'src/module/common/socket/socket.enum';
+import { SocketService } from 'src/module/common/infrastruture/socket/socket.service';
+import { SocketEventNameEnum } from 'src/module/common/infrastruture/socket/socket.enum';
 import { OrderReturnService } from 'src/module/cart-module/feature/order/order-return/order.return.service';
 
 @Injectable()
