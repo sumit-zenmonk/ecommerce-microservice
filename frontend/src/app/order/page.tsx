@@ -17,12 +17,15 @@ import { OrderPaymentStatusEnum, OrderStatusEnum } from "@/enum/order.enum";
 import Stepper from "@mui/material/Stepper";
 import Step from "@mui/material/Step";
 import StepLabel from "@mui/material/StepLabel";
+import { Tooltip } from "@mui/material";
+import WarningAmberIcon from "@mui/icons-material/WarningAmber";
+import isReturnPolicyExpired from "@/service/return.policy.service";
 
 export default function OrderPage() {
     const dispatch = useDispatch<AppDispatch>();
     const { orders, loading } = useSelector((state: RootState) => state.orderReducer);
-    const [limit] = useState(Number(process.env.page_limit) || 10);
-    const [offset, setOffset] = useState(Number(process.env.page_offset) || 0);
+    const [limit] = useState(Number(process.env.NEXT_PUBLIC_PAGE_LIMIT) || 10);
+    const [offset, setOffset] = useState(Number(process.env.NEXT_PUBLIC_PAGE_OFFSET) || 0);
     const [hasMore, setHasMore] = useState(true);
     const [payModalOrder, setPayModalOrder] = useState<string | null>(null);
 
@@ -148,11 +151,26 @@ export default function OrderPage() {
                                             {
                                                 order.payment_status === OrderPaymentStatusEnum.PAID &&
                                                 order.order_status !== OrderStatusEnum.RETURNED &&
-                                                <Button
-                                                    onClick={() => handleReturnOrder(order.uuid)}
+                                                <Tooltip
+                                                    followCursor
+                                                    describeChild
+                                                    placement="bottom"
+                                                    title={`You can only return orders within ${process.env.NEXT_PUBLIC_MAX_RETURN_ORDER_DAYS_POLICY} days. Return policy expired.`}
                                                 >
-                                                    Return Order and Get Refund {order.total_price}
-                                                </Button>
+                                                    <span>
+                                                        <Button
+                                                            onClick={() => handleReturnOrder(order.uuid)}
+                                                            disabled={isReturnPolicyExpired(new Date(order.created_at))}
+                                                            startIcon={
+                                                                isReturnPolicyExpired(new Date(order.created_at)) && (
+                                                                    <WarningAmberIcon color="error" />
+                                                                )
+                                                            }
+                                                        >
+                                                            Return Order and Get Refund {order.total_price}
+                                                        </Button>
+                                                    </span>
+                                                </Tooltip>
                                             }
 
                                             <Box sx={{ width: "100%", mt: 2 }}>

@@ -5,6 +5,7 @@ import { OrderPaymentStatusEnum, OrderStatusEnum } from "src/module/shipment-mod
 import { OrderRepository } from "src/module/shipment-module/infrastructure/repository/order.repo";
 import { OutboxRepository } from "src/module/shipment-module/infrastructure/repository/outbox.repo";
 import { ReturnOrderDto } from "./return-order.dto";
+import isReturnPolicyExpired from "src/module/common/services/return.policy.service";
 
 @Injectable()
 export class ReturnOrderService {
@@ -24,6 +25,8 @@ export class ReturnOrderService {
             throw new BadRequestException("Your Order already returned");
         } else if (order.order_status == OrderStatusEnum.RETURNED && order.payment_status !== OrderPaymentStatusEnum.REFUND) {
             throw new BadRequestException("Your Order returned and refund of money is in process");
+        } else if (isReturnPolicyExpired(order.created_at)) {
+            throw new BadRequestException(`Returning policy is for only ${process.env.MAX_RETURN_ORDER_DAYS_POLICY} days`);
         }
 
         const returnedFromStatus = order.order_status;
