@@ -155,7 +155,7 @@ export default function OrderPage() {
                                                     followCursor
                                                     describeChild
                                                     placement="bottom"
-                                                    title={`You can only return orders within ${process.env.NEXT_PUBLIC_MAX_RETURN_ORDER_DAYS_POLICY} days. Return policy expired.`}
+                                                    title={`You can only return orders within ${process.env.NEXT_PUBLIC_MAX_RETURN_ORDER_DAYS_POLICY} days.`}
                                                 >
                                                     <span>
                                                         <Button
