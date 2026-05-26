@@ -10,6 +10,10 @@ export enum XMatchHeaderEnum {
     ANY = 'any'
 }
 
+export enum RetryMechanismHeaderEnum {
+    XREQUEUETRY = 'x-requeue-try'
+}
+
 // which exchange belong to
 export enum ExchangeNameEnum {
     USER_EXCHANGE = 'user.exchange',
@@ -44,8 +48,4 @@ export enum QueueEnum {
     PRODUCT_ORDER_RETURNED_QUEUE = 'product.order.returned.queue',
     CART_ORDER_RETURNED_QUEUE = 'cart.order.returned.queue',
     FINANCE_ORDER_RETURNED_QUEUE = 'finance.order.returned.queue',
-}
-
-export enum RetryMechanismHeaderEnum {
-    XREQUEUETRY = 'x-requeue-try'
 }
