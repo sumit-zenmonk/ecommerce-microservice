@@ -5,11 +5,11 @@ import { OrderRepository } from "src/module/shipment-module/infrastructure/repos
 @Injectable()
 export class OrderPaidService {
     constructor(
-        private readonly orderRepository: OrderRepository,
+        private readonly repository: OrderRepository,
     ) { }
 
     async orderPaid(payload: any) {
-        await this.orderRepository.updateOrderPaymentStatus(payload.order_uuid, OrderPaymentStatusEnum.PAID)
+        await this.repository.updateOrderPaymentStatus(payload.order_uuid, OrderPaymentStatusEnum.PAID)
 
         return;
     }

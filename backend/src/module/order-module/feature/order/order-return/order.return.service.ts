@@ -5,15 +5,15 @@ import { OrderRepository } from "src/module/order-module/infrastructure/reposito
 @Injectable()
 export class OrderReturnService {
     constructor(
-        private readonly orderRepository: OrderRepository,
+        private readonly repository: OrderRepository,
     ) { }
 
     async orderReturn(order: any) {
         if (order.returned_from_status) {
-            await this.orderRepository.updateReturnedFromStatus(order.uuid, order.returned_from_status);
+            await this.repository.updateReturnedFromStatus(order.uuid, order.returned_from_status);
         }
-        await this.orderRepository.updateOrderStatus(order.uuid, OrderStatusEnum.RETURNED);
-        await this.orderRepository.updateOrderPaymentStatus(order.uuid, OrderPaymentStatusEnum.REFUND);
+        await this.repository.updateOrderStatus(order.uuid, OrderStatusEnum.RETURNED);
+        await this.repository.updateOrderPaymentStatus(order.uuid, OrderPaymentStatusEnum.REFUND);
 
         return;
     }

@@ -5,16 +5,16 @@ import { CartRepository } from "src/module/cart-module/infrastructure/repository
 @Injectable()
 export class DeleteCartService {
     constructor(
-        private readonly cartRepository: CartRepository,
+        private readonly repository: CartRepository,
     ) { }
 
     async deleteCart(user: UserEntity) {
-        const isCartExists = await this.cartRepository.findByUserUuid(user.uuid);
+        const isCartExists = await this.repository.findByUserUuid(user.uuid);
         if (!isCartExists) {
             throw new BadRequestException("Cart not found");
         }
 
-        await this.cartRepository.deleteCart(isCartExists.uuid);
+        await this.repository.deleteCart(isCartExists.uuid);
 
         return {
             message: "Cart Deleted Success",

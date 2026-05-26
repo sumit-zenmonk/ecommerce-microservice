@@ -6,7 +6,7 @@ import { UserEntity } from "src/module/user-module/domain/user/user.entity";
 @Injectable()
 export class AddAmountService {
     constructor(
-        private readonly financeRepository: FinanceRepository,
+        private readonly repository: FinanceRepository,
     ) { }
 
     async addAmount(user: UserEntity, amount: number) {
@@ -14,14 +14,14 @@ export class AddAmountService {
             throw new BadRequestException("Amount must be greater than zero");
         }
 
-        let account = await this.financeRepository.findAccount(user.uuid);
+        let account = await this.repository.findAccount(user.uuid);
         if (!account) {
-            account = await this.financeRepository.createAccount({ user_uuid: user.uuid, balance: 0 });
+            account = await this.repository.createAccount({ user_uuid: user.uuid, balance: 0 });
         }
 
         account.balance += amount;
-        const saved = await this.financeRepository.saveAccount(account);
-        await this.financeRepository.createHistory({
+        const saved = await this.repository.saveAccount(account);
+        await this.repository.createHistory({
             user_uuid: user.uuid,
             amount,
             type: PaymentHistoryTypeEnum.TOPUP,

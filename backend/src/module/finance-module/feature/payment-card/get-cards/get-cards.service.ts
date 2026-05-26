@@ -5,12 +5,12 @@ import { UserEntity } from "src/module/user-module/domain/user/user.entity";
 @Injectable()
 export class GetCardsService {
     constructor(
-        private readonly financeRepository: FinanceRepository,
+        private readonly repository: FinanceRepository,
     ) { }
 
     async getCards(user: UserEntity) {
         return {
-            data: await this.financeRepository.findUserCards(user.uuid),
+            data: await this.repository.findUserCards(user.uuid),
             message: "Cards fetched successfully"
         }
     }

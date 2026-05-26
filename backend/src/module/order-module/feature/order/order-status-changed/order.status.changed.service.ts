@@ -4,11 +4,11 @@ import { OrderRepository } from "src/module/order-module/infrastructure/reposito
 @Injectable()
 export class OrderStatusChangedService {
     constructor(
-        private readonly orderRepository: OrderRepository,
+        private readonly repository: OrderRepository,
     ) { }
 
     async OrderStatusChanged(payload: any) {
-        await this.orderRepository.updateOrderStatus(payload.order_uuid, payload.nextStatus)
+        await this.repository.updateOrderStatus(payload.order_uuid, payload.nextStatus)
 
         return;
     }

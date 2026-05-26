@@ -4,12 +4,12 @@ import { CartRepository } from "src/module/cart-module/infrastructure/repository
 @Injectable()
 export class OrderCreateService {
     constructor(
-        private readonly cartRepository: CartRepository,
+        private readonly repository: CartRepository,
     ) { }
 
     async orderCreate(payload: any) {
-        await this.cartRepository.deleteCart(payload.cart_uuid);
-        await this.cartRepository.createCart({ user_uuid: payload.user_uuid });
+        await this.repository.deleteCart(payload.cart_uuid);
+        await this.repository.createCart({ user_uuid: payload.user_uuid });
         return;
     }
 }

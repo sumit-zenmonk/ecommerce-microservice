@@ -5,13 +5,13 @@ import { UserEntity } from "src/module/user-module/domain/user/user.entity";
 @Injectable()
 export class GetAccountService {
     constructor(
-        private readonly financeRepository: FinanceRepository,
+        private readonly repository: FinanceRepository,
     ) { }
 
     async getAccount(user: UserEntity) {
-        let account = await this.financeRepository.findAccount(user.uuid);
+        let account = await this.repository.findAccount(user.uuid);
         if (!account) {
-            account = await this.financeRepository.createAccount({ user_uuid: user.uuid, balance: 0 });
+            account = await this.repository.createAccount({ user_uuid: user.uuid, balance: 0 });
         }
         return {
             data: account,

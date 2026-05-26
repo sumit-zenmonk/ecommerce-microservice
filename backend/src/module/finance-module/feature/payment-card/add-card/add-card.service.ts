@@ -6,7 +6,7 @@ import { AddCardDto } from "./add-card-dto";
 @Injectable()
 export class AddCardService {
     constructor(
-        private readonly financeRepository: FinanceRepository,
+        private readonly repository: FinanceRepository,
     ) { }
 
     async addCard(user: UserEntity, body: AddCardDto) {
@@ -15,7 +15,7 @@ export class AddCardService {
             user_uuid: user.uuid,
         };
 
-        const card = await this.financeRepository.createCard(payload);
+        const card = await this.repository.createCard(payload);
         return {
             data: card,
             message: "Card added successfully"

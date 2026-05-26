@@ -5,11 +5,11 @@ import { UserEntity } from "src/module/user-module/domain/user/user.entity";
 @Injectable()
 export class DeleteCardService {
     constructor(
-        private readonly financeRepository: FinanceRepository,
+        private readonly repository: FinanceRepository,
     ) { }
 
     async deleteCard(user: UserEntity, uuid: string) {
-        await this.financeRepository.deleteCard(user.uuid, uuid);
+        await this.repository.deleteCard(user.uuid, uuid);
         return {
             message: "Card deleted successfully"
         };

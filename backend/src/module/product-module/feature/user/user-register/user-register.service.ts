@@ -4,17 +4,17 @@ import { UserRepository } from "src/module/product-module/infrastructure/reposit
 @Injectable()
 export class UserRegisterService {
     constructor(
-        private readonly userRepository: UserRepository,
+        private readonly repository: UserRepository,
     ) { }
 
     async userRegister(payload: any) {
-        const isUserExists = await this.userRepository.findByEmail(payload.email);
+        const isUserExists = await this.repository.findByEmail(payload.email);
         if (isUserExists.length) {
             console.warn(`Duplicate skipped: ${isUserExists[0].email}`);
             return;
         }
 
-        await this.userRepository.register(payload);
+        await this.repository.register(payload);
         return;
     }
 }

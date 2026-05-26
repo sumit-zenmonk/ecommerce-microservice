@@ -5,13 +5,13 @@ import { CartRepository } from "src/module/cart-module/infrastructure/repository
 @Injectable()
 export class GetCartService {
     constructor(
-        private readonly cartRepository: CartRepository,
+        private readonly repository: CartRepository,
     ) { }
 
     async getCart(user: UserEntity) {
-        const cart = await this.cartRepository.findByUserUuid(user.uuid);
+        const cart = await this.repository.findByUserUuid(user.uuid);
         if (!cart) {
-            const createdCart = await this.cartRepository.createCart({ user_uuid: user.uuid, });
+            const createdCart = await this.repository.createCart({ user_uuid: user.uuid, });
             return {
                 data: createdCart,
                 message: "Cart Fetched Success",
