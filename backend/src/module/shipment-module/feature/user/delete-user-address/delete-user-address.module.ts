@@ -1,8 +1,8 @@
 import { Module } from "@nestjs/common";
-import { UserRepository } from "src/module/user-module/infrastructure/repository/user.repo";
+import { UserRepository } from "src/module/user-module/infrastructure/repository/user.repository";
 import { DeleteUserAddressController } from "./delete-user-address.controller";
 import { DeleteUserAddressService } from "./delete-user-address.service";
-import { UserAddressRepository } from "src/module/shipment-module/infrastructure/repository/user.address.repo";
+import { UserAddressRepository } from "src/module/shipment-module/infrastructure/repository/user.address.repository";
 
 @Module({
     imports: [],

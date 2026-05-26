@@ -1,12 +1,12 @@
 import { Injectable, Logger } from '@nestjs/common';
 import { Cron, CronExpression } from '@nestjs/schedule';
-import { OrderRepository } from '../../repository/order.repo';
+import { OrderRepository } from '../../repository/order.repository';
 
 import {
     OrderPaymentStatusEnum,
     OrderStatusEnum,
 } from 'src/module/shipment-module/domain/order/order.enum';
-import { OutboxRepository } from '../../repository/outbox.repo';
+import { OutboxRepository } from '../../repository/outbox.repository';
 import { ExchangeNameEnum, RoutingKeyEnum } from 'src/module/common/infrastruture/rabbit-mq/type-enum/rabbit-mq.enum';
 import { SocketService } from 'src/module/common/infrastruture/socket/socket.service';
 import { SocketEventNameEnum } from 'src/module/common/infrastruture/socket/socket.enum';
@@ -14,8 +14,8 @@ import { SocketEventNameEnum } from 'src/module/common/infrastruture/socket/sock
 @Injectable()
 export class PaidOrderStatusCronService {
     constructor(
-        private readonly orderRepo: OrderRepository,
-        private readonly outboxRepo: OutboxRepository,
+        private readonly orderRepository: OrderRepository,
+        private readonly outboxRepository: OutboxRepository,
         private readonly socketService: SocketService,
     ) { }
 
@@ -24,7 +24,7 @@ export class PaidOrderStatusCronService {
     @Cron(process.env.SHIPMENT_ORDER_STATUS_CRON_TIMER || CronExpression.EVERY_30_SECONDS)
     async handleCron() {
         // Fetch top 10 paid orders
-        const orders = await this.orderRepo.findTopTenPaidButNotDeliveredOrderStatus();
+        const orders = await this.orderRepository.findTopTenPaidButNotDeliveredOrderStatus();
 
         if (!orders.length) {
             return;
@@ -56,7 +56,7 @@ export class PaidOrderStatusCronService {
             }
 
             if (nextStatus) {
-                const updateResult = await this.orderRepo.updateOrderStatusIfNotReturned(
+                const updateResult = await this.orderRepository.updateOrderStatusIfNotReturned(
                     order.uuid,
                     nextStatus,
                 );
@@ -71,7 +71,7 @@ export class PaidOrderStatusCronService {
                     nextStatus,
                 };
 
-                await this.outboxRepo.createOutboxntry({
+                await this.outboxRepository.createOutboxntry({
                     exchange_name: ExchangeNameEnum.ORDER_EXCHANGE,
                     routing_key: RoutingKeyEnum.ORDER_STATUS_CHANGED,
                     message_payload: payload,

@@ -14,7 +14,7 @@ import { AuthenticateMiddleware } from './module/common/infrastruture/middleware
 
 // User Module
 import { userDataSource } from './module/user-module/infrastructure/database/data-source';
-import { UserRepository } from './module/user-module/infrastructure/repository/user.repo';
+import { UserRepository } from './module/user-module/infrastructure/repository/user.repository';
 import { JwtHelperService } from './module/user-module/infrastructure/services/jwt.service';
 import * as UserCronModule from './module/user-module/infrastructure/cron/cron.module';
 import { UserModule } from './module/user-module/feature/user/user.module';

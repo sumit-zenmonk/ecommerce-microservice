@@ -39,9 +39,9 @@ export class FinanceRepository {
     }
 
     async createCard(payload: Partial<PaymentCardEntity>) {
-        const repo = this.getCardRepository();
-        const card = repo.create(payload);
-        return await repo.save(card);
+        const cardRepository = this.getCardRepository();
+        const card = cardRepository.create(payload);
+        return await cardRepository.save(card);
     }
 
     async deleteCard(user_uuid: string, uuid: string) {
@@ -53,9 +53,9 @@ export class FinanceRepository {
     }
 
     async createAccount(payload: Partial<PaymentAccountEntity>) {
-        const repo = this.getAccountRepository();
-        const account = repo.create(payload);
-        return await repo.save(account);
+        const accountRepository = this.getAccountRepository();
+        const account = accountRepository.create(payload);
+        return await accountRepository.save(account);
     }
 
     async saveAccount(account: PaymentAccountEntity) {
@@ -63,9 +63,9 @@ export class FinanceRepository {
     }
 
     async createHistory(payload: Partial<PaymentHistoryEntity>) {
-        const repo = this.getHistoryRepository();
-        const history = repo.create(payload);
-        return await repo.save(history);
+        const historyRepository = this.getHistoryRepository();
+        const history = historyRepository.create(payload);
+        return await historyRepository.save(history);
     }
 
     async findHistories(user_uuid: string) {

@@ -6,7 +6,7 @@ import {
 } from '@nestjs/websockets';
 import { Server, Socket } from 'socket.io';
 import { Injectable } from '@nestjs/common';
-import { UserRepository } from 'src/module/user-module/infrastructure/repository/user.repo';
+import { UserRepository } from 'src/module/user-module/infrastructure/repository/user.repository';
 import { JwtHelperService } from 'src/module/user-module/infrastructure/services/jwt.service';
 
 @Injectable()
@@ -24,7 +24,7 @@ export class SocketService implements OnGatewayConnection, OnGatewayDisconnect {
 
     constructor(
         private readonly jwtHelperService: JwtHelperService,
-        private readonly userRepo: UserRepository,
+        private readonly userRepository: UserRepository,
     ) { }
 
     async handleConnection(client: Socket) {
@@ -36,7 +36,7 @@ export class SocketService implements OnGatewayConnection, OnGatewayDisconnect {
             }
 
             const decoded = await this.jwtHelperService.verifyJwtToken(token);
-            const user = await this.userRepo.findByUuid(decoded.uuid);
+            const user = await this.userRepository.findByUuid(decoded.uuid);
 
             if (!user || user.length === 0) {
                 client.disconnect();

@@ -1,7 +1,7 @@
 import { Injectable, Logger, OnModuleInit } from '@nestjs/common';
 import { RabbitMQService } from 'src/module/common/infrastruture/rabbit-mq/rabbit-mq.service';
 import { ExchangeNameEnum, ExchangeTypeEnum, QueueEnum, RoutingKeyEnum } from 'src/module/common/infrastruture/rabbit-mq/type-enum/rabbit-mq.enum';
-import { InboxRepository } from '../../../repository/inbox.repo';
+import { InboxRepository } from '../../../repository/inbox.repository';
 import { OrderPaidDeductStockService } from 'src/module/product-module/feature/order/order-paid-deduct-stock/order.paid.deduct.stock.service';
 
 @Injectable()
@@ -10,7 +10,7 @@ export class ProductOrderPaidDeductStockConsumer implements OnModuleInit {
 
     constructor(
         private readonly rabbitMQService: RabbitMQService,
-        private readonly inboxRepo: InboxRepository,
+        private readonly inboxRepository: InboxRepository,
         private readonly orderPaidDeductStockService: OrderPaidDeductStockService,
     ) { }
 
@@ -22,7 +22,7 @@ export class ProductOrderPaidDeductStockConsumer implements OnModuleInit {
 
                 this.logger.log(`Processing Order Deduct Stock: ${outbox_uuid} \n ${JSON.stringify(payload)}`);
 
-                const alreadyProcessed = await this.inboxRepo.findByOutboxUuid(outbox_uuid);
+                const alreadyProcessed = await this.inboxRepository.findByOutboxUuid(outbox_uuid);
                 if (alreadyProcessed) {
                     this.logger.warn(`Duplicate skipped: ${outbox_uuid}`);
                     return;
@@ -37,7 +37,7 @@ export class ProductOrderPaidDeductStockConsumer implements OnModuleInit {
 
                 await this.orderPaidDeductStockService.orderPaidDeductStock(order);
 
-                await this.inboxRepo.createEntry({ outbox_uuid });
+                await this.inboxRepository.createEntry({ outbox_uuid });
             },
         );
     }

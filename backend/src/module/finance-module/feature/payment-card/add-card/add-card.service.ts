@@ -1,12 +1,12 @@
 import { BadRequestException, Injectable } from "@nestjs/common";
-import { FinanceRepository } from "src/module/finance-module/infrastructure/repository/finance.repo";
+import { FinanceRepository } from "src/module/finance-module/infrastructure/repository/finance.repository";
 import { UserEntity } from "src/module/user-module/domain/user/user.entity";
 import { AddCardDto } from "./add-card-dto";
 
 @Injectable()
 export class AddCardService {
     constructor(
-        private readonly financeRepo: FinanceRepository,
+        private readonly financeRepository: FinanceRepository,
     ) { }
 
     async addCard(user: UserEntity, body: AddCardDto) {
@@ -15,7 +15,7 @@ export class AddCardService {
             user_uuid: user.uuid,
         };
 
-        const card = await this.financeRepo.createCard(payload);
+        const card = await this.financeRepository.createCard(payload);
         return {
             data: card,
             message: "Card added successfully"

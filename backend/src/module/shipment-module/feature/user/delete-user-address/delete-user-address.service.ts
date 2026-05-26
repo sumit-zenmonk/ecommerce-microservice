@@ -1,17 +1,17 @@
 import { BadRequestException, Injectable } from "@nestjs/common";
-import { UserRepository } from "src/module/user-module/infrastructure/repository/user.repo";
+import { UserRepository } from "src/module/user-module/infrastructure/repository/user.repository";
 import { UserEntity } from "src/module/shipment-module/domain/user/user.entity";
-import { UserAddressRepository } from "src/module/shipment-module/infrastructure/repository/user.address.repo";
+import { UserAddressRepository } from "src/module/shipment-module/infrastructure/repository/user.address.repository";
 
 @Injectable()
 export class DeleteUserAddressService {
     constructor(
-        private readonly userRepo: UserRepository,
-        private readonly userAddressRepo: UserAddressRepository,
+        private readonly userRepository: UserRepository,
+        private readonly userAddressRepository: UserAddressRepository,
     ) { }
 
     async deleteUserAddress(user: UserEntity, uuid: string) {
-        await this.userAddressRepo.deleteUserAddress(uuid);
+        await this.userAddressRepository.deleteUserAddress(uuid);
         return {
             message: "User Address deleted successfully"
         };

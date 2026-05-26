@@ -1,8 +1,8 @@
 import { Module } from "@nestjs/common";
-import { FinanceRepository } from "src/module/finance-module/infrastructure/repository/finance.repo";
+import { FinanceRepository } from "src/module/finance-module/infrastructure/repository/finance.repository";
 import { PayUsingCardController } from "./pay-using-card.controller";
 import { PayUsingCardService } from "./pay-using-card.service";
-import { OutboxRepository } from "src/module/finance-module/infrastructure/repository/outbox.repo";
+import { OutboxRepository } from "src/module/finance-module/infrastructure/repository/outbox.repository";
 
 @Module({
     imports: [],

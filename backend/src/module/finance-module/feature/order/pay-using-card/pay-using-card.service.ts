@@ -1,9 +1,9 @@
 import { BadRequestException, Injectable } from "@nestjs/common";
-import { FinanceRepository } from "src/module/finance-module/infrastructure/repository/finance.repo";
+import { FinanceRepository } from "src/module/finance-module/infrastructure/repository/finance.repository";
 import { UserEntity } from "src/module/finance-module/domain/user/user.entity";
 import { PayUsingCardDto } from "./pay-using-card-dto";
 import { PaymentHistoryTypeEnum } from "src/module/finance-module/domain/payment-history/payment.enum";
-import { OutboxRepository } from "src/module/finance-module/infrastructure/repository/outbox.repo";
+import { OutboxRepository } from "src/module/finance-module/infrastructure/repository/outbox.repository";
 import { ExchangeNameEnum, RoutingKeyEnum } from "src/module/common/infrastruture/rabbit-mq/type-enum/rabbit-mq.enum";
 import { SocketService } from "src/module/common/infrastruture/socket/socket.service";
 import { SocketEventNameEnum } from "src/module/common/infrastruture/socket/socket.enum";
@@ -11,8 +11,8 @@ import { SocketEventNameEnum } from "src/module/common/infrastruture/socket/sock
 @Injectable()
 export class PayUsingCardService {
     constructor(
-        private readonly financeRepo: FinanceRepository,
-        private readonly outboxRepo: OutboxRepository,
+        private readonly financeRepository: FinanceRepository,
+        private readonly outboxRepository: OutboxRepository,
         private readonly socketService: SocketService,
     ) { }
 
@@ -24,14 +24,14 @@ export class PayUsingCardService {
         }
 
         // check is card exists with user
-        const isCardExists = await this.financeRepo.findCard(user.uuid, body.card_uuid);
+        const isCardExists = await this.financeRepository.findCard(user.uuid, body.card_uuid);
         if (!isCardExists) {
             throw new BadRequestException("Card not found");
         }
 
-        let account = await this.financeRepo.findAccount(user.uuid);
+        let account = await this.financeRepository.findAccount(user.uuid);
         if (!account) {
-            account = await this.financeRepo.createAccount({ user_uuid: user.uuid, balance: 0 });
+            account = await this.financeRepository.createAccount({ user_uuid: user.uuid, balance: 0 });
         }
 
         // amount is too much to PayUsingCard than in user account
@@ -41,10 +41,10 @@ export class PayUsingCardService {
 
         // deduct amount from account
         account.balance -= amount;
-        const saved = await this.financeRepo.saveAccount(account);
+        const saved = await this.financeRepository.saveAccount(account);
 
         // make PayUsingCardment history
-        await this.financeRepo.createHistory({
+        await this.financeRepository.createHistory({
             user_uuid: user.uuid,
             order_uuid: body.order_uuid,
             amount,
@@ -63,7 +63,7 @@ export class PayUsingCardService {
         // );
 
         // make entry of publish exchange
-        await this.outboxRepo.createOutboxntry({
+        await this.outboxRepository.createOutboxntry({
             exchange_name: ExchangeNameEnum.ORDER_EXCHANGE,
             routing_key: RoutingKeyEnum.ORDER_PAID,
             message_payload: {

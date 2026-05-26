@@ -1,12 +1,12 @@
 import { BadRequestException, Injectable, } from "@nestjs/common";
 import { SocketEventNameEnum } from "src/module/common/infrastruture/socket/socket.enum";
 import { SocketService } from "src/module/common/infrastruture/socket/socket.service";
-import { ProductRepository } from "src/module/product-module/infrastructure/repository/product.repo";
+import { ProductRepository } from "src/module/product-module/infrastructure/repository/product.repository";
 
 @Injectable()
 export class OrderReturnService {
     constructor(
-        private readonly productRepo: ProductRepository,
+        private readonly productRepository: ProductRepository,
         private readonly socketService: SocketService,
     ) { }
 
@@ -14,7 +14,7 @@ export class OrderReturnService {
         // increase stock one by one
         const increase = order.items.map(async (item) => {
             try {
-                await this.productRepo.increaseStock(item.product_uuid, item.quantity);
+                await this.productRepository.increaseStock(item.product_uuid, item.quantity);
                 console.log(`Increase ${item.quantity} quantity in ${item.name} (UUID: ${item.product_uuid})`);
             } catch (err: any) {
                 console.error(`Failed to return Stock increase for ${item.name}: ${err.message}`);

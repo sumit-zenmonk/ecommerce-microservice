@@ -1,12 +1,12 @@
 import { BadRequestException, Injectable, } from "@nestjs/common";
-import { OrderItemRepository } from "src/module/shipment-module/infrastructure/repository/order.item.repo";
-import { OrderRepository } from "src/module/shipment-module/infrastructure/repository/order.repo";
+import { OrderItemRepository } from "src/module/shipment-module/infrastructure/repository/order.item.repository";
+import { OrderRepository } from "src/module/shipment-module/infrastructure/repository/order.repository";
 
 @Injectable()
 export class OrderCreatedService {
     constructor(
-        private readonly orderRepo: OrderRepository,
-        private readonly orderItemRepo: OrderItemRepository,
+        private readonly orderRepository: OrderRepository,
+        private readonly orderItemRepository: OrderItemRepository,
     ) { }
 
     async orderCreated(payload: any) {
@@ -19,7 +19,7 @@ export class OrderCreatedService {
             items,
         } = payload;
 
-        const order = await this.orderRepo.createOrder({
+        const order = await this.orderRepository.createOrder({
             uuid: order_uuid,
             cart_uuid,
             total_price,
@@ -29,7 +29,7 @@ export class OrderCreatedService {
 
         await Promise.all(
             items.map(item =>
-                this.orderItemRepo.createOrderItem({
+                this.orderItemRepository.createOrderItem({
                     uuid: item.uuid,
                     order_uuid: order.uuid,
                     product_uuid: item.product_uuid,

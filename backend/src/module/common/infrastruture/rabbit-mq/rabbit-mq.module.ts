@@ -3,12 +3,12 @@ import { Global, Module } from '@nestjs/common';
 import { RabbitMQService } from './rabbit-mq.service';
 
 // User Service
-import * as UsermoduleUserRepo from 'src/module/user-module/infrastructure/repository/user.repo';
+import * as UsermoduleUserRepo from 'src/module/user-module/infrastructure/repository/user.repository';
 
 // Product Service
-import * as ProductmoduleUserRepo from 'src/module/product-module/infrastructure/repository/user.repo';
-import * as ProductmoduleProductRepo from 'src/module/product-module/infrastructure/repository/product.repo';
-import * as ProductmoduleInboxRepo from 'src/module/product-module/infrastructure/repository/inbox.repo';
+import * as ProductmoduleUserRepo from 'src/module/product-module/infrastructure/repository/user.repository';
+import * as ProductmoduleProductRepo from 'src/module/product-module/infrastructure/repository/product.repository';
+import * as ProductmoduleInboxRepo from 'src/module/product-module/infrastructure/repository/inbox.repository';
 import * as ProductUserRegisterService from 'src/module/product-module/feature/user/user-register/user-register.service';
 import * as ProductOrderPaidDeductStockService from 'src/module/product-module/feature/order/order-paid-deduct-stock/order.paid.deduct.stock.service';
 import * as ProductOrderReturnService from 'src/module/product-module/feature/order/order-return/order.return.service';
@@ -17,10 +17,10 @@ import * as ProductOrderPaidDeductConsumer from 'src/module/product-module/infra
 import * as ProductOrderReturnConsumer from 'src/module/product-module/infrastructure/rabbit-mq-consumer/order/order-return/order-return.consumer';
 
 // Cart Service
-import * as CartmoduleUserRepo from 'src/module/cart-module/infrastructure/repository/user.repo';
-import * as CartmoduleCartRepo from 'src/module/cart-module/infrastructure/repository/cart.repo';
-import * as CartOrdermoduleProductRepo from 'src/module/cart-module/infrastructure/repository/product.repo';
-import * as CartmoduleInboxRepo from 'src/module/cart-module/infrastructure/repository/inbox.repo';
+import * as CartmoduleUserRepo from 'src/module/cart-module/infrastructure/repository/user.repository';
+import * as CartmoduleCartRepo from 'src/module/cart-module/infrastructure/repository/cart.repository';
+import * as CartOrdermoduleProductRepo from 'src/module/cart-module/infrastructure/repository/product.repository';
+import * as CartmoduleInboxRepo from 'src/module/cart-module/infrastructure/repository/inbox.repository';
 import * as CartOrderCreateService from 'src/module/cart-module/feature/order/order-create/order.create.service';
 import * as CartOrderReturnService from 'src/module/cart-module/feature/order/order-return/order.return.service';
 import * as CartUserRegisterService from 'src/module/cart-module/feature/user/user-register/user-register.service';
@@ -31,10 +31,10 @@ import * as CartOrderPaidDeductConsumer from 'src/module/cart-module/infrastruct
 import * as CartOrderReturnConsumer from 'src/module/cart-module/infrastructure/rabbit-mq-consumer/order/order-return/order-return.consumer';
 
 // Order Service
-import * as OrdermoduleUserRepo from 'src/module/order-module/infrastructure/repository/user.repo';
-import * as OrdermoduleInboxRepo from 'src/module/order-module/infrastructure/repository/inbox.repo';
-import * as OrdermoduleOrderRepo from 'src/module/order-module/infrastructure/repository/order.repo';
-import * as OrdermoduleOutboxRepo from 'src/module/order-module/infrastructure/repository/outbox.repo';
+import * as OrdermoduleUserRepo from 'src/module/order-module/infrastructure/repository/user.repository';
+import * as OrdermoduleInboxRepo from 'src/module/order-module/infrastructure/repository/inbox.repository';
+import * as OrdermoduleOrderRepo from 'src/module/order-module/infrastructure/repository/order.repository';
+import * as OrdermoduleOutboxRepo from 'src/module/order-module/infrastructure/repository/outbox.repository';
 import * as OrderUserRegisterService from 'src/module/order-module/feature/user/user-register/user-register.service';
 import * as OrderPaidService from 'src/module/order-module/feature/order/order-paid/order-paid.service';
 import * as OrderReturnService from 'src/module/order-module/feature/order/order-return/order.return.service';
@@ -45,22 +45,22 @@ import * as OrderStatusChangedConsumer from 'src/module/order-module/infrastruct
 import * as OrderReturnConsumer from 'src/module/order-module/infrastructure/rabbit-mq-consumer/order/order-return/order-return.consumer';
 
 // finance Service
-import * as FinancemoduleUserRepo from 'src/module/finance-module/infrastructure/repository/user.repo';
-import * as FinancemoduleInboxRepo from 'src/module/finance-module/infrastructure/repository/inbox.repo';
-import * as FinancemoduleFinanceRepo from 'src/module/finance-module/infrastructure/repository/finance.repo';
+import * as FinancemoduleUserRepo from 'src/module/finance-module/infrastructure/repository/user.repository';
+import * as FinancemoduleInboxRepo from 'src/module/finance-module/infrastructure/repository/inbox.repository';
+import * as FinancemoduleFinanceRepo from 'src/module/finance-module/infrastructure/repository/finance.repository';
 import * as FinanceUserRegisterService from 'src/module/finance-module/feature/user/user-register/user-register.service';
 import * as FinanceOrderReturnService from 'src/module/finance-module/feature/order/order-return/order.return.service';
 import * as FinanceUserConsumer from 'src/module/finance-module/infrastructure/rabbit-mq-consumer/user/user-registered/user-registered.consumer';
 import * as FinanceOrderReturnConsumer from 'src/module/finance-module/infrastructure/rabbit-mq-consumer/order/order-return/order-return.consumer';
 
 // shipment Service
-import * as ShipmentmoduleUserRepo from 'src/module/shipment-module/infrastructure/repository/user.repo';
-import * as ShipmentmoduleInboxRepo from 'src/module/shipment-module/infrastructure/repository/inbox.repo';
-import * as ShipmentOrderRepository from 'src/module/shipment-module/infrastructure/repository/order.repo';
+import * as ShipmentmoduleUserRepo from 'src/module/shipment-module/infrastructure/repository/user.repository';
+import * as ShipmentmoduleInboxRepo from 'src/module/shipment-module/infrastructure/repository/inbox.repository';
+import * as ShipmentOrderRepository from 'src/module/shipment-module/infrastructure/repository/order.repository';
 import * as ShipmentUserRegisterService from 'src/module/shipment-module/feature/user/user-register/user-register.service';
 import * as ShipmentOrderPaidService from 'src/module/shipment-module/feature/order/order-paid/order.paid.service';
 import * as ShipmentOrderCreatedService from 'src/module/shipment-module/feature/order/order-created/order.created.service';
-import * as ShipmentOrderItemRepository from 'src/module/shipment-module/infrastructure/repository/order.item.repo';
+import * as ShipmentOrderItemRepository from 'src/module/shipment-module/infrastructure/repository/order.item.repository';
 import * as ShipmentUserConsumer from 'src/module/shipment-module/infrastructure/rabbit-mq-consumer/user/user-registered/user-registered.consumer';
 import * as ShipentOrderCreatedConsumer from 'src/module/shipment-module/infrastructure/rabbit-mq-consumer/order/order-created/order-created-consumer';
 import * as ShipmentOrderPaidConsumer from 'src/module/shipment-module/infrastructure/rabbit-mq-consumer/order/order-paid/order-paid.consumer';

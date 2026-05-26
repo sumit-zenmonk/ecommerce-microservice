@@ -1,15 +1,15 @@
 import { BadRequestException, Injectable, } from "@nestjs/common";
-import { CartRepository } from "src/module/cart-module/infrastructure/repository/cart.repo";
+import { CartRepository } from "src/module/cart-module/infrastructure/repository/cart.repository";
 
 @Injectable()
 export class OrderCreateService {
     constructor(
-        private readonly cartRepo: CartRepository,
+        private readonly cartRepository: CartRepository,
     ) { }
 
     async orderCreate(payload: any) {
-        await this.cartRepo.deleteCart(payload.cart_uuid);
-        await this.cartRepo.createCart({ user_uuid: payload.user_uuid });
+        await this.cartRepository.deleteCart(payload.cart_uuid);
+        await this.cartRepository.createCart({ user_uuid: payload.user_uuid });
         return;
     }
 }

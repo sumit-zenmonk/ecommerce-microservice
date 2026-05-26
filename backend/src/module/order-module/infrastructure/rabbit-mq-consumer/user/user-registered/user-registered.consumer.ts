@@ -1,8 +1,8 @@
 import { Injectable, Logger, OnModuleInit } from '@nestjs/common';
-import { UserRepository } from '../../../repository/user.repo';
+import { UserRepository } from '../../../repository/user.repository';
 import { RabbitMQService } from 'src/module/common/infrastruture/rabbit-mq/rabbit-mq.service';
 import { ExchangeNameEnum, ExchangeTypeEnum, QueueEnum, RoutingKeyEnum } from 'src/module/common/infrastruture/rabbit-mq/type-enum/rabbit-mq.enum';
-import { InboxRepository } from '../../../repository/inbox.repo';
+import { InboxRepository } from '../../../repository/inbox.repository';
 import { UserRegisterService } from 'src/module/order-module/feature/user/user-register/user-register.service';
 
 @Injectable()
@@ -12,7 +12,7 @@ export class UserRegisteredConsumer implements OnModuleInit {
     constructor(
         private readonly rabbitMQService: RabbitMQService,
         private readonly userRegisterService: UserRegisterService,
-        private readonly inboxRepo: InboxRepository,
+        private readonly inboxRepository: InboxRepository,
     ) { }
 
     async onModuleInit() {
@@ -23,7 +23,7 @@ export class UserRegisteredConsumer implements OnModuleInit {
 
                 this.logger.log(`Processing registered user: ${payload.email} \n ${JSON.stringify(payload)}`);
 
-                const alreadyProcessed = await this.inboxRepo.findByOutboxUuid(outbox_uuid);
+                const alreadyProcessed = await this.inboxRepository.findByOutboxUuid(outbox_uuid);
                 if (alreadyProcessed) {
                     this.logger.warn(`Duplicate skipped: ${outbox_uuid}`);
                     return;
@@ -31,7 +31,7 @@ export class UserRegisteredConsumer implements OnModuleInit {
 
                 await this.userRegisterService.userRegister(payload);
 
-                await this.inboxRepo.createEntry({ outbox_uuid });
+                await this.inboxRepository.createEntry({ outbox_uuid });
             },
         );
     }

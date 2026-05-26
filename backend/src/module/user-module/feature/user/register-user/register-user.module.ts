@@ -1,10 +1,10 @@
 import { Module } from "@nestjs/common";
 import { RegisterUserController } from "./register-user.controller";
 import { RegisterUserService } from "./register-user.service";
-import { UserRepository } from "src/module/user-module/infrastructure/repository/user.repo";
+import { UserRepository } from "src/module/user-module/infrastructure/repository/user.repository";
 import { JwtHelperService } from "src/module/user-module/infrastructure/services/jwt.service";
 import { BcryptService } from "src/module/common/infrastruture/services/bcrypt.service";
-import { OutboxRepository } from "src/module/user-module/infrastructure/repository/outbox.repo";
+import { OutboxRepository } from "src/module/user-module/infrastructure/repository/outbox.repository";
 
 @Module({
     imports: [],
