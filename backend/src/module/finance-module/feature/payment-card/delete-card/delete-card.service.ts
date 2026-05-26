@@ -10,6 +10,7 @@ export class DeleteCardService {
 
     async deleteCard(user: UserEntity, uuid: string) {
         await this.repository.deleteCard(user.uuid, uuid);
+
         return {
             message: "Card deleted successfully"
         };

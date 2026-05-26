@@ -38,6 +38,26 @@ export class FinanceRepository {
         });
     }
 
+    async upsertAccount(user_uuid: string): Promise<PaymentAccountEntity> {
+        await this.getAccountRepository().upsert(
+            {
+                user_uuid,
+                balance: 0,
+            },
+            {
+                conflictPaths: ["user_uuid"],
+                skipUpdateIfNoValuesChanged: true,
+            },
+        );
+
+        const account = await this.findAccount(user_uuid);
+        if (!account) {
+            throw new Error("Failed to create or retrieve account");
+        }
+
+        return account;
+    }
+
     async createCard(payload: Partial<PaymentCardEntity>) {
         const cardRepository = this.getCardRepository();
         const card = cardRepository.create(payload);

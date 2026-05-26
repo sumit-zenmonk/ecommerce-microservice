@@ -9,8 +9,10 @@ export class GetCardsService {
     ) { }
 
     async getCards(user: UserEntity) {
+        const cards = await this.repository.findUserCards(user.uuid);
+
         return {
-            data: await this.repository.findUserCards(user.uuid),
+            data: cards,
             message: "Cards fetched successfully"
         }
     }

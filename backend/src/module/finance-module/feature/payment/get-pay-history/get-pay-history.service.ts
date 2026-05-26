@@ -9,8 +9,10 @@ export class GetPayHistoryService {
     ) { }
 
     async getPayHistories(user: UserEntity) {
+        const history = await this.repository.findHistories(user.uuid);
+
         return {
-            data: await this.repository.findHistories(user.uuid),
+            data: history,
             message: "Payment history fetched successfully"
         };
     }
