@@ -14,11 +14,10 @@ export class AddAmountService {
             throw new BadRequestException("Amount must be greater than zero");
         }
 
-        // let account = await this.repository.findAccount(user.uuid);
-        // if (!account) {
-        //     account = await this.repository.createAccount({ user_uuid: user.uuid, balance: 0 });
-        // }
-        let account = await this.repository.upsertAccount(user.uuid);
+        let account = await this.repository.findAccount(user.uuid);
+        if (!account) {
+            account = await this.repository.createAccount({ user_uuid: user.uuid, balance: 0 });
+        }
 
         account.balance += amount;
         const saved = await this.repository.saveAccount(account);

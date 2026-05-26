@@ -9,12 +9,10 @@ export class GetAccountService {
     ) { }
 
     async getAccount(user: UserEntity) {
-        // let account = await this.repository.findAccount(user.uuid);
-        // if (!account) {
-        //     account = await this.repository.createAccount({ user_uuid: user.uuid, balance: 0 });
-        // }
-
-        const account = await this.repository.upsertAccount(user.uuid);
+        let account = await this.repository.findAccount(user.uuid);
+        if (!account) {
+            account = await this.repository.createAccount({ user_uuid: user.uuid, balance: 0 });
+        }
 
         return {
             data: account,
