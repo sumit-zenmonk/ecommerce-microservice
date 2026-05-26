@@ -203,7 +203,7 @@ export class RabbitMQService implements OnModuleInit, OnModuleDestroy {
         await this.setupRetryQueue(QueueEnum.FINANCE_ORDER_RETURNED_QUEUE);
     }
 
-    private async setupRetryQueue(originalQueue: string, retryDelay = 15000) {
+    private async setupRetryQueue(originalQueue: string, retryDelay = Number(process.env.RETRYDELAY) || 15000) {
         const channel = this.channel;
         if (!channel) return;
 
